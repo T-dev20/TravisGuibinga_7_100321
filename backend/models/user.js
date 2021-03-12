@@ -1,5 +1,4 @@
 /* Structuration des données "users" dans la base de données MySQL */
-
 var mysql = require("mysql");
 
 //Constructeur
