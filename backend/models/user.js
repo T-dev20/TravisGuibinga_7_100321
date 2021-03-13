@@ -1,15 +1,41 @@
-/* Structuration des données "users" dans la base de données MySQL */
-var mysql = require("mysql");
-
-//Constructeur
-const User = function(user) {
-    this.id = user.id;
-    this.username = user.username;
-    this.email = user.email;
-    this.password = user.password;
-    this.first_name = user.first_name;
-    this.last_name = user.last_name;
-    this.is_admin = user.is_admin;
+module.exports = (sequelize, Sequelize) => {
+  const User = sequelize.define('User', { 
+    id:{ 
+        type:Sequelize.INTEGER.UNSIGNED, 
+        autoIncrement:true, 
+        allowNull:false, 
+        primaryKey:true
+    }, 
+    name: { 
+      type: Sequelize.STRING, 
+      allowNull:false,
+      unique: true
+    }, 
+    email: { 
+      type: Sequelize.STRING, 
+      allowNull:false,
+      unique: true
+    }, 
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    job: { 
+      type: Sequelize.STRING, 
+      allowNull: false,
+    }, 
+    image_profil: {
+      type: Sequelize.STRING
+    },
+    role: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: "User",
+    },
+  
+     createdAt: Sequelize.DATE, 
+     updatedAt: Sequelize.DATE, 
+}) 
+  
+    return User;
 };
-
-module.exports = User;
