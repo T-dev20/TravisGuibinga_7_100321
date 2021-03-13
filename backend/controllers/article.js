@@ -70,11 +70,23 @@ exports.createArticle = (req, res, next) => {
 
 //Fonction qui gère la logique métier de la route GET (affichage de tous les articles)
 exports.getAllArticles = (req, res, next) => {
-  let sql = "SELECT Articles.id, content, date_post, username FROM Article INNER JOIN User ON Article.user_id = User.id ORDER BY date_post DESC"; 
+  let sql = "SELECT Article.id, content, date_post, username FROM Article INNER JOIN User ON Article.user_id = User.id ORDER BY date_post DESC"; 
   db.query(sql, function(err, data) {
     if (err) {
         return res.status(400).json({err});
     } 
     res.json({status: 200, data, message: "Articles affichés avec succès !"})
+  });
+};
+
+
+//Fonction qui gère la logique métier de la route GET (affichage d'un article en particulier, sélectionné par son id)
+exports.getOneArticle = (req, res, next) => {
+    let sql = "SELECT Article.id, content, date_post, username FROM Article INNER JOIN User ON Article.user_id = User.id WHERE Article.id = ?";
+    db.query(sql, [req.params.id], function(err, data, fields) {
+    if (err) {
+        return res.status(404).json({err});
+    }
+    res.json({status: 200, data, message: "Article affiché avec succès !"})
   });
 };
