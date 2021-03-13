@@ -15,3 +15,8 @@ exports.createArticle = (req, res, next) => {
         res.json({status: 201, data, message: "Nouvel article posté avec succès !"})
     });
 };
+
+//Fonction qui gère la logique métier de la route PUT (modification d'un article posté par son auteur, sélectionné par son id)
+ exports.modifyArticle = (req, res, next) => {
+     
+ };
