@@ -77,3 +77,15 @@ exports.login = (req, res, next) => {
             .catch(error => res.status(500).json({error}));  
     });
 };
+
+
+//Fonction qui gère la logique métier de la route GET (affichage des données d'un user)
+exports.getOneUser = (req, res, next) => {
+    let sql = `SELECT * FROM User WHERE id = ?`;
+    db.query(sql, [req.params.id], function(err, data, fields) {
+    if (err) {
+        return res.status(404).json({err});
+    }
+    res.json({status: 200, data, message: "Infos_User affichés avec succès !"})
+  });
+};
