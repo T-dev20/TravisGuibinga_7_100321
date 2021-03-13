@@ -15,3 +15,5 @@ connection.connect(function(error) {
     }
     console.log("Connexion à MySQL réussie !");
 });
+
+module.exports = connection;
