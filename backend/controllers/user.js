@@ -46,3 +46,9 @@ exports.signup = (req, res, next) => {
         })
         .catch(error => res.status(500).json({error})); 
 };
+
+
+//Fonction qui gère la logique métier de la route POST (connexion d'un user existant dans la database)
+exports.login = (req, res, next) => {
+    
+};
