@@ -67,3 +67,14 @@ exports.createArticle = (req, res, next) => {
         }
     });
  };
+
+//Fonction qui gère la logique métier de la route GET (affichage de tous les articles)
+exports.getAllArticles = (req, res, next) => {
+  let sql = "SELECT Articles.id, content, date_post, username FROM Article INNER JOIN User ON Article.user_id = User.id ORDER BY date_post DESC"; 
+  db.query(sql, function(err, data) {
+    if (err) {
+        return res.status(400).json({err});
+    } 
+    res.json({status: 200, data, message: "Articles affichés avec succès !"})
+  });
+};
