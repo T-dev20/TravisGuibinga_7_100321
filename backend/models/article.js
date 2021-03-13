@@ -5,7 +5,7 @@ const Article = function(article) {
     this.id = article.id;
     this.content = article.content;
     this.user_id = article.user_id;
-    this.image = article.image;
+    this.imageUrl = article.imageUrl;
     this.date_post = new Date();
     this.date_update_post = article.date_update_post
 };
