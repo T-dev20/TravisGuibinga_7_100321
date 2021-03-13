@@ -18,5 +18,7 @@ exports.createArticle = (req, res, next) => {
 
 //Fonction qui gère la logique métier de la route PUT (modification d'un article posté par son auteur, sélectionné par son id)
  exports.modifyArticle = (req, res, next) => {
-     
+    //Recherche dans la BDD de l'article à modifier
+    console.log(req.params.id);
+    let sql = "SELECT * FROM Article WHERE id = ?";
  };
