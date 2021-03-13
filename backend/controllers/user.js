@@ -37,7 +37,7 @@ exports.signup = (req, res, next) => {
                         //Encodage d'un nouveau token
                         token: jwt.sign(
                             {userId : data[0].id, username: data[0].username, isAdmin: data[0].is_admin},
-                            "RANDOM_TOKEN_SECRET",
+                            'RANDOM_TOKEN_SECRET',
                             {expiresIn: "24h"}
                         )
                     });
@@ -50,5 +50,30 @@ exports.signup = (req, res, next) => {
 
 //Fonction qui gère la logique métier de la route POST (connexion d'un user existant dans la database)
 exports.login = (req, res, next) => {
-    
+    //Recherche de l'utilisateur dans la DB via son email 
+    let sql = `SELECT * FROM User WHERE email = ?`;
+    db.query(sql, [req.body.email], function(err, data, fields) {
+        if (data.length === 0) {
+            return res.status(404).json({err: "Utilisateur non trouvé !"}); 
+        } 
+        //Si on a trouvé le mail dans la DB, on compare le hash du nouveau mot de passe au hash de la DB
+        bcrypt.compare(req.body.password, data[0].password)
+            .then(valid => {
+                if(!valid) {
+                    return res.status(401).json({error: "Mot de passe incorrect !"});
+                }
+                res.status(200).json({
+                    userId: data[0].id,
+                    username: data[0].username,
+                    isAdmin: data[0].is_admin,
+                    //Si le password est correct, encodage d'un nouveau token
+                    token: jwt.sign(
+                        {userId : data[0].id, username: data[0].username, isAdmin: data[0].is_admin},
+                        'RANDOM_TOKEN_SECRET',
+                        {expiresIn: "24h"}
+                    )
+                });
+            })
+            .catch(error => res.status(500).json({error}));  
+    });
 };
