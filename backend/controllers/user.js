@@ -89,3 +89,15 @@ exports.getOneUser = (req, res, next) => {
     res.json({status: 200, data, message: "Infos_User affichés avec succès !"})
   });
 };
+
+
+//Fonction qui gère la logique métier de la route DELETE (suppression d'un compte user existant dans la database)
+exports.deleteAccount = (req, res, next) => {
+    let sql = `DELETE FROM User WHERE id = ?`;
+    db.query(sql, [req.params.id], function(err, data, fields) {
+        if (err) {
+            return res.status(400).json({err: "Désolé, votre demande de suppression de compte n'a pu aboutir."}); 
+        }
+        res.json({status: 200, data, message: "Votre compte a bien été supprimé !"});    
+    });
+};
