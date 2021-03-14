@@ -1,103 +1,94 @@
-var db = require("../config/mysql.config.js");
-const User = require("../models/user");
-const bcrypt = require("bcrypt"); 
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
-
-//Fonction qui gère la logique métier de la route POST (inscription d'un nouvel user)
 exports.signup = (req, res, next) => {
-    //Cryptage du password
     bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-            //Création d'un nouvel utilisateur
-            const user = new User({
-                username: req.body.username,
-                email: req.body.email,
-                password: hash,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name  
-            });
-            //Enregistrement du new user dans la base de données
-            let sql = `INSERT INTO User(username, email, password, first_name, last_name) VALUES (?)`;
-            let values = [user.username, user.email, user.password, user.first_name, user.last_name];
-            db.query(sql, [values], function(err, data, fields) {
-                if (err) {
-                    return res.status(400).json({err}); 
-                }
-                //Si absence d'erreur, on crée un nouveau token pour ce new user
-                let sql = `SELECT * FROM User WHERE email = ?`;
-                db.query(sql, [req.body.email], function(err, data, fields) {
-                    if (err) {
-                    return res.status(404).json({err}); 
+    .then(hash => {
+        User.create ({
+            email: req.body.email,
+            name: req.body.name,
+            job: req.body.job,
+            password: hash
+        })
+        .then(user =>{
+            res.status(201).json({ message: 'Utilisateur créé !'})
+        })
+        .catch(err => console.log('User_created', err))
+            
+    })
+    .catch(error => res.status(500).json({ error })) 
+};
+
+
+exports.login = (req, res, next) => {
+    User.findOne({where: { email: req.body.email } }) // on vérifie que l'e-mail entré par l'utilisateur correspond à un utilisateur existant de la base de données 
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+            }
+            bcrypt.compare(req.body.password, user.password) // on utilise la fonction compare de bcrypt pour comparer le mot de passe entré par l'utilisateur avec le hash enregistré dans la base de données
+                .then(valid => {
+                    if (!valid) {
+                        return res.status(401).json({ error: 'Mot de passe incorrect !' });
                     }
-                    res.status(200).json({ 
-                        userId: data[0].id, 
-                        username: data[0].username, 
-                        isAdmin: data[0].is_admin,
-                        //Encodage d'un nouveau token
-                        token: jwt.sign(
-                            {userId : data[0].id, username: data[0].username, isAdmin: data[0].is_admin},
-                            'RANDOM_TOKEN_SECRET',
-                            {expiresIn: "24h"}
+                    res.status(200).json({
+                        token: jwt.sign( // on utilise la fonction sign dejsonwebtoken pour encoder un nouveau token
+                            {
+                                userId: user.id,
+                                role: user.role,
+                                userName: user.name
+                            },
+                            "RANDON_SECRET_KEY", // on utilise une chaîne secrète de développement temporaire
+                            {expiresIn: '24h'} // pour définir la durée de validité du token
                         )
                     });
-                });
+                })
+                .catch(error => res.status(500).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
+};
+
+
+exports.getAllUsers = (req, res, next) => {
+    User.findAll()
+        .then(users => res.status(200).json(users))
+        .catch(error => res.status(500).json({ error }))
+}
+
+
+exports.getCurrentUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+    const userId = decodedToken.userId;
+    console.log(userId)
+
+    User.findOne({ where: { id: userId } })
+        .then(user => {
+            res.status(200).json({
+                UserName: user.name,
+                job: user.job,
+                image: user.image,
+                email: user.email
             });
         })
-        .catch(error => res.status(500).json({error})); 
-};
+        .catch(error => res.status(500).json({ error: 'erreur bdd' }))
+}
 
 
-//Fonction qui gère la logique métier de la route POST (connexion d'un user existant dans la database)
-exports.login = (req, res, next) => {
-    //Recherche de l'utilisateur dans la DB via son email 
-    let sql = `SELECT * FROM User WHERE email = ?`;
-    db.query(sql, [req.body.email], function(err, data, fields) {
-        if (data.length === 0) {
-            return res.status(404).json({err: "Utilisateur non trouvé !"}); 
-        } 
-        //Si on a trouvé le mail dans la DB, on compare le hash du nouveau mot de passe au hash de la DB
-        bcrypt.compare(req.body.password, data[0].password)
-            .then(valid => {
-                if(!valid) {
-                    return res.status(401).json({error: "Mot de passe incorrect !"});
-                }
-                res.status(200).json({
-                    userId: data[0].id,
-                    username: data[0].username,
-                    isAdmin: data[0].is_admin,
-                    //Si le password est correct, encodage d'un nouveau token
-                    token: jwt.sign(
-                        {userId : data[0].id, username: data[0].username, isAdmin: data[0].is_admin},
-                        'RANDOM_TOKEN_SECRET',
-                        {expiresIn: "24h"}
-                    )
-                });
+exports.modifyUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+    const userId = decodedToken.userId;
+    console.log(userId)
+
+    User.findOne({ where: { id: userId } })
+        .then(user => {
+            user.update({
+                image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
             })
-            .catch(error => res.status(500).json({error}));  
-    });
-};
-
-
-//Fonction qui gère la logique métier de la route GET (affichage des données d'un user)
-exports.getOneUser = (req, res, next) => {
-    let sql = `SELECT * FROM User WHERE id = ?`;
-    db.query(sql, [req.params.id], function(err, data, fields) {
-    if (err) {
-        return res.status(404).json({err});
-    }
-    res.json({status: 200, data, message: "Infos_User affichés avec succès !"})
-  });
-};
-
-
-//Fonction qui gère la logique métier de la route DELETE (suppression d'un compte user existant dans la database)
-exports.deleteAccount = (req, res, next) => {
-    let sql = `DELETE FROM User WHERE id = ?`;
-    db.query(sql, [req.params.id], function(err, data, fields) {
-        if (err) {
-            return res.status(400).json({err: "Désolé, votre demande de suppression de compte n'a pu aboutir."}); 
-        }
-        res.json({status: 200, data, message: "Votre compte a bien été supprimé !"});    
-    });
-};
+            .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
+            .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour !' }));
+        })
+        .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé !' }))
+  };
