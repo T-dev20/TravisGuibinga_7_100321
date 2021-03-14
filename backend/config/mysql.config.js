@@ -1,19 +1,13 @@
-const mysql = require("mysql");
-
-const connection = mysql.createConnection({
-    host : "localhost",
-    user: "root",
-    password : "Trav15#",
-    database : "groupomania"
-});
-
-//Connexion à MySQL
-connection.connect(function(error) {
-    if (error) {
-        console.error("La connexion à MySQL a échoué !"); 
-        return;
+module.exports = {
+    HOST: "localhost",
+    USER: "root",
+    PASSWORD: "Trav15#",
+    DB: "groupotest",
+    dialect: "mysql",
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
     }
-    console.log("Connexion à MySQL réussie !");
-});
-
-module.exports = connection;
+  };
