@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("..middleware/multer-config");
+const auth = require("..middleware/auth");
 const userCtrl = require("../controllers/user");
 
 
-//Requête POST pour inscription d'un nouveau user
-router.post("/signup", userCtrl.signup); 
- 
-//Requête POST pour connexion d'un user existant
-router.post("/login", userCtrl.login);
-
-//Requête GET pour afficher les données d'un user
-router.get("/:id", userCtrl.getOneUser);
-
-//Requête DELETE pour suppression de compte d'un user existant
-router.delete("/:id", userCtrl.deleteAccount);
+router.post('/signup', userCtrl.signup);
+router.post('/login', userCtrl.login);
+router.get('/users', userCtrl.getAllUsers);
+router.get('/users/monprofil', auth, userCtrl.getCurrentUser);
+router.put('/users/monprofil', auth, multer, userCtrl.modifyUser);
 
 module.exports = router;
