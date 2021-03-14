@@ -1,13 +1,21 @@
-var mysql = require("mysql");
+module.exports = (sequelize, Sequelize) => {
+  const Post = sequelize.define('Post', { 
+    id:{ 
+        type:Sequelize.INTEGER.UNSIGNED, 
+        autoIncrement:true, 
+        allowNull:false, 
+        primaryKey:true
+    }, 
+    content: { 
+      type: Sequelize.TEXT, 
+      allowNull:false
+    }, 
+    image: { 
+      type: Sequelize.STRING
+    }, 
+     createdAt: Sequelize.DATE, 
+     updatedAt: Sequelize.DATE, 
+}) 
 
-//Constructeur
-const Article = function(article) {
-    this.id = article.id;
-    this.content = article.content;
-    this.user_id = article.user_id;
-    this.imageUrl = article.imageUrl;
-    this.date_post = new Date();
-    this.date_update_post = article.date_update_post
+    return Post;
 };
-
-module.exports = Article;
