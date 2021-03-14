@@ -1,12 +1,19 @@
-var mysql = require("mysql");
+module.exports = (sequelize, Sequelize) => {
+    const Comment = sequelize.define('Comment', { 
+      id:{ 
+          type:Sequelize.INTEGER, 
+          autoIncrement:true, 
+          allowNull:false, 
+          primaryKey:true
+      }, 
+      content: { 
+        type: Sequelize.TEXT, 
+        allowNull:false
+      }, 
 
-//Constructeur
-const Comment = function(comment) {
-    this.id = comment.id;
-    this.content = comment.content;
-    this.user_id = comment.user_id;
-    this.article_id = comment.article_id;
-    this.date_post = new Date()
+       createdAt: Sequelize.DATE, 
+       updatedAt: Sequelize.DATE, 
+  }) 
+    
+      return Comment;
 };
-
-module.exports = Comment;
