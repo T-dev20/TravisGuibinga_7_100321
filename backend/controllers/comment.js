@@ -1,4 +1,4 @@
-const Post = require('../models/Post');
+const db = require('../models');
 const Comment = require('../models/Comment');
 const jwt = require('jsonwebtoken');
 
@@ -10,12 +10,12 @@ exports.createComment = (req, res, next) => {
     const userId = decodedToken.userId;
     //console.log(userId)
 
-    Post.findOne({ where: { id: req.body.PostId } })  // On recherche le post à commenté
+    db.Post.findOne({ where: { id: req.body.PostId } })  // On recherche le post à commenté
         .then(post => {
             if (!post) {
                 return res.status(404).json({ error: 'Post introuvable !' })
             }
-            Comment.create({
+            db.Comment.create({
                 content: req.body.content,
                 PostId: req.body.PostId,
                 OwnerId: userId
@@ -25,6 +25,14 @@ exports.createComment = (req, res, next) => {
         })
     .catch(error => res.status(400).json({ message: "erreur" }))
 }
+
+
+exports.modifyComment = (req, res, next) => {
+  db.Comment.update({ where: { id: req.params.id } })
+      .then(comment => res.status(200).json(comment))
+      .catch(error => res.status(404).json({error: error}));
+};
+
 
 exports.deleteComment = (req, res, next) => {
     Comment.destroy({ where: { id: req.params.id } })
