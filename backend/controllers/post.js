@@ -1,7 +1,4 @@
 const db = require('../models');
-const Comment = require("../models/Comment");
-const Post = require("../models/Post");
-const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 
@@ -10,8 +7,7 @@ exports.createPost = (req, res, next) => {
     const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
     const userId = decodedToken.userId;
    
-    
-    Post.create({
+    db.Post.create({
         UserId: userId,
         content: req.body.content,
         image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
@@ -21,15 +17,15 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-    Post.destroy({ where: { id: req.params.id } })
+    db.Post.destroy({ where: { PostId: req.params.id } })
         .then(() => res.status(200).json({ message: 'Post supprimé'}))
         .catch(error => res.status(400).json({ error: 'Problème_suppression_post' }));
 };
 
 
 exports.getOnePost = (req, res, next) => {
-  Post.findOne({
-    id: req.params.id
+  db.Post.findOne({
+    PostId: req.params.id
   })
       .then(post => res.status(200).json(post))
       .catch(error => res.status(404).json({error: error}));
@@ -37,9 +33,9 @@ exports.getOnePost = (req, res, next) => {
 
 
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll({
+    db.Post.findAll({
         include: {
-            model: db.user,
+            model: db.User,
             attributes: ["name", "role", "image"]
         },
         order: [
@@ -51,10 +47,10 @@ exports.getAllPosts = (req, res, next) => {
 };
 
 exports.getAllComments = (req, res, next) => {
-    Comment.findAll({
+    db.Comment.findAll({
         where: { PostId: req.params.id},
         include: {
-            model: User,
+            model: db.User,
             attributes: ["name", "role", "image"]
         }
     }) 
