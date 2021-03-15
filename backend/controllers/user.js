@@ -68,7 +68,7 @@ exports.getCurrentUser = (req, res, next) => {
             res.status(200).json({
                 UserName: user.name,
                 job: user.job,
-                image: user.image,
+                image_profil: user.image_profil,
                 email: user.email
             });
         })
@@ -85,7 +85,7 @@ exports.modifyUser = (req, res, next) => {
     User.findOne({ where: { id: userId } })
         .then(user => {
             user.update({
-                image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+                image_profil: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
             })
             .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
             .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour !' }));
