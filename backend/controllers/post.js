@@ -42,7 +42,7 @@ exports.getAllPosts = (req, res, next) => {
             ['createdAt', 'DESC']
       ],
     })
-        .then(posts => res.status(200).json(posts))
+        .then(post => res.status(200).json(post))
         .catch(error => res.status(500).json({ error }))
 }
 
