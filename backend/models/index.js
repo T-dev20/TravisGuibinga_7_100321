@@ -13,7 +13,10 @@ const sequelize = new Sequelize(mysqlConfig.DB, mysqlConfig.USER, mysqlConfig.PA
   },
 });
 
-module.exports = sequelize;
+// Test DB_connexion
+sequelize.authenticate()
+    .then(() => console.log('Database connected...'))
+    .catch(err => console.log('Error: ' + err))
 
 const db = {};
 
