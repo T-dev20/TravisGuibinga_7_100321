@@ -1,6 +1,6 @@
 const mysqlConfig = require("../config/mysql.config");
 const Sequelize = require("sequelize");
-module.exports = new Sequelize(mysqlConfig.DB, mysqlConfig.USER, mysqlConfig.PASSWORD, {
+const sequelize = new Sequelize(mysqlConfig.DB, mysqlConfig.USER, mysqlConfig.PASSWORD, {
   host: mysqlConfig.HOST,
   dialect: mysqlConfig.dialect,
   operatorsAliases: false,
@@ -12,6 +12,8 @@ module.exports = new Sequelize(mysqlConfig.DB, mysqlConfig.USER, mysqlConfig.PAS
     idle: mysqlConfig.pool.idle
   },
 });
+
+module.exports = sequelize;
 
 const db = {};
 
@@ -25,3 +27,5 @@ db.Comment = require("./Comment.js")(sequelize, Sequelize);
 // Contraintes de clés étrangères
 db.User.hasMany(db.Post);
 db.Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE' });
+
+module.exports = db;

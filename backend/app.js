@@ -5,12 +5,12 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 
-const db = require("./models/index");
+// const db = require("./models/index");
 
-// Test DB_connexion
-db.authenticate()
-    .then(() => console.log('Database connected...'))
-    .catch(err => console.log('Error: ' + err))
+// // Test DB_connexion
+// db.authenticate()
+//     .then(() => console.log('Database connected...'))
+//     .catch(err => console.log('Error: ' + err))
 
 const app = express();
 
