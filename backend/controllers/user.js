@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const db = require('../models');
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
 
 
 exports.login = (req, res, next) => {
-    User.findOne({where: { email: req.body.email } }) // on vérifie que l'e-mail entré par l'utilisateur correspond à un utilisateur existant de la base de données 
+    db.User.findOne({where: { email: req.body.email } }) // on vérifie que l'e-mail entré par l'utilisateur correspond à un utilisateur existant de la base de données 
         .then(user => {
             if (!user) {
                 return res.status(401).json({ error: 'Utilisateur non trouvé !' });
@@ -51,7 +51,7 @@ exports.login = (req, res, next) => {
 
 
 exports.getAllUsers = (req, res, next) => {
-    User.findAll()
+    db.User.findAll()
         .then(users => res.status(200).json(users))
         .catch(error => res.status(500).json({ error }))
 }
@@ -63,7 +63,7 @@ exports.getCurrentUser = (req, res, next) => {
     const userId = decodedToken.userId;
     console.log(userId)
 
-    User.findOne({ where: { id: userId } })
+    db.User.findOne({ where: { id: userId } })
         .then(user => {
             res.status(200).json({
                 UserName: user.name,
@@ -82,7 +82,7 @@ exports.modifyUser = (req, res, next) => {
     const userId = decodedToken.userId;
     console.log(userId)
 
-    User.findOne({ where: { id: userId } })
+    db.User.findOne({ where: { id: userId } })
         .then(user => {
             user.update({
                 image_profil: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
