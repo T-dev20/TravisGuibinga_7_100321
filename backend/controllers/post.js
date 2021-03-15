@@ -1,7 +1,7 @@
 const db = require('../models');
-const Comment = require("../models/comment");
-const Post = require("../models/post");
-const User = require("../models/user");
+const Comment = require("../models/Comment");
+const Post = require("../models/Post");
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 
