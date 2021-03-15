@@ -5,7 +5,7 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 
-const db = require("./config/index");
+const db = require("./models/index");
 
 // Test DB_connexion
 db.authenticate()

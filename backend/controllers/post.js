@@ -1,3 +1,4 @@
+const db = require('../models');
 const Comment = require("../models/comment");
 const Post = require("../models/post");
 const User = require("../models/user");
@@ -38,7 +39,7 @@ exports.getOnePost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
     Post.findAll({
         include: {
-            model: db.User,
+            model: db.user,
             attributes: ["name", "role", "image"]
         },
         order: [

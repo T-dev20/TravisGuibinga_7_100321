@@ -1,4 +1,4 @@
-const mysqlConfig = require("./mysql.config");
+const mysqlConfig = require("../config/mysql.config");
 const Sequelize = require("sequelize");
 module.exports = new Sequelize(mysqlConfig.DB, mysqlConfig.USER, mysqlConfig.PASSWORD, {
   host: mysqlConfig.HOST,
