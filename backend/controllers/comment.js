@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 exports.createComment = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
     const userId = decodedToken.userId;
     //console.log(userId)
 
