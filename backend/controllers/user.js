@@ -92,3 +92,15 @@ exports.modifyUser = (req, res, next) => {
         })
         .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé !' }))
   };
+
+
+  exports.deleteCurrentUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+    const userId = decodedToken.userId;
+    console.log(userId)
+
+    db.User.destroy({ where: { id: userId } })
+        .then(() => res.status(200).json({ message: 'Compte supprimé'}))
+        .catch(error => res.status(400).json({ error: 'Problème_suppression_compte' }));        
+  };
