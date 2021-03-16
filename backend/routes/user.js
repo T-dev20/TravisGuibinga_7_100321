@@ -10,5 +10,6 @@ router.post('/login', userCtrl.login);
 router.get('/users', userCtrl.getAllUsers);
 router.get('/users/monprofil', auth, userCtrl.getCurrentUser);
 router.put('/users/monprofil', auth, multer, userCtrl.modifyUser);
+router.delete('/users/monprofil', userCtrl.deleteCurrentUser);
 
 module.exports = router;
