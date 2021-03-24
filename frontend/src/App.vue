@@ -1,8 +1,9 @@
 <template>
 <div id="app">
   <div id="nav">
-    <router-link to="/">S'incrire</router-link> |
-    <router-link to="/about">Connexion</router-link>
+    <!-- Navigation lorsque l'user n'est pas connecté -->
+    <router-link to="/registration">Inscription</router-link> |
+    <router-link to="/">Connexion</router-link>
   </div>
   <router-view/>
 </div>
