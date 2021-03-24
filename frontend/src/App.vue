@@ -2,7 +2,7 @@
 <div id="app">
   <div id="nav">
     <!-- Navigation lorsque l'user n'est pas connecté -->
-    <router-link to="/registration">Inscription</router-link> |
+    <router-link to="/inscription">Inscription</router-link> |
     <router-link to="/">Connexion</router-link>
   </div>
   <router-view/>
