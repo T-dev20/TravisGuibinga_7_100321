@@ -10,17 +10,17 @@
                         <div class="font-italic">Pas encore de compte ? <a style="color:#5ef1af" href="http://localhost:8080/#/inscription">Cliquez ici pour vous inscrire</a></div>
                         
                         <br>
-                        <label for="email-inscription">Adresse e-mail</label>
-                        <input id="email-inscription" v-bind:style="border" v-model="email" type="email" placeholder="email@gmail.com" class="form-control" required>  
+                        <label for="email-connexion">Adresse e-mail</label>
+                        <input id="email-connexion" v-bind:style="border" v-model="email" type="email" placeholder="email@gmail.com" class="form-control" required>  
                         <br>
 
-                        <label for="mpasse-inscription">Mot de passe</label>
-                        <input id="mpasse-inscription" v-bind:style="border" v-model="password" type="password" placeholder="Motdepasse!1" class="form-control" required>  
+                        <label for="mpasse-connexion">Mot de passe</label>
+                        <input id="mpasse-connexion" v-bind:style="border" v-model="password" type="password" placeholder="Motdepasse!1" class="form-control" required>  
                         <br>
 
                         <!-- Connexion button -->
                         <p class="card-text text-center inline">
-                            <button @click="checkForm" id="contact_button-inscription" class="btn font-weight-bold toClick" type="submit"><div class="h4">Se connecter</div></button>
+                            <button @click="checkForm" id="contact_button-connexion" class="btn font-weight-bold toClick" type="submit"><div class="h4">Se connecter</div></button>
                         </p>                         
                     </form>                    
                 </div>
