@@ -32,13 +32,3 @@
         </div>             
     </div>
 </template>
-
-<style lang="scss">
-
-.form-control {
-    color: black;
-    &:focus-visible {
-      color: black;
-    }
-}
-</style>

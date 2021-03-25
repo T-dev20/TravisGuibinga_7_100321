@@ -7,7 +7,7 @@
                         <h2 class="h4 text-left inline">
                             Se connecter :                    
                         </h2>
-                        <div class="font-italic">Pas encore de compte ? <a style="color:#5ef1af" href="http://localhost:8080/#/register">Cliquez ici pour vous inscrire</a></div>
+                        <div class="font-italic">Pas encore de compte ? <a style="color:#5ef1af" href="http://localhost:8080/#/inscription">Cliquez ici pour vous inscrire</a></div>
                         
                         <br>
                         <label for="email-inscription">Adresse e-mail</label>
