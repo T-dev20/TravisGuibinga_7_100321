@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<style>
+<style lang='scss'>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -29,4 +29,8 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+// Definition of Sass variables
+$website-color: #4c8baf;
+$cardGroupomania-bgColor: darken($website-color, 20);
 </style>
