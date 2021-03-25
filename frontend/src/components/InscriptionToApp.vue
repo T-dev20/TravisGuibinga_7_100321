@@ -9,18 +9,8 @@
                         </h2>
                         <br>
 
-                        <label for="firstName">Prénom</label>
+                        <label for="fullName">Nom complet</label>
                         <input id="firstName" v-bind:style="border" v-model="firstName" type="text" placeholder="Pierre" class="form-control" required>     
-                        <br>
-
-                        <label for="lastName">Nom</label>
-                        <input id="lastName" v-bind:style="border" v-model="lastName" type="text" placeholder="Dupont" class="form-control" required>  
-                        <br>
-
-                        <label for="photo-inscription">Photo de profil <span class="font-italic font-weight-light text-white-50"> Facultatif </span></label>
-                        <p>
-                          <input id="photo-inscription" type="file" @change="imageUpload" class="input">  
-                        </p>
                         <br>
 
                         <label for="email-inscription">Adresse e-mail</label>
