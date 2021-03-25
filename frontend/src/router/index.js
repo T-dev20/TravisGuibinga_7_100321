@@ -7,14 +7,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Inscription',
-    component: Inscription
-  },
-  {
     path: '/connexion',
     name: 'Connexion',
     component: Connexion
+  },
+  {
+    path: '/inscription',
+    name: 'Inscription',
+    component: Inscription
   }
 ]
 
