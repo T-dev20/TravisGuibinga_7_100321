@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-12">
-            <img alt="Groupomania logo" src="../assets/logo.png">
+            <img alt="Groupomania logo" src="../assets/logo2.png">
             <h1 class="text-center mt-2 welcomeText">
                 Bienvenue au Réseau Social de Groupomania
             </h1>
