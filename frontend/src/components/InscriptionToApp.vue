@@ -10,7 +10,7 @@
                         <br>
 
                         <label for="fullName">Nom complet</label>
-                        <input id="firstName" v-bind:style="border" v-model="firstName" type="text" placeholder="Pierre" class="form-control" required>     
+                        <input id="fullName" v-bind:style="border" v-model="fullName" type="text" placeholder="Pierre" class="form-control" required>     
                         <br>
 
                         <label for="email-inscription">Adresse e-mail</label>
@@ -18,7 +18,7 @@
                         <br>
 
                         <label for="mpasse-inscription">Mot de passe</label>
-                        <p v-if="!this.validPassword(this.password) || !this.password" class="font-italic font-weight-light text-white-50">Doit contenir entre 8 et 15 caractères, des minuscules et majuscules, au moins un chiffre et un caractère spécial </p>
+                        <!-- <p v-if="!this.validPassword(this.password) || !this.password" class="font-italic font-weight-light text-white-50">Doit contenir entre 8 et 15 caractères, des minuscules et majuscules, au moins un chiffre et un caractère spécial </p> -->
                         <input id="mpasse-inscription" v-bind:style="border" v-model="password" type="password" placeholder="Motdepasse!1" class="form-control" required>  
                         <br>
 
