@@ -1,3 +1,4 @@
+require('dotenv').config;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../models');
@@ -40,7 +41,7 @@ exports.login = (req, res, next) => {
                                 role: user.role,
                                 userName: user.name
                             },
-                            "RANDON_SECRET_KEY", // on utilise une chaîne secrète de développement temporaire
+                            process.env.SECRET_KEY, // on utilise une chaîne secrète de développement temporaire
                             {expiresIn: '24h'} // pour définir la durée de validité du token
                         )
                     });
@@ -60,7 +61,7 @@ exports.getAllUsers = (req, res, next) => {
 
 exports.getCurrentUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
     console.log(userId)
 
@@ -79,7 +80,7 @@ exports.getCurrentUser = (req, res, next) => {
 
 exports.modifyUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
     console.log(userId)
 
@@ -100,7 +101,7 @@ exports.modifyUser = (req, res, next) => {
 
   exports.deleteCurrentUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
     console.log(userId)
 
