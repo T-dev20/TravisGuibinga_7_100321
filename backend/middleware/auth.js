@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config;
 
 module.exports = (req, res, next) => {
     try {
@@ -6,7 +7,7 @@ module.exports = (req, res, next) => {
             throw 'Token d\'authentification manquant !';
         }
         const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+        const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
         const userId = decodedToken.userId;
         //const userRoles = decodedToken.role;
 
