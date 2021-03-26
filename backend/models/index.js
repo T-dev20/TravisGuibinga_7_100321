@@ -1,15 +1,15 @@
-const mysqlConfig = require("../config/mysql.config");
+require('dotenv').config();
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(mysqlConfig.DB, mysqlConfig.USER, mysqlConfig.PASSWORD, {
-  host: mysqlConfig.HOST,
-  dialect: mysqlConfig.dialect,
+const sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: "mysql",
   operatorsAliases: false,
 
   pool: {
-    max: mysqlConfig.pool.max,
-    min: mysqlConfig.pool.min,
-    acquire: mysqlConfig.pool.acquire,
-    idle: mysqlConfig.pool.idle
+    max: 5,
+    min: 0,
+    acquire: 3000,
+    idle: 10000
   },
 });
 

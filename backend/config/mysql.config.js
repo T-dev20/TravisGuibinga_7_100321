@@ -1,13 +1,15 @@
+require('dotenv').config;
+
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "Trav15#",
-    DB: "groupotest",
-    dialect: "mysql",
+    HOST: process.env.DB_HOST,    
+    USER: process.env.DB_USER,    
+    PASSWORD: process.env.DB_PASSWORD,    
+    DB: process.env.DB, 
+    dialect: "mysql",    
     pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  };
+        max: 5,        
+        min: 0,        
+        acquire: 30000,        
+        idle: 10000        
+        }        
+    };
