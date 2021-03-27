@@ -1,10 +1,11 @@
+require('dotenv').config;
 const db = require('../models');
 const jwt = require("jsonwebtoken");
 
 
 exports.createPost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, "RANDON_SECRET_KEY");
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
    
     db.Post.create({
