@@ -12,7 +12,7 @@ router.post('/', auth, multer, postCtrl.createPost);
 //pour afficher un post
 router.get('/:id', auth, postCtrl.getOnePost);
 //pour modifier un post  
-//router.put('/:id', auth, multer, postCtrl.modifyPost);
+router.put('/:id', auth, multer, postCtrl.modifyPost);
 //pour liker un post
 //router.post('/:id/like', auth, postCtrl.likePost)
 //pour supprimer un post 

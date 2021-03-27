@@ -30,6 +30,24 @@ exports.getOnePost = (req, res, next) => {
       .catch(error => res.status(404).json({error: 'error'}));
 };
 
+exports.modifyPost = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decodedToken.userId;
+    console.log(userId)
+
+    db.Post.findOne({ where: { id: req.params.id } })
+        .then(post => {
+            post.update(
+               { content: req.body.content,
+                 image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+             }
+            )
+            .then(() => res.status(200).json({ message: 'Post modifié !' }))
+            .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour le post!' }));
+        })
+        .catch(error => res.status(404).json({ error: 'Post non trouvé !' }))
+  };
 
 exports.getAllPosts = (req, res, next) => {
     db.Post.findAll({
