@@ -5,7 +5,7 @@ const multer = require('../middleware/multer-config'); // pour importer le middl
 const postCtrl = require('../controllers/post'); // pour importer le controleur
 
 
-router.get('/', postCtrl.getAllPosts);
+router.get('/', auth, postCtrl.getAllPosts);
 router.get('/:id/comments', postCtrl.getAllComments);
 //pour enregistrer des posts dans la BDD
 router.post('/', auth, multer, postCtrl.createPost);
