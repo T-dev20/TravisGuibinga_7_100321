@@ -75,7 +75,7 @@ exports.getCurrentUser = (req, res, next) => {
                 email: user.email
             });
         })
-        .catch(error => res.status(500).json({ error: 'erreur bdd' }))
+        .catch(error => res.status(404).json({ error: 'Utilisateur inexistant !' }))
 }
 
 
