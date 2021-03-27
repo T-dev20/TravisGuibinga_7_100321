@@ -29,11 +29,11 @@ db.Comment = require("./Comment.js")(sequelize, Sequelize);
 
 // Contraintes de clés étrangères
 db.User.hasMany(db.Post);
-db.Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE' });
+db.Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 
 db.Post.hasMany(db.Comment);
-db.Comment.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE' });
-db.Comment.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE' });
+db.Comment.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+db.Comment.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 module.exports = db;
