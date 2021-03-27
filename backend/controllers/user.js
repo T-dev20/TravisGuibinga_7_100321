@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../models');
 const fs = require('fs');
+const User = require('../models/User');
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
@@ -68,7 +69,7 @@ exports.getCurrentUser = (req, res, next) => {
     db.User.findOne({ where: { id: userId } })
         .then(user => {
             res.status(200).json({
-                UserName: user.name,
+                name: user.name,
                 job: user.job,
                 image_profil: user.image_profil,
                 email: user.email
@@ -87,10 +88,10 @@ exports.modifyUser = (req, res, next) => {
     db.User.findOne({ where: { id: userId } })
         .then(user => {
             user.update(
-               { UserName: user.name
-                //  job: user.job,
-                //  email: user.email,
-                //  image_profil: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+               { name: req.body.name,
+                 job: req.body.job,
+                 email: req.body.email,
+                 image_profil: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
              }
             )
             .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
