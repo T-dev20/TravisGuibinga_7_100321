@@ -3,16 +3,12 @@ const db = require('../models');
 const Comment = require('../models/Comment');
 const jwt = require('jsonwebtoken');
 
-// exports.modifyComment = (req, res, next) => {
-//   db.Comment.update({ where: { id: req.params.id } })
-//       .then(comment => res.status(200).json(comment))
-//       .catch(error => res.status(404).json({error: error}));
-// };
 
 exports.modifyComment = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
+    const userName = decodedToken.userName;
     console.log(userId)
 
     db.Comment.findOne({ where: { id: req.params.id } })
