@@ -6,7 +6,10 @@ const postCtrl = require('../controllers/post'); // pour importer le controleur
 
 
 router.get('/', auth, postCtrl.getAllPosts);
+//pour consulter les commentaires du post
 router.get('/:id/comments', postCtrl.getAllComments);
+//pour créer un commentaire sur le post
+router.post("/:id", auth, postCtrl.createComment);
 //pour enregistrer des posts dans la BDD
 router.post('/', auth, multer, postCtrl.createPost);
 //pour afficher un post
