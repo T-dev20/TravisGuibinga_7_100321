@@ -11,13 +11,20 @@ exports.createComment = (req, res, next) => {
     const userId = decodedToken.userId;
     //console.log(userId)
 
-            db.Comment.create({ where: { Postid: req.params.id } }, {
+    db.Post.findOne({ where: { id: req.params.id } })  // On recherche le post à commenté
+        .then(post => {
+            if (!post) {
+                return res.status(404).json({ error: 'Post introuvable !' })
+            }
+            db.Comment.create({
                 content: req.body.content,
-                PostId: req.body.PostId,
+                PostId: req.params.id,
                 OwnerId: userId
             })
             .then(() => res.status(201).json({ message: 'Commentaire créé.' }))
             .catch(error => res.status(400).json({ error }))
+        })
+    .catch(error => res.status(400).json({ message: "erreur" }))
 }
 
 
