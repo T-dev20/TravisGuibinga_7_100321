@@ -18,9 +18,21 @@ exports.createPost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-    db.Post.destroy({ where: { id: req.params.id } })
-        .then(() => res.status(200).json({ message: 'Post supprimé'}))
-        .catch(error => res.status(400).json({ error: 'Problème_suppression_post' }));
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decodedToken.userId;
+
+    db.Post.findOne({ where: { id: req.params.id } })
+        .then(post => {
+            if (post.UserId == userId) {
+            post.destroy({where: { id: req.params.id }})
+            .then(() => res.status(200).json({ message: 'Post supprimé !' }))
+            .catch(error => res.status(400).json({ error: 'Impossible de supprimer le post!' }));
+            }else {
+                return res.status(400).json({ message: "Vous n'êtes pas autorisé(e) à supprimer ce post !"})
+            }
+        })
+        .catch(error => res.status(404).json({ error: 'Post non trouvé !' }))
 };
 
 
@@ -38,13 +50,16 @@ exports.modifyPost = (req, res, next) => {
 
     db.Post.findOne({ where: { id: req.params.id } })
         .then(post => {
-            post.update(
-               { content: req.body.content,
+            if (post.UserId == userId) {
+                post.update({ 
+                 content: req.body.content,
                  image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
-             }
-            )
+             })
             .then(() => res.status(200).json({ message: 'Post modifié !' }))
             .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour le post!' }));
+            }else {
+                return res.status(400).json({ message: "Vous n'êtes pas autorisé(e) à modififier ce post !"})
+            }
         })
         .catch(error => res.status(404).json({ error: 'Post non trouvé !' }))
   };
