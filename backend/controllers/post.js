@@ -68,7 +68,7 @@ exports.getAllComments = (req, res, next) => {
         where: { PostId: req.params.id},
         include: {
             model: db.User,
-            attributes: ["name", "role", "image_profil"]
+            attributes: ["email", "name", "role", "image_profil"]
         }
     })
         .then(comments => res.status(200).json(comments))
