@@ -21,10 +21,14 @@ exports.deletePost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
+    const userRole = decodedToken.role;
 
-    db.Post.findOne({ where: { id: req.params.id } })
+    db.Post.findOne({include: {
+            model: db.User,
+            attributes: ["name", "role", "image_profil"]
+        }, where: { id: req.params.id } })
         .then(post => {
-            if (post.UserId == userId) {
+            if (post.UserId == userId || userRole == "Admin") {
             post.destroy({where: { id: req.params.id }})
             .then(() => res.status(200).json({ message: 'Post supprimé !' }))
             .catch(error => res.status(400).json({ error: 'Impossible de supprimer le post!' }));
@@ -37,7 +41,10 @@ exports.deletePost = (req, res, next) => {
 
 
 exports.getOnePost = (req, res, next) => {
-  db.Post.findOne({where: { id: req.params.id }})
+  db.Post.findOne({include: {
+            model: db.User,
+            attributes: ["name", "role", "image_profil"]
+        },where: { id: req.params.id }})
       .then(post => res.status(200).json(post || {} ))
       .catch(error => res.status(404).json( {} ));
 };
