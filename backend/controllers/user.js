@@ -107,7 +107,15 @@ exports.modifyUser = (req, res, next) => {
     const userId = decodedToken.userId;
     console.log(userId)
 
-    db.User.destroy({ where: { id: userId } })
-        .then(() => res.status(200).json({ message: 'Compte supprimé'}))
-        .catch(error => res.status(400).json({ error: 'Problème_suppression_compte' }));        
+    db.User.findOne({ where: { id: userId } })
+    .then(user => {
+        if (user.id == userId || user.role == "Admin") {
+            db.User.destroy()
+            .then(() => res.status(200).json({ message: 'Compte supprimé'}))
+            .catch(error => res.status(400).json({ error: 'Problème_suppression_compte' }));
+        }else {
+            return res.status(404).json({ message: "'Vous n'avez pas le droit de supprimé ce compte !" })
+        }
+    })
+            
   };
