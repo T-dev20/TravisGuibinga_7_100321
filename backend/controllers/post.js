@@ -53,11 +53,16 @@ exports.modifyPost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
+    const userRole = decodedToken.role;
     console.log(userId)
 
-    db.Post.findOne({ where: { id: req.params.id } })
+    db.Post.findOne({include: {
+            model: db.User,
+            attributes: ["name", "role", "image_profil"]
+        },
+         where: { id: req.params.id } })
         .then(post => {
-            if (post.UserId == userId) {
+            if (post.UserId == userId || userRole == "Admin") {
                 post.update({ 
                  content: req.body.content,
                  image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
