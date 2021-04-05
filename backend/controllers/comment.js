@@ -15,7 +15,7 @@ exports.modifyComment = (req, res, next) => {
         },
         where: { id: req.params.id } })
         .then(comment => {
-            if (comment.OwnerId == userId || userRole == "Admin") {
+            if (comment.OwnerId == userId) {
                 comment.update({
                 content: req.body.content
             })
