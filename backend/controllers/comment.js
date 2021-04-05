@@ -22,7 +22,7 @@ exports.modifyComment = (req, res, next) => {
             .then(() => res.status(201).json({ message: 'Commentaire modifié.' }))
             .catch(error => res.status(400).json({ error }))
             }else {
-                return res.status(404).json({ error: "'Vous n'êtes pas autorisé à modifier ce commentaire !'" })
+                return res.status(404).json({ error: "Vous n'êtes pas autorisé à modifier ce commentaire !" })
             }
             
         })
