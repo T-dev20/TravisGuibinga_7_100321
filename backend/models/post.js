@@ -9,10 +9,14 @@ module.exports = (sequelize, Sequelize) => {
     content: { 
       type: Sequelize.TEXT, 
       allowNull:false
-    }, 
+    },
     image: { 
       type: Sequelize.STRING
-    }, 
+    },
+    likes: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
      createdAt: Sequelize.DATE, 
      updatedAt: Sequelize.DATE, 
 }) 

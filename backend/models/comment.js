@@ -10,7 +10,10 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT, 
         allowNull:false
       }, 
-
+      likes: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
        createdAt: Sequelize.DATE, 
        updatedAt: Sequelize.DATE, 
   }) 
