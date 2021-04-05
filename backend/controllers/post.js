@@ -53,7 +53,6 @@ exports.modifyPost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
-    const userRole = decodedToken.role;
     console.log(userId)
 
     db.Post.findOne({include: {
