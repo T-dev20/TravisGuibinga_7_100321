@@ -28,3 +28,51 @@
         </div>             
     </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+    name: 'ConnexionToApp',
+    data() {
+        return {
+        email: null,
+        password: null,
+        border: null
+        }
+    },
+    methods: {
+        // Function at the click of the connexion button
+        checkForm(event) {
+            event.preventDefault();
+            // Check if email and password have been provided
+            if (!this.email || !this.password) {
+                alert("Veuillez renseigner tous les champs pour vous connecter !");
+                this.border= 'border: 2px solid #FF0000' 
+            } else {
+                axios.post('http://localhost:3000/api/auth/login', {
+                    email: this.email,
+                    password: this.password          
+                })
+                // Set a token and userId in localStorage & redirection to the main page with posts and refresh this page
+                .then((response) => {
+                    console.log(response);
+                    localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("userId", response.data.userId);  
+                    localStorage.setItem("role", response.data.role);  
+                    this.$router.push({ name: "Groupomania" }); 
+                    window.location.reload('../App.vue'); 
+                })
+                .catch( (error)=> {
+                    if(JSON.stringify(error.message)=='"Request failed with status code 401"') {
+                        alert('Utilisateur inconnu ou mot de passe incorrect.');
+                    } else {
+                        alert('Oups une erreur est survenue.');
+                    }
+                    console.log(error);
+                })
+            }
+        }
+    }
+}
+</script>
