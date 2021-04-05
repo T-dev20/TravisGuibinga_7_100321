@@ -96,7 +96,10 @@ exports.getAllComments = (req, res, next) => {
         include: {
             model: db.User,
             attributes: ["email", "name", "role", "image_profil"]
-        }
+        },
+        order: [
+            ['createdAt', 'DESC']
+      ],
     })
         .then(comments => res.status(200).json(comments))
         .catch(error => res.status(500).json({ error }))
