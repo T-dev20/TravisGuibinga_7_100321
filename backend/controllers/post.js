@@ -62,7 +62,7 @@ exports.modifyPost = (req, res, next) => {
         },
          where: { id: req.params.id } })
         .then(post => {
-            if (post.UserId == userId || userRole == "Admin") {
+            if (post.UserId == userId) {
                 post.update({ 
                  content: req.body.content,
                  image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
