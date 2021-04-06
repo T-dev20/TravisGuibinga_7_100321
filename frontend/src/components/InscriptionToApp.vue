@@ -48,15 +48,30 @@ name: 'InscriptionToApp',
             imageUrl: '',
             email: null,
             password: null,
+            fonction: null,
             border: null
         }       
     },
     methods: {
-        // Function to register
+    // Function to register
     checkForm(event) {
-
+      event.preventDefault();
+      // On vérifie que l'user à renseigner tous les champs
+      if (!this.fullName || !this.email || !this.password || !this.fonction) {
+        alert("Veuillez renseigner tous les champs pour vous inscrire !");
+        this.border= 'border: 2px solid #FF0000' 
+      // Vérifie que l'email est correcte 
+      } else if(!this.validEmail(this.email)) {
+        alert("Veuillez renseigner un email valide !");
+      // Vérifie que le mot de passe est correcte   
+      } else if(!this.validPassword(this.password)) {
+        alert("Veuillez renseigner un mot de passe valide !");
+      }
     },
-    // Function to verify that password typo is correct
+    validEmail: function (email) {
+      var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      return re.test(email);
+    },
     validPassword: function (password) {
     var re = /^(?=.{8,15}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/;
     return re.test(password);
