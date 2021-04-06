@@ -18,7 +18,7 @@
                         <br>
 
                         <label for="mpasse-inscription">Mot de passe</label>
-                        <!-- <p v-if="!this.validPassword(this.password) || !this.password" class="font-italic font-weight-light text-white-50">Doit contenir entre 8 et 15 caractères, des minuscules et majuscules, au moins un chiffre et un caractère spécial </p> -->
+                        <p v-if="!this.validPassword(this.password) || !this.password" class="font-italic font-weight-light text-white-50">Doit contenir entre 8 et 15 caractères, des minuscules et majuscules, au moins un chiffre et un caractère spécial </p>
                         <input id="mpasse-inscription" v-bind:style="border" v-model="password" type="password" placeholder="Motdepasse!1" class="form-control" required>  
                         <br>
 
@@ -36,3 +36,28 @@
         </div>             
     </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+name: 'InscriptionToApp',
+    data() {
+        return {
+            fullName: null,
+            imageUrl: '',
+            email: null,
+            password: null,
+            border: null
+        }       
+    },
+    methods: {
+
+        // Function to verify that password typo is correct
+        validPassword: function (password) {
+        var re = /^(?=.{8,15}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/;
+        return re.test(password);
+        }
+    }
+}
+</script>
