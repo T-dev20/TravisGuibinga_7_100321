@@ -44,11 +44,10 @@ export default {
 name: 'InscriptionToApp',
     data() {
         return {
-            fullName: null,
-            imageUrl: '',
+            name: null,
             email: null,
             password: null,
-            fonction: null,
+            job: null,
             border: null
         }       
     },
@@ -57,7 +56,7 @@ name: 'InscriptionToApp',
     checkForm(event) {
       event.preventDefault();
       // On vérifie que l'user à renseigner tous les champs
-      if (!this.fullName || !this.email || !this.password || !this.fonction) {
+      if (!this.name || !this.email || !this.password || !this.job) {
         alert("Veuillez renseigner tous les champs pour vous inscrire !");
         this.border= 'border: 2px solid #FF0000' 
       // Vérifie que l'email est correcte 
@@ -66,6 +65,24 @@ name: 'InscriptionToApp',
       // Vérifie que le mot de passe est correcte   
       } else if(!this.validPassword(this.password)) {
         alert("Veuillez renseigner un mot de passe valide !");
+      } else {
+        // Creation d'un formData pour envoyer les données
+        const formData = new FormData();
+        formData.append('fullName', this.name);
+        formData.append('email', this.email);
+        formData.append('password', this.password);
+        formData.append('fonction', this.job);
+        // Envoie des données à l'API
+        axios.post('http://localhost:3000/api/auth/signup', formData)
+        .then((response) => {
+          console.log(response)
+          alert('Félicitations, vous êtes inscrit ! Connectez-vous pour accéder au réseau.');
+          this.$router.push({ name: "Connexion" });
+        })
+        .catch( (error)=> {          
+          alert('Oups une erreur est survenue.');
+          console.log(error);
+        })
       }
     },
     validEmail: function (email) {
