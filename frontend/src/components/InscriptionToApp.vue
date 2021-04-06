@@ -52,12 +52,15 @@ name: 'InscriptionToApp',
         }       
     },
     methods: {
+        // Function to register
+    checkForm(event) {
 
-        // Function to verify that password typo is correct
-        validPassword: function (password) {
-        var re = /^(?=.{8,15}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/;
-        return re.test(password);
-        }
+    },
+    // Function to verify that password typo is correct
+    validPassword: function (password) {
+    var re = /^(?=.{8,15}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/;
+    return re.test(password);
+    }
     }
 }
 </script>
