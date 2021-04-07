@@ -125,3 +125,32 @@ exports.createComment = (req, res, next) => {
         })
     .catch(error => res.status(400).json({ message: "erreur" }))
 }
+
+
+exports.postLike = (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+  const userId = decodedToken.userId;
+
+  switch (req.body.like) {
+    case 0:                                                   //cas: req.body.like = 0
+      db.Post.findOne( { where: { id: req.params.id } })
+        .then((post) => {
+          if (post.OwnerId === userId) {
+            db.Post.updateOne({ likes: post.likes - 1 })
+              .then(() => { res.status(201).json({ message: "Like annulé !" }); }) //code 201: created
+              .catch((error) => { res.status(400).json({ error }) });
+          }
+        })
+        .catch((error) => { res.status(404).json({ error }) });
+      break;
+
+    case 1:                                                // cas: req.body.like = 1
+      db.Post.updateOne({ likes: db.Post.likes + 1 })
+        .then(() => { res.status(201).json({ message: "Post liké !" }); }) //code 201: created
+        .catch((error) => { res.status(400).json({ error }); });          //code 400: bad request
+
+    default:
+      console.error("bad request");
+  }
+};

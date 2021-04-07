@@ -68,10 +68,10 @@ name: 'InscriptionToApp',
       } else {
         // Creation d'un formData pour envoyer les données
         const formData = new FormData();
-        formData.append('fullName', this.name);
+        formData.append('name', this.name);
         formData.append('email', this.email);
         formData.append('password', this.password);
-        formData.append('fonction', this.job);
+        formData.append('job', this.job);
         // Envoie des données à l'API
         axios.post('http://localhost:3000/api/auth/signup', formData)
         .then((response) => {
