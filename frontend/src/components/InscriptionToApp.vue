@@ -10,20 +10,20 @@
                         <br>
 
                         <label for="fullName">Nom complet</label>
-                        <input id="fullName" v-bind:style="border" v-model="fullName" type="text" placeholder="Pierre DEBREUILLNE" class="form-control" required>     
+                        <input id="fullName" v-bind:style="border" v-model="fullName" name="fullName" type="text" placeholder="Pierre DEBREUILLNE" class="form-control" required>     
                         <br>
 
                         <label for="email-inscription">Adresse e-mail</label>
-                        <input id="email-inscription" v-bind:style="border" v-model="email" type="email" placeholder="email@gmail.com" class="form-control" required>  
+                        <input id="email-inscription" v-bind:style="border" v-model="email" name="email" type="email" placeholder="email@gmail.com" class="form-control" required>  
                         <br>
 
                         <label for="mpasse-inscription">Mot de passe</label>
                         <p v-if="!this.validPassword(this.password) || !this.password" class="font-italic font-weight-light text-white-50">Doit contenir entre 8 et 15 caractères, des minuscules et majuscules, au moins un chiffre et un caractère spécial </p>
-                        <input id="mpasse-inscription" v-bind:style="border" v-model="password" type="password" placeholder="Motdepasse!1" class="form-control" required>  
+                        <input id="mpasse-inscription" v-bind:style="border" v-model="password" name="password" type="password" placeholder="Motdepasse!1" class="form-control" required>  
                         <br>
 
                         <label for="job">Fonction</label>
-                        <input id="job" v-bind:style="border" v-model="job" type="text" placeholder="RH" class="form-control" required>  
+                        <input id="job" v-bind:style="border" v-model="job" name="job" type="text" placeholder="RH" class="form-control" required>  
                         <br>
 
                         <!-- Register button -->
@@ -44,10 +44,11 @@ export default {
 name: 'InscriptionToApp',
     data() {
         return {
-            fullName: "",
-            email: "",
-            password: "",
-            job: ""
+            fullName: null,
+            email: null,
+            password: null,
+            job: null,
+            border: null
         }       
     },
     methods: {
@@ -65,7 +66,7 @@ name: 'InscriptionToApp',
         alert("Veuillez renseigner un mot de passe valide !");
       } else {
         // Creation d'un formData pour envoyer les données
-        const formData = new FormData();
+        var formData = new FormData();
         formData.append('fullName', this.fullName);
         formData.append('email', this.email);
         formData.append('password', this.password);
@@ -75,7 +76,7 @@ name: 'InscriptionToApp',
         .then((response) => {
           console.log(response)
           alert('Félicitations, vous êtes inscrit ! Connectez-vous pour accéder au réseau.');
-          this.$router.push({ name: "Connexion" });
+          this.$router.push('/connexion');
         })
         .catch( (error)=> {          
           alert('Oups une erreur est survenue.');
