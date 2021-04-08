@@ -157,9 +157,7 @@ exports.createComment = (req, res, next) => {
 
 
  exports.postLike = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
-    //const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-    //const userId = decodedToken.userId;
+
     const isliked = req.body.like;
 
     db.Post.findOne({ where: { id: req.params.id } })
@@ -168,12 +166,12 @@ exports.createComment = (req, res, next) => {
         if (!post) {
             return res.status(404).json({ error: 'Post introuvable !' })
         } else if(isliked == 0) {
-                post.update({ likes: post.likes + 1 })
-                .then(() => res.status(201).json({ message: 'Post liké' }))
+                post.update({ likes: post.likes - 1 })
+                .then(() => res.status(201).json({ message: 'Like annulé' }))
                 .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
         } else if(isliked == 1) {
-                post.update({ likes: post.likes - 1 })
-                .then(post => res.status(201).json({ message: 'Post disliké' }))
+                post.update({ likes: post.likes + 1 })
+                .then(post => res.status(201).json({ message: 'Post liké' }))
                 .catch(error => res.status(500).json({ error: ' Erreur update post' }))
         }
     })
