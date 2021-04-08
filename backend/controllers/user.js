@@ -6,6 +6,7 @@ const fs = require('fs');
 const User = require('../models/User');
 
 exports.signup = (req, res, next) => {
+    console.log("body", req.body);
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
         db.User.create ({
@@ -20,7 +21,10 @@ exports.signup = (req, res, next) => {
         .catch(err => console.log('User_created', err))
             
     })
-    .catch(error => res.status(500).json({ error })) 
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({ error }) 
+    })
 };
 
 

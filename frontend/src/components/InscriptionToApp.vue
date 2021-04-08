@@ -9,8 +9,8 @@
                         </h2>
                         <br>
 
-                        <label for="fullName">Nom complet</label>
-                        <input id="fullName" v-bind:style="border" v-model="fullName" name="fullName" type="text" placeholder="Pierre DEBREUILLNE" class="form-control" required>     
+                        <label for="name">Nom complet</label>
+                        <input id="name" v-bind:style="border" v-model="name" name="name" type="text" placeholder="Pierre DEBREUILLNE" class="form-control" required>     
                         <br>
 
                         <label for="email-inscription">Adresse e-mail</label>
@@ -44,7 +44,7 @@ export default {
 name: 'InscriptionToApp',
     data() {
         return {
-            fullName: null,
+            name: null,
             email: null,
             password: null,
             job: null,
@@ -56,7 +56,7 @@ name: 'InscriptionToApp',
     checkForm(event) {
       event.preventDefault();
       // On vérifie que l'user à renseigner tous les champs
-      if (!this.fullName || !this.email || !this.password || !this.job) {
+      if (!this.name || !this.email || !this.password || !this.job) {
         alert("Veuillez renseigner tous les champs pour vous inscrire !"); 
       // Vérifie que l'email est correcte 
       } else if(!this.validEmail(this.email)) {
@@ -65,18 +65,17 @@ name: 'InscriptionToApp',
       } else if(!this.validPassword(this.password)) {
         alert("Veuillez renseigner un mot de passe valide !");
       } else {
-        // Creation d'un formData pour envoyer les données
-        var formData = new FormData();
-        formData.append('fullName', this.fullName);
-        formData.append('email', this.email);
-        formData.append('password', this.password);
-        formData.append('job', this.job);
         // Envoie des données à l'API
-        axios.post('http://localhost:3000/api/auth/signup', formData)
+        axios.post('http://localhost:3000/api/auth/signup', {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            job: this.job,
+      })
         .then((response) => {
           console.log(response)
           alert('Félicitations, vous êtes inscrit ! Connectez-vous pour accéder au réseau.');
-          this.$router.push('/connexion');
+          this.$router.push({ name: "Connexion" });
         })
         .catch( (error)=> {          
           alert('Oups une erreur est survenue.');
