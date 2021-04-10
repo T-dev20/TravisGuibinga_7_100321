@@ -127,53 +127,53 @@ exports.createComment = (req, res, next) => {
 }
 
 
-// exports.postLike = (req, res, next) => {
-//   const token = req.headers.authorization.split(' ')[1];
-//   const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-//   const userId = decodedToken.userId;
 
-//   switch (req.body.like) {
-//     case 0:                                                   //cas: req.body.like = 0
-//       db.Post.findOne( { where: { id: req.params.id } })
-//         .then((post) => {
-//           if (post.OwnerId === userId) {
-//             post.updateOne({ likes: post.likes-- })
-//               .then(() => { res.status(201).json({ message: "Like annulé !" }); }) //code 201: created
-//               .catch((error) => { res.status(400).json({ error }) });
-//           }
-//         })
-//         .catch((error) => { res.status(404).json({ error }) });
-//       break;
+exports.postLike = (req, res, next) => {
+  switch (req.body.like) {
+    case 0:                                                   
+      db.Post.findOne( {where: { id: req.params.id } })
+        .then((post) => {
+          if (post.UserId === req.body.id) {
+            db.Post.updateOne({ likes: post.likes - 1 })
+              .then(() => { res.status(201).json({ message: "Like annulé !" }); })
+              .catch((error) => { res.status(400).json({ error }); });
 
-//     case 1:                                                // cas: req.body.like = 1
-//       db.Post.updateOne({ likes: db.Post.likes++ })
-//         .then(() => { res.status(201).json({ message: "Post liké !" }); }) //code 201: created
-//         .catch((error) => { res.status(400).json({ error }); });          //code 400: bad request
+          }
+        })
+        .catch((error) => { res.status(404).json({ error }); });
+      break;
 
-//     default:
-//       console.error("bad request");
-//   }
-// };
+    case 1:                                               
+      db.Post.updateOne( { likes: db.post.likes + 1 } )
+        .then(() => { res.status(201).json({ message: "Post liké !" }); })
+        .catch((error) => { res.status(400).json({ error }); });
+      break;
+
+    default:
+      console.error("bad request");
+  }
+};
 
 
- exports.postLike = (req, res, next) => {
+//  exports.postLike = (req, res, next) => {
 
-    const isliked = req.body.like;
-
-    db.Post.findOne({ where: { id: req.params.id } })
-
-    .then(post => {
-        if (!post) {
-            return res.status(404).json({ error: 'Post introuvable !' })
-        } else if(isliked == 0) {
-                post.update({ likes: post.likes - 1 })
-                .then(() => res.status(201).json({ message: 'Like annulé' }))
-                .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
-        } else if(isliked == 1) {
-                post.update({ likes: post.likes + 1 })
-                .then(post => res.status(201).json({ message: 'Post liké' }))
-                .catch(error => res.status(500).json({ error: ' Erreur update post' }))
-        }
-    })
-    .catch(error => res.status(400).json({ message: "erreur destroy" }))         
-}
+//     const liked = req.body.like;
+//     db.Post.findOne({ include: {
+//             model: db.User
+//         },where: { id: req.params.id } })
+//     .then(post => {
+//         console.log(req.body.UserId);
+//         if (!post) {
+//             return res.status(404).json({ error: 'Post introuvable !' })
+//         } else if(liked == 0  &&  post.UserId === req.body.UserId) {
+//                 post.update({ likes: post.likes - 1 })
+//                 .then(() => res.status(201).json({ message: 'Like annulé' }))
+//                 .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
+//         } else if(liked == 1  &&  post.UserId === req.body.UserId) {
+//                 post.update({ likes: post.likes + 1 })
+//                 .then(post => res.status(201).json({ message: 'Post liké' }))
+//                 .catch(error => res.status(500).json({ error: ' Erreur update post' }))
+//         }
+//     })
+//     .catch(error => res.status(400).json({ message: "erreur destroy" }))         
+// }
