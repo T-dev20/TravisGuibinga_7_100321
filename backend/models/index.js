@@ -26,14 +26,25 @@ db.sequelize = sequelize;
 db.User = require("./User.js")(sequelize, Sequelize);
 db.Post = require("./Post.js")(sequelize, Sequelize);
 db.Comment = require("./Comment.js")(sequelize, Sequelize);
+db.like_Post = require("./like_Post.js")(sequelize, Sequelize);
+
 
 // Contraintes de clés étrangères
 db.User.hasMany(db.Post);
 db.Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
+db.User.hasMany(db.like_Post);
+db.like_Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+
+//db.User.hasMany(db.like, { foreignKey: "userId" }, { onDelete: "cascade" });
+
 
 db.Post.hasMany(db.Comment);
 db.Comment.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 db.Comment.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+
+db.Post.hasMany(db.like_Post);
+db.like_Post.belongsTo(db.Comment, { foreignKey: 'OwnerId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+
 
 module.exports = db;
