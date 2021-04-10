@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     likes: {
       type: Sequelize.INTEGER,
-      unique: true,
+      defaultValue: 0
     },
      createdAt: Sequelize.DATE, 
      updatedAt: Sequelize.DATE, 
