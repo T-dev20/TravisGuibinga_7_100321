@@ -139,7 +139,6 @@ exports.postLike = (req, res, next) => {
         if (!post) {
             return res.status(404).json({ error: 'Post introuvable !' })
         } else if( isliked === false ) {
-            db.like_Post.create({ PostId: req.params.id, OwnerId: userId });
             db.like_Post.findOne( { include: {
                 model: db.User,
                 attributes: ["id"]
@@ -148,6 +147,7 @@ exports.postLike = (req, res, next) => {
                     if(like) {
                         return res.status(404).json({ error: "Vous l'avez déjà liké ce post !" })  
                     } else {
+                        db.like_Post.create({ PostId: req.params.id, OwnerId: userId });
                         post.update({ likes: post.likes + 1 })
                         .then(post => res.status(201).json({ message: 'Post liké' }))
                         .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
@@ -156,16 +156,24 @@ exports.postLike = (req, res, next) => {
                 .catch(error => res.status(400).json({ error }))
 
         } else if(isliked === true) {
-            db.like_Post.destroy({ where: { PostId: req.params.id }})
-            .then(like => {
-                post.update({ likes: post.likes - 1 })
-                .then(post => res.status(201).json({ message: 'Post disliké' }))
-                .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
-            })
-            .catch(error => res.status(400).json({ message: "problème destroy like" }))
+            db.like_Post.findOne( { include: {
+                model: db.User,
+                attributes: ["id"]
+                }, where: { PostId: req.params.id } })
+                .then(like => {
+                    if(like) {
+                        db.like_Post.destroy({ where: { PostId: req.params.id }})
+                        post.update({ likes: post.likes - 1 })
+                        .then(post => res.status(201).json({ message: 'Post disliké' }))
+                        .catch(error => res.status(500).json({ error: ' Erreur update post' }))
+                    } else {
+                        return res.status(404).json({ error: "Post non retrouvé !" })
+                    }
+                })
+                .catch(error => res.status(400).json({ error }))
         }
     })
-    .catch(error => res.status(400).json({ message: "erreur destroy" }))         
+    .catch(error => res.status(400).json({ message: "erreur destroy" }))      
 }
 
 
