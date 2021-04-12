@@ -138,7 +138,7 @@ exports.postLike = (req, res, next) => {
     .then(post => {
         if (!post) {
             return res.status(404).json({ error: 'Post introuvable !' })
-        } else if( isliked === false ) {
+        } else if( isliked === true ) {
             db.like_Post.findOne( { include: {
                 model: db.User,
                 attributes: ["id"]
@@ -155,7 +155,7 @@ exports.postLike = (req, res, next) => {
                 })
                 .catch(error => res.status(400).json({ error }))
 
-        } else if(isliked === true) {
+        } else if(isliked === false) {
             db.like_Post.findOne( { include: {
                 model: db.User,
                 attributes: ["id"]
@@ -164,7 +164,7 @@ exports.postLike = (req, res, next) => {
                     if(like) {
                         db.like_Post.destroy({ where: { PostId: req.params.id }})
                         post.update({ likes: post.likes - 1 })
-                        .then(post => res.status(201).json({ message: 'Post disliké' }))
+                        .then(post => res.status(201).json({ message: 'Like annulé' }))
                         .catch(error => res.status(500).json({ error: ' Erreur update post' }))
                     } else {
                         return res.status(404).json({ error: "Post non retrouvé !" })
