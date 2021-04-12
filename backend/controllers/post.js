@@ -23,7 +23,7 @@ exports.deletePost = (req, res, next) => {
     const userId = decodedToken.userId;
     const userRole = decodedToken.role;
 
-    db.Post.findOne({include: {
+    db.Post.findOne({include: { 
             model: db.User,
             attributes: ["name", "role", "image_profil"]
         }, where: { id: req.params.id } })
@@ -127,29 +127,36 @@ exports.createComment = (req, res, next) => {
 }
 
 
-
-
 exports.postLike = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
     const isliked = req.body.like
 
-    db.Post.findOne({ where: { id: req.body.PostId } })
+    db.Post.findOne({ where: { id: req.params.id } })
 
     .then(post => {
         if (!post) {
             return res.status(404).json({ error: 'Post introuvable !' })
-        } else if(isliked === false) {
-            db.like_Post.create({ PostId: req.body.PostId, OwnerId: userId })
-            .then(like => {
-                post.update({ likes: post.likes + 1 })
-                .then(post => res.status(201).json({ message: 'Post liké' }))
-                .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
-            })
-            .catch(error => res.status(400).json({ error }))
+        } else if( isliked === false ) {
+            db.like_Post.create({ PostId: req.params.id, OwnerId: userId });
+            db.like_Post.findOne( { include: {
+                model: db.User,
+                attributes: ["id"]
+                }, where: { PostId: req.params.id } })
+                .then(like => {
+                    if(like) {
+                        return res.status(404).json({ error: "Vous l'avez déjà liké ce post !" })  
+                    } else {
+                        post.update({ likes: post.likes + 1 })
+                        .then(post => res.status(201).json({ message: 'Post liké' }))
+                        .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
+                    }
+                })
+                .catch(error => res.status(400).json({ error }))
+
         } else if(isliked === true) {
-            db.like_Post.destroy({ where: { id: req.body.LikeId, PostId: req.body.PostId, OwnerId: userId } })
+            db.like_Post.destroy({ where: { PostId: req.params.id }})
             .then(like => {
                 post.update({ likes: post.likes - 1 })
                 .then(post => res.status(201).json({ message: 'Post disliké' }))
@@ -160,3 +167,67 @@ exports.postLike = (req, res, next) => {
     })
     .catch(error => res.status(400).json({ message: "erreur destroy" }))         
 }
+
+
+
+// exports.postLike = (req, res, next) => {
+//     const token = req.headers.authorization.split(' ')[1];
+//     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+//     const userId = decodedToken.userId;
+
+//   switch (req.body.like) {
+//     case 0:    
+    
+//       db.Post.findOne({include: {
+//             model: db.like_Post,
+//             attributes: ["PostId", "OwnerId"]
+//         },
+//          where: { id: req.params.id } })
+//         .then(post => {
+//             if (post.like_Post.OwnerId == userId) {
+//                 post.update({ 
+//                  likes: post.likes - 1
+//              })
+//             .then(() => res.status(200).json({ message: 'Vote enregistré !' }))
+//             .catch(error => res.status(400).json({ error: 'Impossible de voté' }));
+//             }else {
+//                 return res.status(400).json({ message: "Vous n'êtes pas autorisé(e) à modififier ce post !"})
+//             }
+//         })
+//         .catch(error => res.status(404).json({ error: 'Post non trouvé !' }))
+
+//       db.Post.findOne({ where: { id: req.params.id } })
+//         .then((post) => {
+//           if (post.UserId === req.body.OwnerId ) {  // on cherche si l'utilisateur est déjà dans le tableau usersLiked
+//             db.Post.updateOne({ likes: post.likes - 1 })
+//               .then(() => { res.status(201).json({ message: "vote enregistré." }); }) //code 201: created
+//               .catch((error) => { res.status(400).json({ error }); });
+//           }
+//         })
+//         .catch((error) => { res.status(404).json({ error }); });
+//       break;
+
+//     case 1: 
+//      db.Post.findOne({include: {
+//             model: db.like_Post,
+//             attributes: ["PostId", "OwnerId"]
+//         },
+//          where: { id: req.params.id } })
+//         .then(post => {
+//             if (post.UserId == post.db.like_Post.OwnerId) {
+//                 post.update({ 
+//                  likes: post.likes + 1
+//              })
+//             .then(() => res.status(200).json({ message: 'Post liké !' }))
+//             .catch(error => res.status(400).json({ error: 'Impossible de liké' }));
+//             }else {
+//                 return res.status(400).json({ message: "Vous n'êtes pas autorisé(e) à modififier ce post !"})
+//             }
+//         })
+//         .catch(error => res.status(404).json({ error: 'Post non trouvé !' }))
+//       break;
+
+//     default:
+//       console.error("bad request");
+//   }
+// };

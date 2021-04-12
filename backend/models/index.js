@@ -34,9 +34,7 @@ db.User.hasMany(db.Post);
 db.Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 db.User.hasMany(db.like_Post);
-db.like_Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
-
-//db.User.hasMany(db.like, { foreignKey: "userId" }, { onDelete: "cascade" });
+db.like_Post.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 
 db.Post.hasMany(db.Comment);
@@ -44,7 +42,7 @@ db.Comment.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE', onUpd
 db.Comment.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 db.Post.hasMany(db.like_Post);
-db.like_Post.belongsTo(db.Comment, { foreignKey: 'OwnerId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+db.like_Post.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 
 
 module.exports = db;
