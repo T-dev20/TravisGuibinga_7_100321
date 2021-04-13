@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Groupomania from '../views/Groupomania.vue'
 import Inscription from '../views/Inscription.vue'
 import Connexion from '../views/Connexion.vue'
 
@@ -10,6 +11,11 @@ const routes = [
     path: '/connexion',
     name: 'Connexion',
     component: Connexion
+  },
+  {
+    path: '/groupomania',
+    name: 'Groupomania',
+    component: Groupomania
   },
   {
     path: '/inscription',
