@@ -14,3 +14,40 @@
     </div>
 </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+name: 'SearchProfile',
+    data() {
+        return {
+            tableUsers: [],
+            idProfileToSee: null
+        }
+    },    
+    mounted() {
+        // Get all users from API
+        axios.get('http://localhost:3000/api/auth/', {
+            headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        })
+        .then((response) => {
+            this.tableUsers = response.data; 
+        })
+        .catch(error => console.log(error)) 
+    },
+    methods: {
+        getToProfile (event) {
+            event.preventDefault();  
+            if(this.idProfileToSee){  
+                localStorage.setItem("userIdToSee", this.idProfileToSee);
+                this.$router.push({ name: "ProfileConsulting" });
+            } else {
+                alert("Vous n'avez pas sélectionné d'utilisateur à consulter !")
+            }
+        }
+    }   
+}
+</script>
