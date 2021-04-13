@@ -142,7 +142,7 @@ exports.postLike = (req, res, next) => {
             db.like_Post.findOne( { include: {
                 model: db.User,
                 attributes: ["id"]
-                }, where: { PostId: req.params.id } })
+                }, where: { PostId: req.params.id, OwnerId: userId } })
                 .then(like => {
                     if(like) {
                         return res.status(404).json({ error: "Vous l'avez déjà liké ce post !" })  
@@ -162,12 +162,12 @@ exports.postLike = (req, res, next) => {
                 }, where: { PostId: req.params.id } })
                 .then(like => {
                     if(like) {
-                        db.like_Post.destroy({ where: { PostId: req.params.id }})
+                        db.like_Post.destroy({ where: { PostId: req.params.id, OwnerId: userId }})
                         post.update({ likes: post.likes - 1 })
                         .then(post => res.status(201).json({ message: 'Like annulé' }))
                         .catch(error => res.status(500).json({ error: ' Erreur update post' }))
                     } else {
-                        return res.status(404).json({ error: "Post non retrouvé !" })
+                        return res.status(404).json({ error: "Votre like a déjà été annulé !" })
                     }
                 })
                 .catch(error => res.status(400).json({ error }))
