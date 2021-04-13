@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Groupomania from '../views/Groupomania.vue'
 import Inscription from '../views/Inscription.vue'
 import Connexion from '../views/Connexion.vue'
+import Profile from '../views/Profile.vue'
+import ProfileConsulting from '../views/ProfileConsulting.vue'
 
 Vue.use(VueRouter)
 
