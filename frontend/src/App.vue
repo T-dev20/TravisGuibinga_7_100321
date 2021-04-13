@@ -20,6 +20,36 @@
 </template>
 
 
+<script>
+  export default {
+    name: 'App',
+    data() {
+      return {
+        token: localStorage.getItem("token"),   
+        connectStatus: null, 
+      }
+    },
+    beforeMount() {
+      this.connexionVerif();
+    },
+    methods: {
+      connexionVerif() {
+        if(this.token){
+          this.connectStatus = 'connected';
+        } else {
+          this.connectStatus = 'notConnected';
+        }
+      },
+      // Function to disconnect the user by clearing the localSorage (clearing the userId and the token)
+      deconnexion() {
+        localStorage.clear();
+        this.$router.push({ name: "Connexion" });
+        window.location.reload();
+      }
+    }
+  }
+</script>
+
 <style lang="scss">
 // Definition of Sass variables
 $website-color: #4c8baf;
