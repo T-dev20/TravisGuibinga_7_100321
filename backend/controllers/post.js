@@ -159,7 +159,7 @@ exports.postLike = (req, res, next) => {
             db.like_Post.findOne( { include: {
                 model: db.User,
                 attributes: ["id"]
-                }, where: { PostId: req.params.id } })
+                }, where: { PostId: req.params.id, OwnerId: userId} })
                 .then(like => {
                     if(like) {
                         db.like_Post.destroy({ where: { PostId: req.params.id, OwnerId: userId }})
