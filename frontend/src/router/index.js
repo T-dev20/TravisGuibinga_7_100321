@@ -53,4 +53,18 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem('token')) {
+      next()
+    } else {
+      next({name: 'Connexion'})
+    }
+  } else if (localStorage.getItem('token')) {
+    next({name: 'Groupomania'})
+  } else {
+    next()
+  }
+})
+
 export default router
