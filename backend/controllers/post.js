@@ -167,7 +167,7 @@ exports.postLike = (req, res, next) => {
                         .then(post => res.status(201).json({ message: 'Like annulé' }))
                         .catch(error => res.status(500).json({ error: ' Erreur update post' }))
                     } else {
-                        return res.status(404).json({ error: "Votre like a déjà été annulé !" })
+                        return res.status(404).json({ error: "Like déja annulé ou liké d'abord avant d'effectuer cette action." })
                     }
                 })
                 .catch(error => res.status(400).json({ error }))
