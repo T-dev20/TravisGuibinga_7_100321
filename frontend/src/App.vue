@@ -98,5 +98,9 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   color:white
 }
 
+.displayFlexCenter {
+  display:flex; 
+  justify-content:center;
+}
 
 </style>
