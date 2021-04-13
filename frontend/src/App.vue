@@ -1,12 +1,24 @@
 <template>
   <div id="app">
     <div id="nav">
+      <!-- Navigation links if userId present in localStorage (user connected) -->
+      <div id="navConnected" v-if="connectStatus == 'connected'">
+        <div>
+          <router-link to="/groupomania">Groupomania</router-link> |
+          <router-link to="/profile">Mon profil</router-link> |
+          <router-link to="/"> <span @click="deconnexion()"> Se déconnecter </span> </router-link>
+        </div>        
+      </div>
+      <!-- Navigation links if userId absent from localStorage (user not connected yet) -->
+      <div id="navUnconnected" v-else>
       <router-link to="/inscription">Inscription</router-link> |
       <router-link to="/connexion">Connexion</router-link>
-    </div>
+     </div> 
+    </div>    
     <router-view/>
   </div>
 </template>
+
 
 <style lang="scss">
 // Definition of Sass variables
