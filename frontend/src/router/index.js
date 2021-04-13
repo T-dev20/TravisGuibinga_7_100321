@@ -10,17 +10,42 @@ const routes = [
   {
     path: '/connexion',
     name: 'Connexion',
-    component: Connexion
+    component: Connexion,
+    meta : { 
+      requiresAuth: false
+    }
   },
   {
     path: '/groupomania',
     name: 'Groupomania',
-    component: Groupomania
+    component: Groupomania,
+    meta : { 
+      requiresAuth: true
+    }
   },
   {
     path: '/inscription',
     name: 'Inscription',
-    component: Inscription
+    component: Inscription,
+    meta : { 
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta : {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/profileConsulting',
+    name: 'ProfileConsulting',
+    component: ProfileConsulting,
+    meta : { 
+      requiresAuth: true
+    }
   }
 ]
 
