@@ -115,6 +115,10 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   justify-content:space-between;
 }
 
+.profileImage {
+  width: 250px;
+}
+
 .roundedBorders {
   border-radius:500px;
 }
