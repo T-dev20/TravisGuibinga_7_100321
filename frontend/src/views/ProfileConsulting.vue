@@ -29,7 +29,7 @@ export default {
   data () {
       return {
           msg: "Posts de l'utilisateur sur le Réseau Social",
-          directionToUseForAxiosGetAuth: 'http://localhost:3000/api/users/monprofil', // Variable for URI in function to get user from API
+          directionToUseForAxiosGetAuth: 'http://localhost:3000/api/users/user/' +localStorage.getItem('userIdToSee'), // Variable for URI in function to get user from API
           directionToUseForAxiosGetPost: 'http://localhost:3000/api/posts/' +localStorage.getItem('userIdToSee') // Variable for URI in function to get all posts from API
       }
   }
