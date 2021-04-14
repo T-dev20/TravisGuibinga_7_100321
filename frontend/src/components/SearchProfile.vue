@@ -28,7 +28,7 @@ name: 'SearchProfile',
     },    
     mounted() {
         // Get all users from API
-        axios.get('http://localhost:3000/api/auth/', {
+        axios.get('http://localhost:3000/api/users', {
             headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
             },
