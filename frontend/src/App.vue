@@ -103,4 +103,29 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   justify-content:center;
 }
 
+.displayFlexSpacearound {
+  display:flex; 
+  flex-direction:row; 
+  justify-content:space-around;
+}
+
+
+@media (max-width: 780px) {
+
+  .displayFlexSpacearoundResponsiveForProfile {
+    display:flex; 
+    flex-direction:column-reverse; 
+    justify-content:space-around;
+  }
+}
+
+@media (max-width: 780px) {
+
+  .displayFlexSpacearoundResponsiveForProfile {
+    display:flex; 
+    flex-direction:column-reverse; 
+    justify-content:space-around;
+  }
+}
+
 </style>
