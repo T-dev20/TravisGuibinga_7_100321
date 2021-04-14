@@ -69,7 +69,7 @@ import axios from 'axios'
 export default {
     name: 'MyProfile',  
     props: {
-        directionToUseForAxiosGetAuth: String
+        directionToUseForAxiosGetUser: String
     },
     data () {
         return {
@@ -91,7 +91,7 @@ export default {
     },
     methods: {   
         getUser() {
-            axios.get(this.directionToUseForAxiosGetAuth, {
+            axios.get(this.directionToUseForAxiosGetUser, {
                 headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
                 },
