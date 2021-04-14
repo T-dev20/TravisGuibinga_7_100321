@@ -109,6 +109,11 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   justify-content:space-around;
 }
 
+.displayFlexSpacebetween {
+  display:flex; 
+  flex-direction:row; 
+  justify-content:space-between;
+}
 
 @media (max-width: 780px) {
 
@@ -125,6 +130,28 @@ $cardGroupomania-bgColor: darken($website-color, 20);
     display:flex; 
     flex-direction:column-reverse; 
     justify-content:space-around;
+  }
+}
+
+
+@media (max-width: 500px) {
+
+  .displayFlexSpacebetween {
+    display:flex; 
+    flex-direction:column; 
+    justify-content:space-between;
+  }
+
+  .text-center-sm {
+    text-align: center!important;
+  }
+
+  .marginButtonModifyPostResponsive {
+    margin-bottom: 1rem;
+  }
+
+  .postImage {
+    width: 50%;
   }
 }
 
