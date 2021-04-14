@@ -87,7 +87,7 @@ exports.getCurrentUser = (req, res, next) => {
 exports.getOneUser = (req, res, next) => {
   const id = req.params.id;
 
-  Users.findByPk(id)
+  db.User.findByPk(id)
     .then(data => {
       res.send(data);
     })

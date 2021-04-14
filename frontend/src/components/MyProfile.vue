@@ -7,7 +7,7 @@
             <div class="displayFlexSpacearound displayFlexSpacearoundResponsiveForProfile" style="align-items:center">
                 <div>
                     <p>Mon numéro d'identifiant : {{ userId }}</p>                                                 
-                    <p> {{name}} </p>
+                    <p>Nom : {{name}} </p>
                     <p>Rôle : {{role}}</p>
                     <!-- <p>{{email}}</p> -->
                     <hr class="separationBar">
