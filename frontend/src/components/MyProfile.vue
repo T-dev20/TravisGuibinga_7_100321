@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div>
-                    <div v-if="this.image_profil !==null">
-                        <a :href="image_profil"><img class="profileImage roundedBorders" :src="image_profil" :alt="'photo de profil de '+name"></a>
+                    <div v-if="this.imageUrl !==null">
+                        <a :href="imageUrl"><img class="profileImage roundedBorders" :src="imageUrl" :alt="'photo de profil de '+name"></a>
                     </div> 
                 </div>
             </div>
@@ -76,7 +76,7 @@ export default {
             currentUserId: parseInt(localStorage.getItem('userId')),
             currentUserRole: localStorage.getItem('role'),
             name: null,
-            image_profil: null,
+            imageUrl: null,
             // email: null,
             role: null,
             password: null,
@@ -99,7 +99,7 @@ export default {
             .then((response) => {
                 this.userId = parseInt(response.data.id), // Needs to be parseInt for the auth process that compares UserId from the req.body and the one with the token
                 this.name = response.data.name,
-                this.image_profil = response.data.image_profil,
+                this.imageUrl = response.data.image_profil,
                 // this.email = response.data.email,
                 this.role = response.data.role
             })
@@ -107,7 +107,7 @@ export default {
         },
         // Transform image into a file
         imageUpload (event) {      
-        this.image_profil = event.target.files[0];
+        this.imageUrl = event.target.files[0];
         },
         // Function to display and hide an element
         cacheDisplay(id){
@@ -152,8 +152,8 @@ export default {
             if(confirm("Êtes-vous sûr(e) de vos modification à apporter ?")) {       
                 // Create a formData to send the data with the image (in file format)    
                 const formData = new FormData();
-                if(this.image_profil) {
-                formData.append('image', this.image_profil);
+                if(this.imageUrl) {
+                formData.append('image', this.imageUrl);
                 }
                 formData.append('name', this.name);
                 // formData.append('email', this.email);
