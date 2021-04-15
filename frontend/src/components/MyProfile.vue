@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div>
-                    <div v-if="this.imageUrl == null">
+                    <div v-if="this.imageUrl !== null">
                         <a :href="imageUrl"><img class="profileImage roundedBorders" :src="imageUrl" :alt="'photo de profil de '+name"></a>
                     </div> 
                 </div>
@@ -138,7 +138,7 @@ export default {
             )
             .then((response) => {
                 console.log(response)
-                alert('Vos modifications sont bien enregistrées ! Connectez-vous pour accéder au réseau.');
+                alert('Vos modifications sont bien enregistrées !');
                 this.getUser();
                 document.getElementById('modify-user').style.display='none';
             })
