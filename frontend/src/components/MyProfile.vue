@@ -6,7 +6,7 @@
             <!--Profile elements  -->
             <div class="displayFlexSpacearound displayFlexSpacearoundResponsiveForProfile" style="align-items:center">
                 <div>
-                    <p>Mon numéro d'identifiant : {{ userId }}</p>                                                 
+                    <p>Numéro d'identifiant : {{ userId }}</p>                                                 
                     <p>Nom : {{name}} </p>
                     <p>Rôle : {{role}}</p>
                     <!-- <p>{{email}}</p> -->
