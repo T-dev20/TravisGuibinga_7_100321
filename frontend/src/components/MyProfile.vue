@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div>
-                    <div v-if="this.imageUrl !==null">
+                    <div v-if="this.imageUrl == null">
                         <a :href="imageUrl"><img class="profileImage roundedBorders" :src="imageUrl" :alt="'photo de profil de '+name"></a>
                     </div> 
                 </div>
