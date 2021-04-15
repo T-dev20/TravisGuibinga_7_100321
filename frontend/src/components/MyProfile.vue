@@ -143,7 +143,7 @@ export default {
                 document.getElementById('modify-user').style.display='none';
             })
             .catch( ()=> {
-                alert('Oups, une erreur est survenue');
+                alert('Oups, Vérifiez votre ancien mot de passe !');
                 console.log('Une erreur est survenue');
             })
         },    
