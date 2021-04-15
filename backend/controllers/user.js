@@ -130,6 +130,8 @@ exports.modifyUser = (req, res, next) => {
                         email: req.body.email,
                         password: hash
                     })
+                    .then(() =>{ res.status(201).json({ message: 'Mot de passe modifié !'}) })
+                    .catch(error => res.status(404).json({ error: 'Erreur modif mot de passe !' }))
                 })
             })
          }
