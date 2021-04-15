@@ -107,15 +107,32 @@ exports.modifyUser = (req, res, next) => {
 
     db.User.findOne({ where: { id: userId } })
         .then(user => {
-            user.update(
-               { name: req.body.name,
+            if(req.body.password==null) {
+            user.update({
+                 name: req.body.name,
                  job: req.body.job,
                  email: req.body.email,
                  image_profil: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
-             }
-            )
+             })
             .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
             .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour !' }));
+         } else {
+              bcrypt.compare(req.body.oldPassword, user.password)/* if id matches one in database, we compare the password logged in with the one linked to the user */
+               .then(valid => {
+                if (!valid) {
+                    return res.status(401).json({ error: 'Mot de passe incorrect !' });
+                }
+                    bcrypt.hash(req.body.password, 10)/* hashing the password for security purposes */
+                    .then(hash => {
+                        user.update({
+                        name: req.body.name,
+                        job: req.body.job,
+                        email: req.body.email,
+                        password: hash
+                    })
+                })
+            })
+         }
         })
         .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé !' }))
   };
