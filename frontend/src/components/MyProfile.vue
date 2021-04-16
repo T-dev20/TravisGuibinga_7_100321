@@ -8,6 +8,7 @@
                 <div>
                     <p>Numéro d'identifiant : {{ userId }}</p>                                                 
                     <p>Nom : {{name}} </p>
+                    <p>Fonction : {{fonction}} </p>
                     <p>Rôle : {{role}}</p>
                     <!-- <p>{{email}}</p> -->
                     <hr class="separationBar">
@@ -76,6 +77,7 @@ export default {
             currentUserId: parseInt(localStorage.getItem('userId')),
             currentUserRole: localStorage.getItem('role'),
             name: null,
+            fonction: null,
             imageUrl: null,
             // email: null,
             role: null,
@@ -101,7 +103,8 @@ export default {
                 this.name = response.data.name,
                 this.imageUrl = response.data.image_profil,
                 // this.email = response.data.email,
-                this.role = response.data.role
+                this.role = response.data.role,
+                this.fonction = response.data.job
             })
             .catch(error => console.log(error))
         },
