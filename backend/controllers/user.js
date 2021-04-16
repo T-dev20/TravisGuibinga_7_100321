@@ -42,6 +42,7 @@ exports.login = (req, res, next) => {
                     res.status(200).json({
                         userId: user.id,
                         role: user.role,
+                        job: user.job,
                         token: jwt.sign( // on utilise la fonction sign dejsonwebtoken pour encoder un nouveau token
                             {
                                 userId: user.id,
