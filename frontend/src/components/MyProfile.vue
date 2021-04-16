@@ -179,7 +179,7 @@ export default {
         // Function to delete profile and send this deletion to API
         deleteProfile(event) {
             event.preventDefault();
-            if(confirm("Vous vous apprêtez à supprimer votre profil. Confirmez-vous la suppression ?")) {
+            if(confirm("Vous vous apprêtez à supprimer votre compte. Confirmez-vous la suppression ?")) {
                 axios.delete('http://localhost:3000/api/users/monprofil' ,
                     {   
                         data: {
