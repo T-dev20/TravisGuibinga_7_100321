@@ -193,7 +193,7 @@ export default {
                 // Clear the local storage (userId and token deleted) and redirection to register page
                 .then((response) => {
                     console.log(response);
-                    if(this.currentUserRole == 'Admin' || this.currentUserId == this.userId) { /* Special message and redirection to Home page if the deleter is the admin who is not on his profile */
+                    if( this.currentUserId == this.userId || this.currentUserRole == 'Admin') { /* Special message and redirection to Home page if the deleter is the admin who is not on his profile */
                         alert('Le profil a bien été supprimé !');
                         this.$router.push({ name: "Groupomania" });
                         window.location.reload('../App.vue');
