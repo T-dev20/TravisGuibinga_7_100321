@@ -149,7 +149,7 @@ exports.modifyUser = (req, res, next) => {
     db.User.findOne({ where: { id: userId } })
     .then(user => {
         if (user.id == userId || user.role == "Admin") {
-            db.User.destroy()
+            db.User.destroy({ where: { id: userId } })
             .then(() => res.status(200).json({ message: 'Compte supprimé'}))
             .catch(error => res.status(400).json({ error: 'Problème_suppression_compte' }));
         }else {
