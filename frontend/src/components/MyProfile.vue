@@ -12,8 +12,8 @@
                     <!-- <p>{{email}}</p> -->
                     <hr class="separationBar">
                     <div class="displayFlexSpacebetween align-center" v-if="userId === currentUserId || currentUserRole == 'admin'">
-                        <button @click="cacheDisplay('modify-user'); getUser()" class="btn btn-warning py-0 mx-2"> 🖊️ </button> Modifier mon profil
-                        <button @click="deleteProfile" id="contact_button-delete" class="btn btn-danger py-0 mx-2"> <strong> X </strong> </button> Supprimer mon profil
+                        <button @click="cacheDisplay('modify-user'); getUser()" class="btn btn-warning py-0 mx-2"> 🖊️ </button> Modifier mes informations
+                        <button @click="deleteProfile" id="contact_button-delete" class="btn btn-danger py-0 mx-2"> <strong> X </strong> </button> Supprimer mon compte
                     </div>
                 </div>
                 <div>
