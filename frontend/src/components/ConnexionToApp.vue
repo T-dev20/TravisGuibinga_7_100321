@@ -59,7 +59,8 @@ export default {
                     console.log(response);
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("userId", response.data.userId);  
-                    localStorage.setItem("role", response.data.role);  
+                    localStorage.setItem("role", response.data.role);
+                    localStorage.setItem("job", response.data.job);
                     this.$router.push({ name: "Groupomania" }); 
                     window.location.reload('../App.vue'); 
                 })
