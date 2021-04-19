@@ -81,7 +81,7 @@ export default {
             this.imageUrl = null;
         })
         .catch( ()=> {
-            alert('Oops, une erreur est survenue');
+            alert('Oups, une erreur est survenue');
             console.log('Une erreur est survenue');
         })
     }
