@@ -38,7 +38,7 @@ export default {
   data() { 
     return {  
     userId: parseInt(localStorage.getItem("userId")), // Needs to be parseInt for the auth process that compares UserId from the req.body and the one with the token
-    ontent: null,
+    content: null,
     image: null
     }
   },
