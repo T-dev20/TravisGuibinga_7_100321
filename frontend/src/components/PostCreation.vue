@@ -38,8 +38,8 @@ export default {
   data() { 
     return {  
     userId: parseInt(localStorage.getItem("userId")), // Needs to be parseInt for the auth process that compares UserId from the req.body and the one with the token
-    postContent: null,
-    imageUrl: null
+    ontent: null,
+    image: null
     }
   },
   methods : {
@@ -58,15 +58,19 @@ export default {
     // Send post to API
     postContentFunction() {      
         // Create a formData to send the data with the image (in file format) 
-        const formData = new FormData();
-        if(this.imageUrl) {
-            formData.append('image', this.imageUrl);
-        }
-        if(this.postContent) {
-            formData.append('postContent', this.postContent);
-        }
-        formData.append('userId', this.userId);        
-        axios.post('http://localhost:3000/api/posts/', formData,
+        // const formData = new FormData();
+        // if(this.image) {
+        //     formData.append('image', this.image);
+        // }
+        // if(this.content) {
+        //     formData.append('content', this.content);
+        // }
+        // formData.append('userId', this.userId);        
+        axios.post('http://localhost:3000/api/posts/', {
+            userId: this.userId,
+            content: this.content,
+            image: this.image
+      },
             {
                 headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
@@ -77,8 +81,8 @@ export default {
             alert('Félicitations, votre post a été publié !');
             this.$emit('updatePost', true);
             document.getElementById('create-post').style.display='none';
-            this.postContent = null;
-            this.imageUrl = null;
+            this.content = null;
+            this.image = null;
         })
         .catch( ()=> {
             alert('Oups, une erreur est survenue');
