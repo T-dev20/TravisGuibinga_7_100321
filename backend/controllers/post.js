@@ -107,8 +107,10 @@ exports.getAllPosts = (req, res, next) => {
             ['createdAt', 'DESC']
       ],
     })
-        .then(post => res.status(200).json(post))
-        .catch(error => res.status(500).json({ error }))
+    .then(data => { res.send(data); })      
+    .catch(err => { res.status(500).send({ message: err.message || "Some error occurred while retrieving tutorials." });});
+        // .then(data => res.send(data).status(200).json(data))
+        // .catch(error => res.status(500).json({ error }))
 }
 
 exports.getAllComments = (req, res, next) => {
