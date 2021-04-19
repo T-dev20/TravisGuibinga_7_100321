@@ -37,7 +37,7 @@ export default {
   },
   data() { 
     return {  
-    userId: parseInt(localStorage.getItem("userId")), // Needs to be parseInt for the auth process that compares UserId from the req.body and the one with the token
+    UserId: parseInt(localStorage.getItem("userId")), // Needs to be parseInt for the auth process that compares UserId from the req.body and the one with the token
     content: null,
     image: null
     }
@@ -67,7 +67,7 @@ export default {
         // }
         // formData.append('userId', this.userId);        
         axios.post('http://localhost:3000/api/posts/', {
-            userId: this.userId,
+            userId: this.UserId,
             content: this.content,
             image: this.image
       },

@@ -35,7 +35,7 @@
 
             <br :id="'postFooter-number'+item.id">
 
-            <!-- Post modification -->
+            Post modification
             <PostModification
             :postUserId="item.userId"
             :postId="item.id"
@@ -176,7 +176,7 @@ export default {
         document.getElementById('comment-creation'+payload).style.display='none';
     },
     getAllPosts(){
-        axios.get(this.directionToUseForAxiosGetPost, {
+        axios.get('http://localhost:3000/api/posts/', {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
