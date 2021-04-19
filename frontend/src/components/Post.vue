@@ -219,7 +219,7 @@ export default {
     },
     // Get all comments from API
     getAllComments() {
-        axios.get('http://localhost:3000/api/comment/', {
+        axios.get('http://localhost:3000/api/:id/comments', {
             headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
             },
@@ -249,7 +249,7 @@ export default {
     // Function to delete one post sent to API
     deletePost(idPostToDelete, userIdPostToDelete) {
         if(confirm("Vous vous apprêtez à supprimer ce post. Confirmez-vous que vous souhaitez supprimer ?")) {
-            axios.delete('http://localhost:3000/api/post/' + idPostToDelete,
+            axios.delete('http://localhost:3000/api/posts/' + idPostToDelete,
                 {
                     data: {
                         userId:userIdPostToDelete /* for middleware adminVerif, to check that userId who created the post is the same that deletes */
@@ -265,7 +265,7 @@ export default {
                 alert('Votre post a bien été supprimé !');
             })
             .catch( ()=> {
-                alert('Oops, une erreur est survenue');
+                alert('Oups, une erreur est survenue');
                 console.log('Une erreur est survenue');
             }) 
         }
