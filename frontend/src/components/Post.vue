@@ -125,3 +125,151 @@
         <button @click="seeMorePosts" class="btn font-weight-bold toClick btnBgApp">Voir plus de posts</button>              
     </div>
 </template>
+
+
+<script>
+import axios from 'axios'
+import PostCreation from '@/components/PostCreation.vue'
+import Comment from '@/components/Comment.vue'
+import CommentCreation from '@/components/CommentCreation.vue'
+import PostModification from '@/components/PostModification.vue'
+import LikePost from '@/components/LikePost.vue'
+
+export default {
+  name: 'Post',
+  components: {
+    Comment,
+    CommentCreation,
+    PostModification,
+    LikePost,
+    PostCreation
+  },
+  props: {
+    msg: String,
+    directionToUseForAxiosGetPost: String
+  },
+  data() {
+    return { 
+    userId: parseInt(localStorage.getItem("userId")), // Needs to be parseInt for the auth process that compares UserId from the req.body and the one with the token
+    role: localStorage.getItem("role"),
+    index: 0,
+    previousPostContent: [], 
+    tableLikes: [],
+    tableComments: [],
+    postsToSee: 10
+    }
+  },
+  mounted() {      
+    // Get all posts from API, URI is a variable
+    this.getAllPosts();
+    // Get all likes/dislikes from API 
+    this.getAllLikes();
+    // Get all comments from API
+    this.getAllComments();   
+    },    
+  methods : {
+    decreaseCommentNumber(payload){
+        document.getElementById('commentNumber'+payload).innerHTML--;        
+    },
+    increaseCommentNumber(payload){
+        document.getElementById('commentNumber'+payload).innerHTML++;
+        document.getElementById('comment-creation'+payload).style.display='none';
+    },
+    getAllPosts(){
+        axios.get(this.directionToUseForAxiosGetPost, {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        })
+        .then((response) => {
+            response.data.forEach(element => {
+                // Change data from API in proper date format 
+                element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' }).format(new Date(element.createdAt));
+                element.likes.forEach(element2 => {
+                // Compute the number of reactions for one post
+                    if(element2.likeReaction == true) {
+                        element.likeNumber++;
+                    } else if(element2.dislikeReaction == true) {
+                        element.dislikeNumber++;
+                    }
+                    // Record in a variable the current user's reaction 
+                    if(element2.userId == this.userId && element2.likeReaction == true) {
+                        element.currentUserLike = 1;
+                    } else if(element2.userId == this.userId && element2.dislikeReaction == true){
+                        element.currentUserDislike = 1;
+                    }
+                })      
+            }); 
+            this.previousPostContent = response.data;
+            this.index++;
+        })
+        .catch(error => console.log(error))
+    },
+    // Get all likes/dislikes from API 
+    getAllLikes() {
+        axios.get('http://localhost:3000/api/like/', {
+            headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        })
+        .then((response) => {
+            this.tableLikes = response.data; 
+        })
+        .catch(error => console.log(error))
+    },
+    // Get all comments from API
+    getAllComments() {
+        axios.get('http://localhost:3000/api/comment/', {
+            headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        })
+        .then((response) => {
+            response.data.forEach(element => {
+                // Change data from API in proper date format
+                element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(element.createdAt));
+            });
+            this.tableComments = response.data;
+        })
+        .catch(error => console.log(error))
+    },        
+    // Function to see more posts 
+    seeMorePosts(event) {
+        event.preventDefault();
+        this.postsToSee += 5;
+    },
+    // Functions to display or hide elements  
+    cacheDisplay(id){
+        if(document.getElementById(id).style.display=='none'){
+            document.getElementById(id).style.display='initial';
+        } else {
+            document.getElementById(id).style.display='none';
+        }
+    },
+    // Function to delete one post sent to API
+    deletePost(idPostToDelete, userIdPostToDelete) {
+        if(confirm("Vous vous apprêtez à supprimer ce post. Confirmez-vous que vous souhaitez supprimer ?")) {
+            axios.delete('http://localhost:3000/api/post/' + idPostToDelete,
+                {
+                    data: {
+                        userId:userIdPostToDelete /* for middleware adminVerif, to check that userId who created the post is the same that deletes */
+                    },
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token"),
+                    }
+                }
+            )
+            .then((response) => {
+                console.log(response);
+                this.getAllPosts();
+                alert('Votre post a bien été supprimé !');
+            })
+            .catch( ()=> {
+                alert('Oops, une erreur est survenue');
+                console.log('Une erreur est survenue');
+            }) 
+        }
+    }
+  }
+}
+</script>
