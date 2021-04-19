@@ -98,10 +98,21 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   color:white
 }
 
+
+.displayFlexRow{
+  display:flex; 
+  flex-direction:row;
+}
+
 .displayFlexCenter {
   display:flex; 
   justify-content:center;
 }
+
+.separationBar {
+  background-color:$separationBar-bgColor;
+}
+
 
 .displayFlexSpacearound {
   display:flex; 
