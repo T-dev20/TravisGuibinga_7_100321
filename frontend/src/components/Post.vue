@@ -185,20 +185,6 @@ export default {
             response.data.forEach(element => {
                 // Change data from API in proper date format 
                 element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' }).format(new Date(element.createdAt));
-                element.likes.forEach(element2 => {
-                // Compute the number of reactions for one post
-                    if(element2.likeReaction == true) {
-                        element.likeNumber++;
-                    } else if(element2.dislikeReaction == true) {
-                        element.dislikeNumber++;
-                    }
-                    // Record in a variable the current user's reaction 
-                    if(element2.userId == this.userId && element2.likeReaction == true) {
-                        element.currentUserLike = 1;
-                    } else if(element2.userId == this.userId && element2.dislikeReaction == true){
-                        element.currentUserDislike = 1;
-                    }
-                })      
             }); 
             this.previousPostContent = response.data;
             this.index++;
