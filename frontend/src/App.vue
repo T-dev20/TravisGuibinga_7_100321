@@ -98,6 +98,12 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   color:white
 }
 
+.cardGroupo {
+  background: white;  
+  border-radius:40px; 
+  color:black
+}
+
 
 .displayFlexRow{
   display:flex; 
