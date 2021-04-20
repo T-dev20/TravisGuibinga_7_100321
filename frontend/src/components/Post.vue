@@ -120,7 +120,8 @@
                 @increaseCommentNumber="increaseCommentNumber"
                 />
             </div>        
-        </div>          
+        </div>
+        <hr class="separationBar" align=center>            
     </div>
 </template>
 
