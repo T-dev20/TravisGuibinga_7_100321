@@ -3,7 +3,7 @@
         <PostCreation
         @updatePost="getAllPosts"/>
 
-        <PostView/>
+        <PostsView/>
 
         <h2 class="h4"> {{msg}} </h2>
         <!-- Generation of posts with a loop -->
@@ -131,6 +131,7 @@
 <script>
 import axios from 'axios'
 import PostCreation from '@/components/PostCreation.vue'
+import PostsView from '@/components/PostsView.vue'
 import Comment from '@/components/Comment.vue'
 import CommentCreation from '@/components/CommentCreation.vue'
 import PostModification from '@/components/PostModification.vue'
@@ -143,7 +144,8 @@ export default {
     CommentCreation,
     PostModification,
     LikePost,
-    PostCreation
+    PostCreation,
+    PostsView
   },
   props: {
     msg: String,
