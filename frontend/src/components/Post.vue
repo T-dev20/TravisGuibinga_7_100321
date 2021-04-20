@@ -5,7 +5,7 @@
 
         <h2 class="h4"> {{msg}} </h2>
         <!-- Generation of posts with a loop -->
-        <div :id="'post-number'+item.id" class="cardGroupomania card shadow my-4 py-2 px-2 mx-3" v-for="item in previousPostContent" :key="item.content + index">
+        <div>
 
             <!-- Post header with profile image -->        
             <!-- <div class="displayFlexRow font-italic text-left font-weight-light">            
