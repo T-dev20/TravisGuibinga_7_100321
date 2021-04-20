@@ -1,7 +1,7 @@
 <template>
         <div class="my-4 py-4">
     <!-- Generation of posts with a loop -->
-        <div :id="'post-number'+item.id" class="cardGroupo card shadow my-4 py-2 px-2 mx-3" v-for="item in previousPostContent" :key="item.content + index">
+        <div :id="'post-number'+item.id" class="cardGroupomania card shadow my-4 py-2 px-2 mx-3" v-for="item in previousPostContent" :key="item.content + index">
 
             <!-- Post header with profile image -->        
             <div class="displayFlexRow font-italic text-left font-weight-light">            
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+import axios from 'axios'
 
 
 export default {
