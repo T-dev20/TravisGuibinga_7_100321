@@ -3,8 +3,6 @@
         <PostCreation
         @updatePost="getAllPosts"/>
 
-        <PostsView/>
-
         <h2 class="h4"> {{msg}} </h2>
         <!-- Generation of posts with a loop -->
         <div :id="'post-number'+item.id" class="cardGroupomania card shadow my-4 py-2 px-2 mx-3" v-for="item in previousPostContent" :key="item.content + index">
@@ -123,7 +121,8 @@
                 />
             </div>        
         </div>
-        <hr class="separationBar" align=center>            
+        <hr class="separationBar" align=center>   
+        <PostsView/>         
     </div>
 </template>
 
