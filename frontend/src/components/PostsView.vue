@@ -69,10 +69,6 @@ export default {
             },
         })
         .then((response) => {
-            response.data.forEach(element => {
-                // Change data from API in proper date format 
-                element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' }).format(new Date(element.createdAt));
-            }); 
             this.previousPostContent = response.data;
             this.index++;
         })
