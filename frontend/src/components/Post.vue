@@ -5,15 +5,15 @@
 
         <h2 class="h4"> {{msg}} </h2>
         <!-- Generation of posts with a loop -->
-        <div :id="'post-number'+item.id" class="cardGroupomania card shadow my-4 py-2 px-2 mx-3" v-for="item in previousPostContent.slice(0, postsToSee)" :key="item.content + index">
+        <div :id="'post-number'+item.id" class="cardGroupomania card shadow my-4 py-2 px-2 mx-3" v-for="item in previousPostContent" :key="item.content + index">
 
             <!-- Post header with profile image -->        
             <div class="displayFlexRow font-italic text-left font-weight-light">            
-                <a :href="item.user.imageUrl"> 
-                    <img class="img-fluid roundedBorders" width="90px" :src="item.user.imageUrl" :alt="'Image de profil de '+item.user.name"> 
+                <a :href="item.User.image_profil">
+                    <img class="img-fluid roundedBorders" width="90px" :src="item.User.image_profil" :alt="'Image de profil de '+item.User.name"> 
                 </a> 
                 <div class="mx-2"> 
-                    <em class="font-weight-bold"> {{item.user.name}} </em>
+                    <em class="font-weight-bold"> {{item.User.name}} </em>
                     <br> {{item.createdAt}} 
                 </div>
             </div>
@@ -27,9 +27,9 @@
             <div :id="'postMiddle-number'+item.id"></div>
 
             <!-- Post image content -->
-            <div v-if="item.imageUrl !== null" class="text-center-sm text-left">
-                <a :id="'postImageLink-number'+item.id" :href="item.imageUrl">
-                    <img :id="'postImage-number'+item.id" :src="item.imageUrl" class="postImage roundedBordersLight" >
+            <div v-if="item.image !== null" class="text-center-sm text-left">
+                <a :id="'postImageLink-number'+item.id" :href="item.image">
+                    <img :id="'postImage-number'+item.id" :src="item.image" class="postImage roundedBordersLight" >
                 </a>            
             </div>
 
@@ -120,9 +120,7 @@
                 @increaseCommentNumber="increaseCommentNumber"
                 />
             </div>        
-        </div>
-        <hr class="separationBar" align=center>
-        <button @click="seeMorePosts" class="btn font-weight-bold toClick btnBgApp">Voir plus de posts</button>              
+        </div>          
     </div>
 </template>
 
@@ -155,8 +153,7 @@ export default {
     index: 0,
     previousPostContent: [], 
     tableLikes: [],
-    tableComments: [],
-    postsToSee: 10
+    tableComments: []
     }
   },
   mounted() {      
@@ -218,11 +215,6 @@ export default {
             this.tableComments = response.data;
         })
         .catch(error => console.log(error))
-    },        
-    // Function to see more posts 
-    seeMorePosts(event) {
-        event.preventDefault();
-        this.postsToSee += 5;
     },
     // Functions to display or hide elements  
     cacheDisplay(id){
