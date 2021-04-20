@@ -35,7 +35,7 @@
 
             <br :id="'postFooter-number'+item.id">
 
-            Post modification
+            <!-- Post modification -->
             <PostModification
             :postUserId="item.userId"
             :postId="item.id"
