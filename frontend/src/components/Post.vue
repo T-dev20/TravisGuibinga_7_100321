@@ -5,10 +5,10 @@
 
         <h2 class="h4"> {{msg}} </h2>
         <!-- Generation of posts with a loop -->
-        <div>
+        <div :id="'post-number'+item.id" class="cardGroupomania card shadow my-4 py-2 px-2 mx-3" v-for="item in previousPostContent" :key="item.content + index">
 
             <!-- Post header with profile image -->        
-            <!-- <div class="displayFlexRow font-italic text-left font-weight-light">            
+            <div class="displayFlexRow font-italic text-left font-weight-light">            
                 <a :href="item.User.image_profil">
                     <img class="img-fluid roundedBorders" width="90px" :src="item.User.image_profil" :alt="'Image de profil de '+item.User.name"> 
                 </a> 
@@ -19,21 +19,21 @@
             </div>
             <br>
 
-             Post text content -->
-            <!-- <div v-if="item.content !== null" class="text-left">
+             <!-- Post text content -->
+            <div v-if="item.content !== null" class="text-left">
                 <p :id="'postContent-number'+item.id" class="h5 text-center-sm text-left">{{item.content}}</p> 
-            </div>     -->
+            </div> 
 
-            <!-- <div :id="'postMiddle-number'+item.id"></div> -->
+            <div :id="'postMiddle-number'+item.id"></div>
 
-            <!-- Post image content 
+            <!-- Post image content  -->
             <div v-if="item.image !== null" class="text-center-sm text-left">
                 <a :id="'postImageLink-number'+item.id" :href="item.image">
                     <img :id="'postImage-number'+item.id" :src="item.image" class="postImage roundedBordersLight" >
                 </a>            
             </div>
 
-            <br :id="'postFooter-number'+item.id"> -->
+            <br :id="'postFooter-number'+item.id">
 
             <!-- Post modification -->
             <PostModification
@@ -121,8 +121,7 @@
                 />
             </div>        
         </div>
-        <hr class="separationBar" align=center>   
-        <PostsView/>         
+        <hr class="separationBar" align=center>            
     </div>
 </template>
 
@@ -130,7 +129,6 @@
 <script>
 import axios from 'axios'
 import PostCreation from '@/components/PostCreation.vue'
-import PostsView from '@/components/PostsView.vue'
 import Comment from '@/components/Comment.vue'
 import CommentCreation from '@/components/CommentCreation.vue'
 import PostModification from '@/components/PostModification.vue'
@@ -143,8 +141,7 @@ export default {
     CommentCreation,
     PostModification,
     LikePost,
-    PostCreation,
-    PostsView
+    PostCreation
   },
   props: {
     msg: String,
@@ -162,7 +159,7 @@ export default {
   },
   mounted() {      
     // Get all posts from API, URI is a variable
-    // this.getAllPosts();
+    this.getAllPosts();
     // Get all likes/dislikes from API 
     this.getAllLikes();
     // Get all comments from API
@@ -176,22 +173,22 @@ export default {
         document.getElementById('commentNumber'+payload).innerHTML++;
         document.getElementById('comment-creation'+payload).style.display='none';
     },
-    // getAllPosts(){
-    //     axios.get('http://localhost:3000/api/posts/', {
-    //         headers: {
-    //             Authorization: "Bearer " + localStorage.getItem("token"),
-    //         },
-    //     })
-    //     .then((response) => {
-    //         response.data.forEach(element => {
-    //             // Change data from API in proper date format 
-    //             element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' }).format(new Date(element.createdAt));
-    //         }); 
-    //         this.previousPostContent = response.data;
-    //         this.index++;
-    //     })
-    //     .catch(error => console.log(error))
-    // },
+    getAllPosts(){
+        axios.get('http://localhost:3000/api/posts/', {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        })
+        .then((response) => {
+            response.data.forEach(element => {
+                // Change data from API in proper date format 
+                element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' }).format(new Date(element.createdAt));
+            }); 
+            this.previousPostContent = response.data;
+            this.index++;
+        })
+        .catch(error => console.log(error))
+    },
     // Get all likes/dislikes from API 
     getAllLikes() {
         axios.get('http://localhost:3000/api/like/', {
