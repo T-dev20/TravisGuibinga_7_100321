@@ -31,7 +31,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'Post',
+  name: 'PostCreation',
   props: {
     msg: String
   },
@@ -45,7 +45,7 @@ export default {
   methods : {
     // Transform image into a file
     imageUpload (event) {      
-        this.imageUrl = event.target.files[0];
+        this.image = event.target.files[0];
     },
     // Function to display and hide an element
     cacheDisplay(id){
