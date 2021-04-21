@@ -12,7 +12,7 @@
             <!-- Post header with profile image -->        
             <div class="displayFlexRow font-italic text-left font-weight-light">            
                 <a :href="item.User.image_profil">
-                    <img class="img-fluid roundedBorders" width="90px" :src="item.User.image_profil" :alt="'Image de profil de '+item.User.name"> 
+                    <img class="img-fluid roundedBorders" width="60px" :src="item.User.image_profil" :alt="'Image de profil de '+item.User.name"> 
                 </a> 
                 <div class="mx-2"> 
                     <em class="font-weight-bold"> {{item.User.name}} </em>

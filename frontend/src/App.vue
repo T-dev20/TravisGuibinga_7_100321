@@ -132,6 +132,12 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   object-fit: cover;
 }
 
+.img-fluid {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
 .roundedBorders {
   border-radius:50%;
 }
