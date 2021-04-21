@@ -9,9 +9,9 @@ exports.createPost = (req, res) => {
     const userId = decodedToken.userId;
     // If an image has been uploaded or not, set req.body.imageUrl
     if (req.file) {
-        req.body.imageUrl=`${req.protocol}://${req.get('host')}/images/${req.file.filename}`/* Creating the image URL */ 
+        req.body.image=`${req.protocol}://${req.get('host')}/images/${req.file.filename}`/* Creating the image URL */ 
     } else {
-        req.body.imageUrl=null; 
+        req.body.image=`${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
     }
     const post = {
         UserId: userId,
