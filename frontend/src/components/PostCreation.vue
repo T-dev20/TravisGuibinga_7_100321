@@ -6,7 +6,7 @@
             <form class="form-group text-left mx-5">
                 <!-- Post text content -->
                 <label for="postContent">Texte de votre post : </label>
-                <textarea id="postContent" rows="5" v-model="postContent" type="text" placeholder="Contenu de mon post" class="form-control">     
+                <textarea id="postContent" rows="5" v-model="content" type="text" placeholder="Contenu de mon post" class="form-control">     
                 </textarea>
                 <br>
 
