@@ -60,11 +60,13 @@
 <script>
 import axios from 'axios'
 import PostCreation from '@/components/PostCreation.vue'
+import PostModification from '@/components/PostModification.vue'
 
 export default {
   name: 'Post',
   components: {
-    PostCreation
+    PostCreation,
+    PostModification
   },
   props: {
     msg: String,
