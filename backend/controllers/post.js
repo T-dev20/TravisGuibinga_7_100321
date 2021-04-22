@@ -91,6 +91,24 @@ exports.getAllPosts = (req, res, next) => {
         // .catch(error => res.status(500).json({ error }))
 }
 
+exports.findAllPostsOneUser = (req, res) => {
+
+    db.Post.findAll({ 
+        where: { Userid: req.params.id },
+        order: [['createdAt', "DESC"], ['updatedAt', "DESC"]],
+        include: [db.User]
+    })    
+    .then(data => {    
+        res.send(data);    
+    })    
+    .catch(err => {    
+        res.status(500).send({    
+            message:    
+            err.message || "Some error occurred while retrieving tutorials."    
+        });        
+    });    
+};
+
 exports.getAllComments = (req, res, next) => {
     db.Comment.findAll({
         where: { PostId: req.params.id},
