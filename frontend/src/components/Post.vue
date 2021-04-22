@@ -37,6 +37,16 @@
             </div>
 
             <br :id="'postFooter-number'+item.id">
+
+            <!-- Post modification -->
+            <PostModification
+            :postUserId="item.userId"
+            :postId="item.id"
+            :userId="userId"
+            :role="role"
+            :postContent="item.content"
+            @updatePost="getAllPosts"
+            />
             
             <hr class="separationBar">
             
