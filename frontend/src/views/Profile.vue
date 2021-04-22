@@ -29,7 +29,7 @@ export default {
   data () {
       return {
           directionToUseForAxiosGetUser: 'http://localhost:3000/api/users/user/' +localStorage.getItem('userId'), // Variable for URI in function to get user from API
-          directionToUseForAxiosGetPostOneUser: 'http://localhost:3000/api/posts/' +localStorage.getItem('userId')
+          directionToUseForAxiosGetPostOneUser: 'http://localhost:3000/api/posts/currentUser/' +localStorage.getItem('userId')
       }
   }
 }
