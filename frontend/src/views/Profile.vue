@@ -6,7 +6,7 @@
               <MyProfile
               :directionToUseForAxiosGetUser="directionToUseForAxiosGetUser"
               />
-              <Post
+              <PostsOneUser
               :msg="msg"
               :directionToUseForAxiosGetPostOneUser="directionToUseForAxiosGetPostOneUser"
               />
@@ -18,13 +18,13 @@
 
 <script>
 import MyProfile from '../components/MyProfile.vue'
-import Post from '@/components/Post.vue'
+import PostsOneUser from '@/components/PostsOneUser.vue'
 
 export default {
   name :"Profile",
   components: {
     MyProfile, 
-    Post
+    PostsOneUser
   }, 
   data () {
       return {

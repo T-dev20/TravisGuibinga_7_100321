@@ -74,7 +74,7 @@ export default {
     },    
   methods : {
     getAllPosts(){
-        axios.get('http://localhost:3000/api/posts/', {
+        axios.get('http://localhost:3000/api/posts/currentUser/' +this.userId , {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
