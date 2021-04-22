@@ -58,19 +58,15 @@ export default {
     // Send post to API
     postContentFunction() {      
         // Create a formData to send the data with the image (in file format) 
-        // const formData = new FormData();
-        // if(this.image) {
-        //     formData.append('image', this.image);
-        // }
-        // if(this.content) {
-        //     formData.append('content', this.content);
-        // }
-        // formData.append('userId', this.userId);        
-        axios.post('http://localhost:3000/api/posts/', {
-            userId: this.UserId,
-            content: this.content,
-            image: this.image
-      },
+        const formData = new FormData();
+        if(this.image) {
+            formData.append('image', this.image);
+        }
+        if(this.content) {
+            formData.append('content', this.content);
+        }
+        formData.append('userId', this.UserId);        
+        axios.post('http://localhost:3000/api/posts/', formData,
             {
                 headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),

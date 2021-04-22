@@ -2,42 +2,20 @@ require('dotenv').config;
 const db = require('../models');
 const jwt = require("jsonwebtoken");
 
-exports.createPost = (req, res) => {  
+exports.createPost = (req, res) => {
 
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decodedToken.userId;
-    // If an image has been uploaded or not, set req.body.imageUrl
-    if (req.file) {
-        req.body.image=`${req.protocol}://${req.get('host')}/images/${req.file.filename}`/* Creating the image URL */ 
-    } else {
-        req.body.image=`${req.protocol}://${req.get('host')}/images/${req.file.filename}`; 
-    }
-    const post = {
+   
+    db.Post.create({
         UserId: userId,
         content: req.body.content,
-        image: req.body.image
-    };
-
-    // Create post in database
-    db.Post.create(post)
-    .then(data => { res.send(data); })
-    .catch(err => { res.status(500).send({ message: err.message || "Some error occurred while creating the post." }); });
+        image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+    })
+        .then(post => res.status(201).json({ message: 'Post créé' }))
+        .catch(error => res.status(400).json({ message: 'erreur création post' }))
 };
-
-// exports.createPost = (req, res, next) => {
-//     const token = req.headers.authorization.split(' ')[1];
-//     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-//     const userId = decodedToken.userId;
-   
-//     db.Post.create({
-//         UserId: userId,
-//         content: req.body.content,
-//         image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
-//     })
-//         .then(post => res.status(201).json({ message: 'Post créé' }))
-//         .catch(error => res.status(400).json({ message: 'erreur création post' }))
-// };
 
 exports.deletePost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
