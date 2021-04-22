@@ -24,7 +24,8 @@
              <!-- Post text content -->
             <div v-if="item.content !== null" class="text-left">
                 <p :id="'postContent-number'+item.id" class="h5 text-center-sm text-left">{{item.content}}</p> 
-            </div> 
+            </div>
+            <br>
 
             <div :id="'postMiddle-number'+item.id"></div>
 
