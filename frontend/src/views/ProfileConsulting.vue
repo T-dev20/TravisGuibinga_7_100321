@@ -6,6 +6,10 @@
               <MyProfile
               :directionToUseForAxiosGetUser="directionToUseForAxiosGetUser"
               />
+              <PostsOneUser
+              :msg="msg"
+              :directionToUseForAxiosGetPostOneUser="directionToUseForAxiosGetPostOneUser"
+              />
           </div>             
       </div>
     </div>
@@ -14,15 +18,18 @@
 
 <script>
 import MyProfile from '../components/MyProfile.vue'
+import PostsOneUser from '@/components/PostsOneUser.vue'
 
 export default {
   name :"Profile",
   components: {
-    MyProfile
+    MyProfile,
+    PostsOneUser
   }, 
   data () {
       return {
           directionToUseForAxiosGetUser: 'http://localhost:3000/api/users/user/' +localStorage.getItem('userIdToSee'), // Variable for URI in function to get user from API
+          directionToUseForAxiosGetPostOneUser: 'http://localhost:3000/api/posts/currentUser/' +localStorage.getItem('userIdToSee')
       }
   }
 }
