@@ -160,6 +160,13 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   }
 }
 
+.postImage {
+    width: 30%;
+}
+
+.text-center-sm {
+    text-align: center!important;
+}
 
 @media (max-width: 500px) {
 
@@ -167,10 +174,6 @@ $cardGroupomania-bgColor: darken($website-color, 20);
     display:flex; 
     flex-direction:column; 
     justify-content:space-between;
-  }
-
-  .text-center-sm {
-    text-align: center!important;
   }
 
   .marginButtonModifyPostResponsive {
