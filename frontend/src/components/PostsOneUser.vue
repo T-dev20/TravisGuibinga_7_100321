@@ -58,7 +58,7 @@ export default {
   },
   props: {
     msg: String,
-    directionToUseForAxiosGetPost: String
+    directionToUseForAxiosGetPostOneUser: String
   },
   data() {
     return { 
@@ -74,7 +74,7 @@ export default {
     },    
   methods : {
     getAllPosts(){
-        axios.get('http://localhost:3000/api/posts/currentUser/' +this.userId , {
+        axios.get(this.directionToUseForAxiosGetPostOneUser, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
