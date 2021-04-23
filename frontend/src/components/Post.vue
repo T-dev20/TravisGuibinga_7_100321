@@ -40,7 +40,7 @@
 
             <!-- Post modification -->
             <PostModification
-            :postUserId="item.userId"
+            :postUserId="item.UserId"
             :postId="item.id"
             :userId="userId"
             :role="role"
