@@ -64,7 +64,8 @@ exports.modifyPost = (req, res, next) => {
             if (post.UserId == userId) {
                 post.update({ 
                  content: req.body.postContent,
-                 image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+                 image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null ),
+                 where: { id: req.params.id }
              })
             .then(() => res.status(200).json({ message: 'Post modifié !' }))
             .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour le post!' }));
