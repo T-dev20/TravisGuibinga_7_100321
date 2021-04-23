@@ -63,7 +63,7 @@ exports.modifyPost = (req, res, next) => {
         .then(post => {
             if (post.UserId == userId) {
                 post.update({ 
-                 content: req.body.content,
+                 content: req.body.postContent,
                  image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
              })
             .then(() => res.status(200).json({ message: 'Post modifié !' }))
