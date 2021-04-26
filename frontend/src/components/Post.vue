@@ -18,11 +18,11 @@
                     <em class="font-weight-bold"> {{item.User.name}} </em>
                     <br> {{item.createdAt}} 
                 </div>
+                 <button class="btn_post py-0 mx-2"> 🖊️ Modifier</button> 
+                 <button id="post_button-delete" class="btn_post py-0 mx-2"> <strong> X Supprimer</strong> </button>
             </div>
             <br>
             
-            <button class="btn btn-warning py-0 mx-2"> 🖊️ </button> Modifier
-            <button id="contact_button-delete" class="btn btn-danger py-0 mx-2"> <strong> X </strong> </button> Supprimer
 
              <!-- Post text content -->
             <div v-if="item.content !== null" class="text-left">
