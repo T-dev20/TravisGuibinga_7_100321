@@ -20,7 +20,7 @@
                 </div>
             </div>
             <br>
-
+            <button class="btn toClick"> <h2 class="h5">Modifier</h2></button>
              <!-- Post text content -->
             <div v-if="item.content !== null" class="text-left">
                 <p :id="'postContent-number'+item.id" class="h5 text-center-sm text-left">{{item.content}}</p> 

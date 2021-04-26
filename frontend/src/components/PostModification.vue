@@ -1,5 +1,5 @@
 <template>
-    <div class="text-left" v-if="postUserId === userId || role == 'admin'">        
+    <div class="text-left" v-if="postUserId === userId || role == 'admin'">
         <div :id="'modify-post'+postId" style="display:none">
             <label :for="'postContent'+postId">Texte de votre post : </label>
             <textarea :id="'postContent'+postId" rows="5" v-model="postContentToModify"  type="text" placeholder="Contenu de mon post" class="form-control" required>                
