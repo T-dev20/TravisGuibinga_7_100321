@@ -28,6 +28,7 @@ export default {
   }, 
   data () {
       return {
+          msg: "Post(s) de l'utilisateur sur le Réseau Social",
           directionToUseForAxiosGetUser: 'http://localhost:3000/api/users/user/' +localStorage.getItem('userIdToSee'), // Variable for URI in function to get user from API
           directionToUseForAxiosGetPostOneUser: 'http://localhost:3000/api/posts/currentUser/' +localStorage.getItem('userIdToSee')
       }
