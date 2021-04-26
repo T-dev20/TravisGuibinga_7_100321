@@ -99,9 +99,15 @@ $cardGroupomania-bgColor: darken($website-color, 20);
 }
 
 
-.displayFlexRow{
+.displayFlexRow {
   display:flex; 
   flex-direction:row;
+}
+
+.displayFlexRow__post {
+  display:flex; 
+  flex-direction:row;
+  justify-content: space-between;
 }
 
 .displayFlexCenter {
