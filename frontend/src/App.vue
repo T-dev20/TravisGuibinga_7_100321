@@ -102,9 +102,6 @@ $cardGroupomania-bgColor: darken($website-color, 20);
 .displayFlexRow{
   display:flex; 
   flex-direction:row;
-  & .btn_post {
-    margin-right: -25px;
-  } 
 }
 
 .displayFlexCenter {
