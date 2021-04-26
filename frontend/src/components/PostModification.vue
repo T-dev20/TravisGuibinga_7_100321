@@ -83,10 +83,10 @@ export default {
                 })
             } 
         },
-        deletePost(event, idPostToDelete) {
+        deletePost(event) {
             event.preventDefault();
             if(confirm("Vous vous apprêtez à supprimer votre post. Confirmez-vous la suppression ?")) {
-                axios.delete('http://localhost:3000/api/posts/' + idPostToDelete,
+                axios.delete('http://localhost:3000/api/posts/' + this.postId,
                     {   
                         headers: {
                             Authorization: "Bearer " + localStorage.getItem("token"),
