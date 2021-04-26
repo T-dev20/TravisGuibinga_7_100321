@@ -10,7 +10,7 @@
             
             
             <!-- Post header with profile image -->        
-            <div class="displayFlexRow font-italic text-left font-weight-light">            
+            <div class="displayFlexRow__post font-italic text-left font-weight-light">            
                
                 <div class="mx-2">
                     <div>
