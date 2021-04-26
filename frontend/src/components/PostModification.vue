@@ -1,5 +1,5 @@
 <template>
-    <div class="text-left" v-if="postUserId === userId || role == 'admin'">
+    <div class="text-left" v-if="postUserId === userId || role == 'Admin'">
         <div :id="'modify-post'+postId" style="display:none">
             <label :for="'postContent'+postId">Texte de votre post : </label>
             <textarea :id="'postContent'+postId" rows="5" v-model="postContentToModify"  type="text" placeholder="Contenu de mon post" class="form-control" required>                
@@ -13,7 +13,7 @@
             <br>
             
             <p class="card-text inline">
-                <button @click="modifyPost(postId, postUserId)" v-if="postUserId === userId || role == 'admin'" class="btn font-weight-bold btn-warning" type="submit">Confirmer la modification</button>
+                <button @click="modifyPost(postId, postUserId)" v-if="postUserId === userId || role == 'Admin'" class="btn font-weight-bold btn-warning" type="submit">Confirmer la modification</button>
             </p>
             <br>
 
