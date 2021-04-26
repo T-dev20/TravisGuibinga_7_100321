@@ -21,10 +21,15 @@
                     <em class="font-weight-bold"> {{item.User.name}} </em>
                     <br> {{item.createdAt}} 
                 </div>
-                <div class="btn_post">
-                    <button class="btn btn--post__modif btn-warning py-0 mx-2"> 🖊️ Modifier</button> 
-                    <button id="post_button-delete" class="btn btn--post__del btn-danger py-0 mx-2"> <strong> X Supprimer</strong> </button>
-                </div>
+                <!-- Post modification -->
+                <PostModification
+                :postUserId="item.UserId"
+                :postId="item.id"
+                :userId="userId"
+                :role="role"
+                :postContent="item.content"
+                @updatePost="getAllPosts"
+                />
             </div>
             <br>
             
@@ -45,16 +50,6 @@
             </div>
 
             <br :id="'postFooter-number'+item.id">
-
-            <!-- Post modification -->
-            <PostModification
-            :postUserId="item.UserId"
-            :postId="item.id"
-            :userId="userId"
-            :role="role"
-            :postContent="item.content"
-            @updatePost="getAllPosts"
-            />
 
             <hr class="separationBar">
             
