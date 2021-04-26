@@ -2,7 +2,7 @@
     <div class="text-left" v-if="postUserId === userId || role == 'Admin'">
         <div class="btn_post">
             <button @click="cacheDisplay('modify-post'+postId)" class="btn btn--post__modif btn-warning py-0 mx-2"> 🖊️ Modifier</button> 
-            <button id="post_button-delete" class="btn btn--post__del btn-danger py-0 mx-2"> <strong> X Supprimer</strong> </button>
+            <button @click="deletePost" id="post_button-delete" class="btn btn--post__del btn-danger py-0 mx-2"> <strong> X Supprimer</strong> </button>
         </div>
         <div :id="'modify-post'+postId" style="display:none">
             <label :for="'postContent'+postId">Texte de votre post : </label>
@@ -82,6 +82,34 @@ export default {
                     console.log('Une erreur est survenue');
                 })
             } 
+        },
+        deletePost(event, idPostToDelete) {
+            event.preventDefault();
+            if(confirm("Vous vous apprêtez à supprimer votre post. Confirmez-vous la suppression ?")) {
+                axios.delete('http://localhost:3000/api/posts/' + idPostToDelete,
+                    {   
+                        data: {
+                            userId: this.userId /* for middleware adminVerif, to check that userId who owns his profile is the same that deletes */
+                        },
+                        headers: {
+                            Authorization: "Bearer " + localStorage.getItem("token"),
+                        }
+                    }
+                )
+                // Clear the local storage (userId and token deleted) and redirection to register page
+                .then((response) => {
+                    console.log(response);
+                    if( this.userId == this.postUserId || this.role == 'Admin') { /* Special message and redirection to Home page if the deleter is the admin who is not on his profile */
+                        alert('Le post a bien été supprimé !');
+                        this.$router.push({ name: "Groupomania" });
+                        window.location.reload('../App.vue');
+                    }
+                })
+                .catch( ()=> {
+                    alert('Oups, une erreur est survenue');
+                    console.log('Une erreur est survenue');
+                }) 
+            }
         }
         
     }
