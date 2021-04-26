@@ -88,9 +88,6 @@ export default {
             if(confirm("Vous vous apprêtez à supprimer votre post. Confirmez-vous la suppression ?")) {
                 axios.delete('http://localhost:3000/api/posts/' + idPostToDelete,
                     {   
-                        data: {
-                            userId: this.userId /* for middleware adminVerif, to check that userId who owns his profile is the same that deletes */
-                        },
                         headers: {
                             Authorization: "Bearer " + localStorage.getItem("token"),
                         }
