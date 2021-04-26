@@ -1,7 +1,7 @@
 <template>
     <div class="text-left" v-if="postUserId === userId || role == 'Admin'">
         <div class="btn_post">
-            <button class="btn btn--post__modif btn-warning py-0 mx-2"> 🖊️ Modifier</button> 
+            <button @click="cacheDisplay('modify-post')" class="btn btn--post__modif btn-warning py-0 mx-2"> 🖊️ Modifier</button> 
             <button id="post_button-delete" class="btn btn--post__del btn-danger py-0 mx-2"> <strong> X Supprimer</strong> </button>
         </div>
         <div :id="'modify-post'+postId" style="display:none">
@@ -47,6 +47,13 @@ export default {
         // Transform image into a file
         postImageToModifyUpload (event) {      
             this.postImageToModify= event.target.files[0];
+        },
+        cacheDisplay(id){
+            if(document.getElementById(id).style.display=='none'){
+                document.getElementById(id).style.display='initial';
+            } else {
+                document.getElementById(id).style.display='none';
+            }
         },
         // Function to modify one post sent to API
         modifyPost(idPostToModify, userIdPost) {
