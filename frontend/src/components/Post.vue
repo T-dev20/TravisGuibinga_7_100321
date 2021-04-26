@@ -18,8 +18,8 @@
                     <em class="font-weight-bold"> {{item.User.name}} </em>
                     <br> {{item.createdAt}} 
                 </div>
-                 <button class="btn_post py-0 mx-2"> 🖊️ Modifier</button> 
-                 <button id="post_button-delete" class="btn_post py-0 mx-2"> <strong> X Supprimer</strong> </button>
+                 <button class="btn btn--post btn-warning py-0 mx-2"> 🖊️ Modifier</button> 
+                 <button id="post_button-delete" class="btn btn--post btn-danger py-0 mx-2"> <strong> X Supprimer</strong> </button>
             </div>
             <br>
             
