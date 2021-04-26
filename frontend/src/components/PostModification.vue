@@ -53,7 +53,7 @@ export default {
                     formData.append('image', this.postImageToModify);  
                 }                 
                 formData.append('userId', userIdPost); /* for middleware adminVerif, to check that userId who created the post is the same that modifies */
-                axios.put('http://localhost:3000/api/post/' + idPostToModify, formData,
+                axios.put('http://localhost:3000/api/posts/' + idPostToModify, formData,
                     { 
                         headers: {
                         Authorization: "Bearer " + localStorage.getItem("token"),
