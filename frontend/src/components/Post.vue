@@ -20,7 +20,10 @@
                 </div>
             </div>
             <br>
-            <button class="btn toClick"> <h2 class="h5">Modifier</h2></button>
+            
+            <button class="btn btn-warning py-0 mx-2"> 🖊️ </button> Modifier
+            <button id="contact_button-delete" class="btn btn-danger py-0 mx-2"> <strong> X </strong> </button> Supprimer
+
              <!-- Post text content -->
             <div v-if="item.content !== null" class="text-left">
                 <p :id="'postContent-number'+item.id" class="h5 text-center-sm text-left">{{item.content}}</p> 
