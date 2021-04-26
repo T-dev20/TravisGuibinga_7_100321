@@ -21,7 +21,7 @@
                     <em class="font-weight-bold"> {{item.User.name}} </em>
                     <br> {{item.createdAt}} 
                 </div>
-                <div>
+                <div class="btn_post">
                     <button class="btn btn--post__modif btn-warning py-0 mx-2"> 🖊️ Modifier</button> 
                     <button id="post_button-delete" class="btn btn--post__del btn-danger py-0 mx-2"> <strong> X Supprimer</strong> </button>
                 </div>
