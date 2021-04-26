@@ -1,7 +1,7 @@
 <template>
     <div class="text-left" v-if="postUserId === userId || role == 'Admin'">
         <div class="btn_post">
-            <button @click="cacheDisplay('modify-post'+postId)" class="btn btn--post__modif btn-warning py-0 mx-2"> 🖊️ Modifier</button> 
+            <button @click="cacheDisplay('modify-post'+postId)" class="btn btn--post__modif btn-warning py-0 mx-2" v-if="postUserId === userId"> 🖊️ Modifier</button> 
             <button @click="deletePost" id="post_button-delete" class="btn btn--post__del btn-danger py-0 mx-2"> <strong> X Supprimer</strong> </button>
         </div>
         <div :id="'modify-post'+postId" style="display:none">
