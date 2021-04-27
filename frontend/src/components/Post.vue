@@ -116,6 +116,21 @@ export default {
         })
         .catch(error => console.log(error))
     },
+    getAllComments() {
+        axios.get('http://localhost:3000/api/posts/' + this.previousPostContent.item.id + '/comments', {
+            headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+        })
+        .then((response) => {
+            response.data.forEach(element => {
+                // Change data from API in proper date format
+                element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(element.createdAt));
+            });
+            this.tableComments = response.data;
+        })
+        .catch(error => console.log(error))
+    },
     // Functions to display or hide elements  
     cacheDisplay(id){
         if(document.getElementById(id).style.display=='none'){
