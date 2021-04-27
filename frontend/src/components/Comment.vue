@@ -32,7 +32,7 @@
                         </textarea>
                         <br>
 
-                        <button @click="modifyComment(comment.id, comment.userId)" class="btn btn-warning font-weight-bold font-italic" type="submit">Modifier ce commentaire</button>
+                        <button @click="modifyComment(comment.id)" class="btn btn-warning font-weight-bold font-italic" type="submit">Modifier ce commentaire</button>
                         <br>
                         <br>
                     </div>
@@ -100,11 +100,10 @@ export default {
             .catch(error => console.log(error))
         },
         // Funtion to modify a comment sent to API
-        modifyComment (idCommentToModify, UserIdCommentToModify) {
+        modifyComment (idCommentToModify) {
             if(confirm("Vous vous apprêtez à modifier ce commentaire. Confirmez-vous la modification ?")) {
                 const formData = new FormData();
                 formData.append('commentContent', this.commentContentToModify);
-                formData.append('userId', UserIdCommentToModify); /* for middleware adminVerif, to check that userId who created the comment is the same that modifies */
                 axios.put('http://localhost:3000/api/comment/' + idCommentToModify, formData,
                     { 
                         headers: {
