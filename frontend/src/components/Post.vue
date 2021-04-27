@@ -64,12 +64,16 @@
 import axios from 'axios'
 import PostCreation from '@/components/PostCreation.vue'
 import PostModification from '@/components/PostModification.vue'
+import Comment from '@/components/Comment.vue'
+import CommentCreation from '@/components/CommentCreation.vue'
 
 export default {
   name: 'Post',
   components: {
     PostCreation,
-    PostModification
+    PostModification,
+    Comment,
+    CommentCreation
   },
   props: {
     msg: String,
@@ -80,14 +84,22 @@ export default {
     userId: parseInt(localStorage.getItem("userId")), // Needs to be parseInt for the auth process that compares UserId from the req.body and the one with the token
     role: localStorage.getItem("role"),
     index: 0,
-    previousPostContent: []
+    previousPostContent: [],
+    tableComments: []
     }
   },
   mounted() {      
-    // Get all posts from API, URI is a variable
     this.getAllPosts();
+    this.getAllComments();
     },    
   methods : {
+    decreaseCommentNumber(payload){
+        document.getElementById('commentNumber'+payload).innerHTML--;        
+    },
+    increaseCommentNumber(payload){
+        document.getElementById('commentNumber'+payload).innerHTML++;
+        document.getElementById('comment-creation'+payload).style.display='none';
+    },
     getAllPosts(){
         axios.get('http://localhost:3000/api/posts/', {
             headers: {
