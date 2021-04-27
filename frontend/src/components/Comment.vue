@@ -37,7 +37,7 @@
                         <br>
                     </div>
 
-                    <hr class="separationBar" align=left width="25%">
+                    <hr class="separationBar" align=left width="30%">
 
                 </div>
             </div>
