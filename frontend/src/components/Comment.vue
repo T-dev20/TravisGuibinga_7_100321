@@ -100,10 +100,11 @@ export default {
             .catch(error => console.log(error))
         },
         // Funtion to modify a comment sent to API
-        modifyComment (idCommentToModify) {
+        modifyComment (idCommentToModify, userIdComment) {
             if(confirm("Vous vous apprêtez à modifier ce commentaire. Confirmez-vous la modification ?")) {
                 const formData = new FormData();
                 formData.append('commentContent', this.commentContentToModify);
+                formData.append('OwnerId', userIdComment);
                 axios.put('http://localhost:3000/api/comment/' + idCommentToModify, formData,
                     { 
                         headers: {
