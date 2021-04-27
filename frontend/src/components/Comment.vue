@@ -7,7 +7,7 @@
                         <em class="displayFlexSpacebetween">
                             <em class="font-italic"> {{comment.User.name}} dit :  </em> 
                             <!-- Modify & Delete comment buttons for the current user -->
-                            <div v-if="comment.OwnerId !== userId || role == 'Admin'">
+                            <div v-if="comment.OwnerId == userId || role == 'Admin'">
                                 <button @click="cacheDisplay('comment-modification'+comment.id); duplicateModifyComment(comment.id)" class="btn btn-warning py-0 px-0"> 🖊️ </button> 
                                 <button @click="deleteComment(comment.id, comment.OwnerId)" class="btn btn-danger mx-1 py-0 px-1"> <strong> X </strong> </button> 
                             </div>
