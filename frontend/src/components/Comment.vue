@@ -85,7 +85,7 @@ export default {
             }            
         },
         getAllComments() {
-            axios.get('http://localhost:3000/api/posts/' + this.previousPostContent.comme.id + '/comments', {
+            axios.get('http://localhost:3000/api/posts/' + this.postId + '/comments', {
                 headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
                 },
