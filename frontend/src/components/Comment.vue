@@ -32,7 +32,7 @@
                         </textarea>
                         <br>
 
-                        <button @click="modifyComment(comment.id)" class="btn btn-warning font-weight-bold font-italic" type="submit">Modifier ce commentaire</button>
+                        <button @click="modifyComment(comment.id, comment.OwnerId)" class="btn btn-warning font-weight-bold font-italic" type="submit">Modifier ce commentaire</button>
                         <br>
                         <br>
                     </div>
