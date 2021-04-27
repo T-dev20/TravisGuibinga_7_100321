@@ -5,7 +5,7 @@
                 <div :id="'comment-number'+comment.id" v-if="comment.postId == postId">
                     <div> 
                         <em class="displayFlexSpacebetween">
-                            <em class="font-italic"> {{comment.user.name}} dit :  </em> 
+                            <em class="font-italic"> {{comment.User.name}} dit :  </em> 
                             <!-- Modify & Delete comment buttons for the current user -->
                             <div v-if="comment.userId == userId || role == 'Admin'">
                                 <button @click="cacheDisplay('comment-modification'+comment.id); duplicateModifyComment(comment.id)" class="btn btn-warning py-0 px-0"> 🖊️ </button> 
