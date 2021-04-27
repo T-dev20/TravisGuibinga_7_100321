@@ -53,6 +53,15 @@
 
             <hr class="separationBar">
             
+            <!-- Detailed list for Comments -->         
+            <Comment
+            :tableComments="tableComments"
+            :postId="item.id"
+            :userId="userId"
+            :role="role"
+            @updateComment="getAllComments"
+            @decreaseCommentNumber="decreaseCommentNumber"
+            />
                 
         </div>
         <hr class="separationBar" align=center>        
