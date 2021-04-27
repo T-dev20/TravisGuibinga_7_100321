@@ -99,16 +99,8 @@ export default {
   },
   mounted() {      
     this.getAllPosts();
-    this.getAllComments();
     },    
   methods : {
-    decreaseCommentNumber(payload){
-        document.getElementById('commentNumber'+payload).innerHTML--;        
-    },
-    increaseCommentNumber(payload){
-        document.getElementById('commentNumber'+payload).innerHTML++;
-        document.getElementById('comment-creation'+payload).style.display='none';
-    },
     getAllPosts(){
         axios.get('http://localhost:3000/api/posts/', {
             headers: {
@@ -122,21 +114,6 @@ export default {
             }); 
             this.previousPostContent = response.data;
             this.index++;
-        })
-        .catch(error => console.log(error))
-    },
-    getAllComments() {
-        axios.get('http://localhost:3000/api/posts/' + this.previousPostContent.item.id + '/comments', {
-            headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-        })
-        .then((response) => {
-            response.data.forEach(element => {
-                // Change data from API in proper date format
-                element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(element.createdAt));
-            });
-            this.tableComments = response.data;
         })
         .catch(error => console.log(error))
     },
