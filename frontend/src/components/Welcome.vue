@@ -3,7 +3,7 @@
         <div class="col-12">
             <img alt="Groupomania logo" src="../assets/logo2.png">
             <h1 class="text-center mt-2 welcomeText">
-                Bienvenue au Réseau Social de Groupomania
+                Bienvenue sur le Réseau Social Groupomania
             </h1>
         </div>
     </div>
