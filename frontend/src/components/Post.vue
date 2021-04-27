@@ -52,7 +52,7 @@
             <br :id="'postFooter-number'+item.id">
 
             <hr class="separationBar">
-            
+
             <!-- Detailed list for Comments -->         
             <Comment
             :tableComments="tableComments"
@@ -74,7 +74,7 @@ import axios from 'axios'
 import PostCreation from '@/components/PostCreation.vue'
 import PostModification from '@/components/PostModification.vue'
 import Comment from '@/components/Comment.vue'
-import CommentCreation from '@/components/CommentCreation.vue'
+//import CommentCreation from '@/components/CommentCreation.vue'
 
 export default {
   name: 'Post',
@@ -82,7 +82,7 @@ export default {
     PostCreation,
     PostModification,
     Comment,
-    CommentCreation
+    //CommentCreation
   },
   props: {
     msg: String,
