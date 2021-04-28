@@ -112,17 +112,11 @@ exports.findAllPostsOneUser = (req, res) => {
 
 exports.getAllComments = (req, res, next) => {
     db.Comment.findAll({
-        where: { PostId: req.params.id},
-        include: {
-            model: db.User,
-            attributes: ["email", "name", "role", "image_profil"]
-        },
-        order: [
-            ['createdAt', 'DESC']
-      ],
+        order: [['createdAt', "ASC"], ['updatedAt', "ASC"]],
+        include: [db.User, db.Post]
     })
-        .then(comments => res.status(200).json(comments))
-        .catch(error => res.status(500).json({ error }))
+        .then(data => { res.send(data); })    
+        .catch(err => { res.status(500).send({ message: err.message || "Some error occurred while retrieving tutorials." }); });
 };
 
 exports.createComment = (req, res, next) => {
