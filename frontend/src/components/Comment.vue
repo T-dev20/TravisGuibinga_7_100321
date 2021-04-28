@@ -54,16 +54,12 @@ export default {
         postId: Number,
         userId: Number,
         role: String,
-        commentContent: String,
         tableComments: Array,
     },
     data() {
         return {     
-            commentContentToModify: this.commentContent
+            commentContentToModify: null
         }
-    },
-    mounted() {      
-    this.getAllComments();
     },
     methods: {
         decreaseCommentNumber(payload){
@@ -84,21 +80,6 @@ export default {
             if(document.getElementById('commentContent-number'+idCommentToModify)) {
                 this.commentContentToModify = document.getElementById('commentContent-number'+idCommentToModify).innerHTML;
             }            
-        },
-        getAllComments() {
-            axios.get('http://localhost:3000/api/posts/' + this.postId + '/comments', {
-                headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-                },
-            })
-            .then((response) => {
-                response.data.forEach(element => {
-                    // Change data from API in proper date format
-                    element.createdAt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(element.createdAt));
-                });
-                this.tableComments = response.data;
-            })
-            .catch(error => console.log(error))
         },
         // Funtion to modify a comment sent to API
         modifyComment (idCommentToModify, userIdComment) {
