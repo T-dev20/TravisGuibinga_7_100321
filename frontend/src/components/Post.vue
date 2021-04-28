@@ -119,7 +119,7 @@ export default {
         .catch(error => console.log(error))
     },
     getAllComments() {
-            axios.get('http://localhost:3000/api/comment', {
+            axios.get('http://localhost:3000/api/posts/comment', {
                 headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
                 },
