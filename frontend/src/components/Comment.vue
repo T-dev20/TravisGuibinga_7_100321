@@ -54,11 +54,12 @@ export default {
         postId: Number,
         userId: Number,
         role: String,
+        commentContent: String,
         tableComments: Array,
     },
     data() {
         return {     
-            commentContentToModify: null
+            commentContentToModify: this.commentContent
         }
     },
     mounted() {      
@@ -114,7 +115,7 @@ export default {
                 )
                 .then((response) => {
                     console.log(response);
-                    document.getElementById('comment-modification'+idCommentToModify).style.display='none';               
+                    document.getElementById('comment-modification'+idCommentToModify).style.display='none';              
                 })
                 .catch( ()=> {
                     alert('Oups, une erreur est survenue');
