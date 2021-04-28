@@ -16,7 +16,7 @@ exports.modifyComment = (req, res, next) => {
         .then(comment => {
             if (comment.OwnerId == userId) {
                 comment.update({
-                content: req.body.content
+                content: req.body.commentContent
             })
             .then(() => res.status(201).json({ message: 'Commentaire modifié.' }))
             .catch(error => res.status(400).json({ error }))
