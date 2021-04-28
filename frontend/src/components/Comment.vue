@@ -114,8 +114,7 @@ export default {
                 )
                 .then((response) => {
                     console.log(response);
-                    document.getElementById('comment-modification'+idCommentToModify).style.display='none'; 
-                    this.$emit('updateComment', true);               
+                    document.getElementById('comment-modification'+idCommentToModify).style.display='none';               
                 })
                 .catch( ()=> {
                     alert('Oups, une erreur est survenue');
