@@ -28,11 +28,11 @@
                         <br>
 
                         <label :for="'commentModifyContent'+comment.id">Texte de votre commentaire : </label>
-                        <textarea :id="'commentModifyContent'+comment.id" rows="2" v-model="commentContentToModify"  type="text" placeholder="Contenu de mon commentaire" class="text-left form-control">  
+                        <textarea :id="'commentModifyContent'+comment.id" rows="2" v-model="commentContent"  type="text" placeholder="Contenu de mon commentaire" class="text-left form-control">  
                         </textarea>
                         <br>
 
-                        <button @click="modifyComment(comment.id, comment.OwnerId)" class="btn btn-warning font-weight-bold font-italic" type="submit">Modifier ce commentaire</button>
+                        <button @click="modifyComment(comment.id)" class="btn btn-warning font-weight-bold font-italic" type="submit">Modifier ce commentaire</button>
                         <br>
                         <br>
                     </div>
@@ -54,11 +54,11 @@ export default {
         postId: Number,
         userId: Number,
         role: String,
-        tableComments: Array,
+        tableComments: Array
     },
     data() {
         return {     
-            commentContentToModify: null
+            commentContent: null
         }
     },
     methods: {
@@ -78,15 +78,14 @@ export default {
         },
         duplicateModifyComment (idCommentToModify) {
             if(document.getElementById('commentContent-number'+idCommentToModify)) {
-                this.commentContentToModify = document.getElementById('commentContent-number'+idCommentToModify).innerHTML;
+                this.commentContent = document.getElementById('commentContent-number'+idCommentToModify).innerHTML;
             }            
         },
         // Funtion to modify a comment sent to API
-        modifyComment (idCommentToModify, userIdComment) {
+        modifyComment (idCommentToModify) {
             if(confirm("Vous vous apprêtez à modifier ce commentaire. Confirmez-vous la modification ?")) {
                 const formData = new FormData();
-                formData.append('commentContent', this.commentContentToModify);
-                formData.append('OwnerId', userIdComment);
+                formData.append('commentContent', this.commentContent);
                 axios.put('http://localhost:3000/api/comment/' + idCommentToModify, formData,
                     { 
                         headers: {
