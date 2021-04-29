@@ -23,11 +23,12 @@ export default {
     props: {
         postId: Number,        
         tableComments: Array,
-        userId: Number
+        userId: Number,
+        commentCreate: String
     },
     data() {
         return {
-            commentToPublish: null
+            commentToPublish: this.commentCreate
         }
     },
     methods: {
