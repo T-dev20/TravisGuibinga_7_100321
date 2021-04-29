@@ -24,11 +24,11 @@ export default {
         postId: Number,        
         tableComments: Array,
         userId: Number,
-        commentCreate: String
+        commentToPublish: String
     },
     data() {
         return {
-            commentToPublish: this.commentCreate
+            commentCreate: this.commentToPublish
         }
     },
     methods: {
