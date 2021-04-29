@@ -62,7 +62,34 @@
             @updateComment="getAllComments"
             @decreaseCommentNumber="decreaseCommentNumber"
             />
-                
+
+            <!-- Comment creation(for the current user)  -->
+            <div class="text-left">            
+                <div class="card-text inline displayFlexSpacebetween align-center">
+                    <!-- Comment creation button -->
+                    <div>        
+                        <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
+                    </div>
+                    <!-- Modify/Delete post buttons for the current user -->
+                    <div v-if="item.userId === userId || role == 'admin'" class="displayFlexSpacebetween align-center">                    
+                        <button  @click="cacheDisplay('modificationEnabledPost'+item.id)" class="roundedBorders btn postModificationEnabled mx-2 marginButtonModifyPostResponsive">...</button>
+                        <div :id="'modificationEnabledPost'+item.id" class="displayFlexSpacebetween align-center" style="display:none">                      
+                            <button @click="cacheDisplay('modify-post'+item.id)" class="btn btn-warning p-0 mx-2" type="submit"> 🖊️ </button>Modifier ce post
+                            <button @click="deletePost(item.id, item.userId)" class="btn btn-danger py-0 px-1 mx-2" type="submit"> <strong> X </strong> </button>Supprimer ce post   
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <!-- Comment creation -->
+                <CommentCreation
+                :tableComments="tableComments"
+                :postId="item.id"
+                :userId="userId"
+                @updateComment="getAllComments"
+                @increaseCommentNumber="increaseCommentNumber"
+                />
+            </div>   
         </div>
         <hr class="separationBar" align=center>        
     </div>
