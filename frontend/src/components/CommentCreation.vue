@@ -33,12 +33,12 @@ export default {
     methods: {
         // Function to publish a comment sent to API
         publishComment(idPostToComment) {
-            const formData = new FormData();
-            if(this.commentToPublish) {
-                formData.append('commentContent', this.commentToPublish);
-            }
-            formData.append('userId', this.userId);
-            axios.post('http://localhost:3000/api/posts/'+ idPostToComment + '/comment', formData,
+            axios.post('http://localhost:3000/api/posts/'+ idPostToComment + '/comment', 
+                {
+                    content: this.commentToPublish,
+                    PostId: this.postId,
+                    OwnerId: this.userId
+                },
                 {
                     headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
