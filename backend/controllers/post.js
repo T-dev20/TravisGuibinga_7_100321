@@ -136,7 +136,7 @@ exports.createComment = (req, res, next) => {
                 return res.status(404).json({ error: 'Post introuvable !' })
             }
             db.Comment.create({
-                content: req.body.content,
+                content: req.body.commentToPublish,
                 PostId: req.params.id,
                 OwnerId: userId
             })
