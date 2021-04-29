@@ -38,7 +38,7 @@ export default {
                 formData.append('commentContent', this.commentToPublish);
             }
             formData.append('userId', this.userId);
-            axios.post('http://localhost:3000/api/posts/'+ idPostToComment, formData,
+            axios.post('http://localhost:3000/api/posts/'+ idPostToComment + '/comment', formData,
                 {
                     headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),

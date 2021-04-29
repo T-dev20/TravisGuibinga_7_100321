@@ -10,7 +10,7 @@ router.get('/currentUser/:id', auth, postCtrl.findAllPostsOneUser);
 //pour consulter les commentaires du post
 router.get('/comment', postCtrl.getAllComments);
 //pour créer un commentaire sur le post
-router.post("/:id", auth, postCtrl.createComment);
+router.post("/:id/comment", auth, postCtrl.createComment);
 //pour enregistrer des posts dans la BDD
 router.post('/', auth, multer, postCtrl.createPost);
 //pour afficher un post
