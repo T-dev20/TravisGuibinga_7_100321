@@ -54,12 +54,11 @@ export default {
         postId: Number,
         userId: Number,
         role: String,
-        tableComments: Array,
-        commentContent: String
+        tableComments: Array
     },
     data() {
         return {     
-            commentContentToModify: this.commentContent
+            commentContentToModify: null
         }
     },
     methods: {
@@ -85,9 +84,10 @@ export default {
         // Funtion to modify a comment sent to API
         modifyComment (idCommentToModify) {
             if(confirm("Vous vous apprêtez à modifier ce commentaire. Confirmez-vous la modification ?")) {
-                const formData = new FormData();
-                formData.append('commentContent', this.commentContentToModify);
-                axios.put('http://localhost:3000/api/comment/' + idCommentToModify, formData,
+                axios.put('http://localhost:3000/api/comment/' + idCommentToModify, 
+                    {
+                            commentContent: this.commentContentToModify
+                    },
                     { 
                         headers: {
                         Authorization: "Bearer " + localStorage.getItem("token"),
