@@ -9,7 +9,7 @@
                             <!-- Modify & Delete comment buttons for the current user -->
                             <div v-if="comment.OwnerId == userId || role == 'Admin'">
                                 <button @click="cacheDisplay('comment-modification'+comment.id); duplicateModifyComment(comment.id)" class="btn btn-warning py-0 px-0"> 🖊️ </button> 
-                                <button @click="deleteComment(comment.id, comment.OwnerId)" class="btn btn-danger mx-1 py-0 px-1"> <strong> X </strong> </button> 
+                                <button @click="deleteComment(comment.id)" class="btn btn-danger mx-1 py-0 px-1"> <strong> X </strong> </button> 
                             </div>
                         </em>
                         <!-- Comment text content -->
@@ -106,13 +106,10 @@ export default {
             } 
         },
         // Function to delete a comment sent to API
-        deleteComment(idCommentToDelete, userIdCommentToDelete) {
+        deleteComment(idCommentToDelete) {
         if(confirm("Vous vous apprêtez à supprimer ce commentaire. Confirmez-vous la suppression ?")) {
             axios.delete('http://localhost:3000/api/comment/' + idCommentToDelete,            
                 {
-                    data: {
-                        userId: userIdCommentToDelete /* for middleware adminVerif, to check that userId who created the comment is the same that deletes */
-                    },
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("token"),
                     }
