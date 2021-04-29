@@ -28,7 +28,7 @@
                         <br>
 
                         <label :for="'commentModifyContent'+comment.id">Texte de votre commentaire : </label>
-                        <textarea :id="'commentModifyContent'+comment.id" rows="2" v-model="commentContent"  type="text" placeholder="Contenu de mon commentaire" class="text-left form-control">  
+                        <textarea :id="'commentModifyContent'+comment.id" rows="2" v-model="commentContentToModify"  type="text" placeholder="Contenu de mon commentaire" class="text-left form-control">  
                         </textarea>
                         <br>
 
@@ -54,11 +54,12 @@ export default {
         postId: Number,
         userId: Number,
         role: String,
-        tableComments: Array
+        tableComments: Array,
+        commentContent: String
     },
     data() {
         return {     
-            commentContent: null
+            commentContentToModify: this.commentContent
         }
     },
     methods: {
@@ -78,14 +79,14 @@ export default {
         },
         duplicateModifyComment (idCommentToModify) {
             if(document.getElementById('commentContent-number'+idCommentToModify)) {
-                this.commentContent = document.getElementById('commentContent-number'+idCommentToModify).innerHTML;
+                this.commentContentToModify = document.getElementById('commentContent-number'+idCommentToModify).innerHTML;
             }            
         },
         // Funtion to modify a comment sent to API
         modifyComment (idCommentToModify) {
             if(confirm("Vous vous apprêtez à modifier ce commentaire. Confirmez-vous la modification ?")) {
                 const formData = new FormData();
-                formData.append('commentContent', this.commentContent);
+                formData.append('commentContent', this.commentContentToModify);
                 axios.put('http://localhost:3000/api/comment/' + idCommentToModify, formData,
                     { 
                         headers: {
