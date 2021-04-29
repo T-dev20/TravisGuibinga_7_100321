@@ -59,6 +59,7 @@
             :postId="item.id"
             :userId="userId"
             :role="role"
+            :commentContent="item.Comments.content"
             @updateComment="getAllComments"
             @decreaseCommentNumber="decreaseCommentNumber"
             />
