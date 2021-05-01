@@ -64,7 +64,7 @@
             />
 
             <!-- Comment creation(for the current user)  -->
-            <div class="text-left">            
+            <div class="text-left" v-for="comm in tableComments" :key="comm.id">            
                 <div class="card-text inline displayFlexSpacebetween align-center">
                     <!-- Comment creation button -->
                     <div>        
@@ -86,6 +86,7 @@
                 :tableComments="tableComments"
                 :postId="item.id"
                 :userId="userId"
+                :commentToPublish="comm.content"
                 @updateComment="getAllComments"
                 @increaseCommentNumber="increaseCommentNumber"
                 />
