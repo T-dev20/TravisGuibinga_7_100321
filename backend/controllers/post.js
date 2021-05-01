@@ -78,18 +78,11 @@ exports.modifyPost = (req, res, next) => {
 
 exports.getAllPosts = (req, res, next) => {
     db.Post.findAll({
-        include: {
-            model: db.User,
-            attributes: ["name", "role", "image_profil"]
-        },
-        order: [
-            ['createdAt', 'DESC']
-      ],
+        order: [['createdAt', "DESC"]],
+        include: [db.User,db.Comment]
     })
     .then(data => { res.send(data); })      
     .catch(err => { res.status(500).send({ message: err.message || "Some error occurred while retrieving tutorials." });});
-        // .then(data => res.send(data).status(200).json(data))
-        // .catch(error => res.status(500).json({ error }))
 }
 
 exports.findAllPostsOneUser = (req, res) => {
