@@ -86,6 +86,7 @@
                 :tableComments="tableComments"
                 :postId="item.id"
                 :userId="userId"
+                :commentToPublish="item.Comments.content"
                 @updateComment="getAllComments"
                 @increaseCommentNumber="increaseCommentNumber"
                 />
