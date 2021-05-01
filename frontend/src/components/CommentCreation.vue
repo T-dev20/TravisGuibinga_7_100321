@@ -48,7 +48,6 @@ export default {
                 this.$emit('updateComment', true);
                 this.$emit('increaseCommentNumber', this.postId);
                 this.commentToPublish = null;
-                location.reload();
             })
             .catch( ()=> {
                 alert('Oups, une erreur est survenue');
