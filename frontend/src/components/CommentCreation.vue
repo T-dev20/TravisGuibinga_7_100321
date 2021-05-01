@@ -48,10 +48,10 @@ export default {
                 this.$emit('updateComment', true);
                 this.$emit('increaseCommentNumber', this.postId);
                 this.commentToPublish = null;
-                this.commentImageToPublish = null;
+                location.reload();
             })
             .catch( ()=> {
-                alert('Oops, une erreur est survenue');
+                alert('Oups, une erreur est survenue');
                 console.log('Une erreur est survenue');
             })
         },
