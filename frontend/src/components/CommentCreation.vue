@@ -23,12 +23,11 @@ export default {
     props: {
         postId: Number,        
         tableComments: Array,
-        userId: Number,
-        commentToPublish: String
+        userId: Number
     },
     data() {
         return {
-            commentCreate: this.commentToPublish
+            commentToPublish: null
         }
     },
     methods: {
@@ -36,9 +35,7 @@ export default {
         publishComment(idPostToComment) {
             axios.post('http://localhost:3000/api/posts/'+ idPostToComment + '/comment', 
                 {
-                    content: this.commentToPublish,
-                    PostId: this.postId,
-                    OwnerId: this.userId
+                    commentToPublish: this.commentToPublish
                 },
                 {
                     headers: {
