@@ -216,6 +216,14 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   .postImage {
     width: 50%;
   }
+
+  .btnAddComment {
+    margin-left: 0px;
+  }
+
+  .likeContainer {
+    width: 35%;
+  }
 }
 
 </style>
