@@ -75,7 +75,7 @@
                     <div>        
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
-                    <div>
+                    <div class="likeContainer">
                         <p class="likeReaction"> <i class="far fa-thumbs-up"></i> {{item.likes}}</p>
                     </div>
                 </div>
