@@ -45,14 +45,8 @@
         localStorage.clear();
         this.$router.push({ name: "Connexion" });
         window.location.reload();
-      },
-      liked() {
-        const thumb = document.getElementById('thumb');
-        thumb.addEventListener('click', function() {
-          thumb.classList.toggle('red');
-        })
-    }
-  }
+      }
+   }
 }
 </script>
 
@@ -65,10 +59,6 @@ $likeReaction-color:rgb(47, 255, 47);
 $dislikeReaction-color:rgb(255, 123, 129);
 $cardGroupomania-bgColor: darken($website-color, 20);
 // 
-
-#heart.red {
-  color: red;
-}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

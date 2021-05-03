@@ -76,8 +76,8 @@
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
                         <div class="restaurants__menus">
-                            <span class="restaurants__menus__heart div-icon"
-                            ><i class="fas fa-thumbs-up" id="thumb"></i>
+                            <span class="restaurants__menus__heart div-icon" 
+                            ><i class="fas fa-thumbs-up" ></i>
                             </span>
                             <!-- Define svg -->
                             <svg width="0" height="0">
