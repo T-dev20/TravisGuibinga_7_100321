@@ -25,7 +25,7 @@
     name: 'App',
     data() {
       return {
-        token: localStorage.getItem("token"),   
+        token: localStorage.getItem("token"),  
         connectStatus: null, 
       }
     },
@@ -45,9 +45,15 @@
         localStorage.clear();
         this.$router.push({ name: "Connexion" });
         window.location.reload();
-      }
+      },
+      liked() {
+        const thumb = document.getElementById('thumb');
+        thumb.addEventListener('click', function() {
+          thumb.classList.toggle('red');
+        })
     }
   }
+}
 </script>
 
 <style lang="scss">
@@ -59,6 +65,10 @@ $likeReaction-color:rgb(47, 255, 47);
 $dislikeReaction-color:rgb(255, 123, 129);
 $cardGroupomania-bgColor: darken($website-color, 20);
 // 
+
+#heart.red {
+  color: red;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -225,7 +235,6 @@ $cardGroupomania-bgColor: darken($website-color, 20);
     width: 35%;
   }
 }
-
 
 .restaurants {
   justify-content: space-around;
