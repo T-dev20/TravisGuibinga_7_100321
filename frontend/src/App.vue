@@ -226,4 +226,44 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   }
 }
 
+
+.restaurants {
+  justify-content: space-around;
+  &__menus {
+    & > .div-icon svg * {
+      fill: transparent;
+      stroke-width: 30;
+      stroke: white;
+    }
+    & > .div-icon svg *:active {
+      animation: hov 1.5s ease-in-out 0.5s both;
+    }
+  }
+}
+
+@keyframes hov {
+  0% {
+    stroke-opacity: 0;
+    fill: url(#lgrad);
+    fill-opacity: 0.4;
+  }
+  40% {
+    fill: url(#lgrad);
+    fill-opacity: 0.65;
+  }
+  60% {
+    stroke-opacity: 0;
+    fill-opacity: 0.75;
+  }
+  80% {
+    stroke-opacity: 0;
+    fill-opacity: 0.85;
+  }
+  100% {
+    stroke-opacity: 0;
+    fill: url(#lgrad);
+    fill-opacity: 1;
+  }
+}
+
 </style>
