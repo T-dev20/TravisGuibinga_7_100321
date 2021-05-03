@@ -140,6 +140,11 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   justify-content:space-between;
 }
 
+.align-center {
+  align-content: center;
+  align-items: center;
+}
+
 .profileImage {
   width: 150px;
   height: 150px;
