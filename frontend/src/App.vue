@@ -235,7 +235,7 @@ $cardGroupomania-bgColor: darken($website-color, 20);
       stroke-width: 30;
       stroke: white;
     }
-    & > .div-icon svg *:active {
+    & > .div-icon svg *:hover {
       animation: hov 1.5s ease-in-out 0.5s both;
     }
   }

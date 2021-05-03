@@ -75,7 +75,6 @@
                     <div class="btnAddComment">      
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
-                    <a href="./menu-leDeliceDesSens.html">
                         <div class="restaurants__menus">
                             <span class="restaurants__menus__heart div-icon"
                             ><i class="fas fa-thumbs-up"></i>
@@ -94,7 +93,6 @@
                             </linearGradient>
                             </svg>
                         </div>
-                    </a>
                     <span class="likeContainer"> <i class="far fa-thumbs-up"></i> {{item.likes}}</span>
                 </div>
                 <br>
