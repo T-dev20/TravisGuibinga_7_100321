@@ -70,6 +70,9 @@
                     <div>        
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
+                     <div>
+                        <p class="likeReaction"> 👍 {{item.likes}}</p>
+                    </div>
                 </div>
                 <br>
 
