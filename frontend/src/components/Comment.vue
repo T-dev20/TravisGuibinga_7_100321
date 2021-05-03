@@ -1,6 +1,6 @@
 <template>
     <div class="text-left">           
-        <div :id="'comment-display'+postId" >
+        <div :id="'comment-display'+postId" style="display:none">
             <div v-for="comment in tableComments" :key="comment.id">
                 <div :id="'comment-number'+comment.id" v-if="comment.PostId == postId">
                     <div> 

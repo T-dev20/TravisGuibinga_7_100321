@@ -53,6 +53,11 @@
 
             <hr class="separationBar">
 
+            <!-- Comments button -->
+            <div>
+                <button @click="cacheDisplay('comment-display'+item.id)" class="btn font-italic toClick"> Commentaires (<em :id="'commentNumber'+item.id">{{item.Comments.length}}</em>) </button>
+            </div>
+
             <!-- Detailed list for Comments -->         
             <Comment
             :tableComments="tableComments"
