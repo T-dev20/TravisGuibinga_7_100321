@@ -80,7 +80,7 @@
                             ><i class="fas fa-thumbs-up" ></i>
                             </span>
                             <!-- Define svg -->
-                            <svg @click="liked()" width="0" height="0" id="thumb">
+                            <svg  width="0" height="0" >
                             <linearGradient id="lgrad" x1="0.5" y1="0" x2="0.2" y2="1">
                                 <stop
                                 offset="0%"
@@ -93,7 +93,7 @@
                             </linearGradient>
                             </svg>
                         </div>
-                    <span class="likeContainer"> <i class="far fa-thumbs-up"></i> {{item.likes}}</span>
+                    <span  @click="liked()" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
                 </div>
                 <br>
 
