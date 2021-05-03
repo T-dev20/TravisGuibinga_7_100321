@@ -80,7 +80,7 @@
                             ><i class="fas fa-thumbs-up" ></i>
                             </span>
                             <!-- Define svg -->
-                            <svg width="0" height="0" id="thumb">
+                            <svg @click="liked()" width="0" height="0" id="thumb">
                             <linearGradient id="lgrad" x1="0.5" y1="0" x2="0.2" y2="1">
                                 <stop
                                 offset="0%"
@@ -186,6 +186,7 @@ export default {
     },
     liked() {
        const thumb = document.getElementById('thumb');
+       thumb.style.color='red';
     }
   }
 }
