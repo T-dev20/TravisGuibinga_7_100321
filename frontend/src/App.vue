@@ -92,6 +92,14 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   }
 }
 
+.toClick {
+    color: white;
+    &:hover {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
 .cardGroupomania {
   background: linear-gradient(135deg, $cardGroupomania-bgColor 0%, lighten($cardGroupomania-bgColor, 20) 100%);  
   border-radius:40px; 
