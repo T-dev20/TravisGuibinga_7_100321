@@ -230,39 +230,16 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   justify-content: space-around;
   &__menus {
     & > .div-icon svg * {
+      cursor: pointer;
       fill: transparent;
       stroke-width: 30;
       stroke: white;
     }
-    & > .div-icon svg *:hover {
-      cursor: pointer;
-      animation: hov 1.5s ease-in-out 0.5s both;
+    & > .div-icon svg *:active {
+      
+      stroke-opacity: 0;
+      fill: url(#lgrad);
     }
-  }
-}
-
-@keyframes hov {
-  0% {
-    stroke-opacity: 0;
-    fill: url(#lgrad);
-    fill-opacity: 0.4;
-  }
-  40% {
-    fill: url(#lgrad);
-    fill-opacity: 0.65;
-  }
-  60% {
-    stroke-opacity: 0;
-    fill-opacity: 0.75;
-  }
-  80% {
-    stroke-opacity: 0;
-    fill-opacity: 0.85;
-  }
-  100% {
-    stroke-opacity: 0;
-    fill: url(#lgrad);
-    fill-opacity: 1;
   }
 }
 
