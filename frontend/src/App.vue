@@ -182,8 +182,12 @@ $cardGroupomania-bgColor: darken($website-color, 20);
     text-align: center!important;
 }
 
+.btnAddComment {
+  margin-left: 25px;
+}
+
 .likeContainer {
-  margin-right: 25px;
+  margin-right: 5px;
   width: 10%;
   text-align: center;
 }

@@ -72,7 +72,7 @@
             <div class="text-left">            
                 <div class="card-text inline displayFlexSpacebetween align-center">
                     <!-- Comment creation button -->
-                    <div>        
+                    <div class="btnAddComment">      
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
                     <span class="likeContainer"> <i class="far fa-thumbs-up"></i> {{item.likes}}</span>
