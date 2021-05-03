@@ -178,6 +178,10 @@ $cardGroupomania-bgColor: darken($website-color, 20);
     text-align: center!important;
 }
 
+.likeReaction {
+  width: 45%;
+}
+
 @media (max-width: 500px) {
 
   .displayFlexSpacebetween {
