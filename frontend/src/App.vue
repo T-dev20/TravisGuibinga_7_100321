@@ -94,10 +94,6 @@ $cardGroupomania-bgColor: darken($website-color, 20);
 
 .toClick {
     color: white;
-    &:hover {
-        color: white;
-        text-decoration: underline;
-    }
 }
 
 .cardGroupomania {
