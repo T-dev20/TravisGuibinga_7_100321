@@ -84,7 +84,7 @@
                                 
                             </svg>
                         </div>
-                    <button  @click="liked()" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</button>
+                    <span  @click="liked()" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
                 </div>
                 <br>
 
