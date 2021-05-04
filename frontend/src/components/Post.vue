@@ -120,7 +120,11 @@ export default {
   },
   props: {
     msg: String,
-    directionToUseForAxiosGetPost: String
+    directionToUseForAxiosGetPost: String,
+    like: {
+        type: Boolean,
+        default: true
+    }
   },
   data() {
     return { 
@@ -128,7 +132,8 @@ export default {
     role: localStorage.getItem("role"),
     index: 0,
     previousPostContent: [],
-    tableComments: []
+    tableComments: [],
+    likedPost: this.like
     }
   },
   mounted() {      
@@ -179,7 +184,7 @@ export default {
        const thumb = document.getElementById('thumb');
        thumb.style.color='red';
     },
-    likePost(idPostToLike) {
+    likePostd(idPostToLike) {
     axios.post('http://localhost:3000/api/posts' + idPostToLike + '/like',
         { 
             userId: this.userId,
@@ -196,7 +201,7 @@ export default {
         this.$emit('updatePost',true);
       })
       .catch( ()=> {
-          alert('Oops, une erreur est survenue');
+          alert('Oups, une erreur est survenue');
           console.log('Une erreur est survenue');
       })
     }
