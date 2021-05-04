@@ -185,7 +185,7 @@ export default {
        thumb.style.color='red';
     },
     likePost(idPostToLike) {
-    axios.post('http://localhost:3000/api/posts' + idPostToLike + '/like',
+    axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
         { 
             like: this.likedPost
         },
