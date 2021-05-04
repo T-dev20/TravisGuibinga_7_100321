@@ -236,6 +236,7 @@ $cardGroupomania-bgColor: darken($website-color, 20);
 
 .fas {
     color: #f50057;
+    transition: .4s;
 }
 
 
