@@ -184,10 +184,10 @@ export default {
        const thumb = document.getElementById('thumb');
        thumb.style.color='red';
     },
-    likePostd(idPostToLike) {
+    likePost(idPostToLike) {
     axios.post('http://localhost:3000/api/posts' + idPostToLike + '/like',
         { 
-            userId: this.userId,
+            like: this.likedPost
         },
         {
             headers: {
