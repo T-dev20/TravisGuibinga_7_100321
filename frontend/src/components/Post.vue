@@ -76,7 +76,7 @@
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
                             <span class="restaurants__menus__heart div-icon" 
-                            ><i id="btn" class="far fa-thumbs-up oneFar"></i>
+                            ><i @click="liked()" id="thumb" class="far fa-thumbs-up oneFar"></i>
                             </span>
                     <span  @click="likePost(item.id)" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
                 </div>
@@ -175,8 +175,14 @@ export default {
         }
     },
     liked() {
-       const thumb = document.getElementById('thumb');
-       thumb.style.color='red';
+       var thumb = document.getElementById('thumb');
+       if(thumb.classList.contains("far")) {
+           thumb.classList.remove("far");
+           thumb.classList.add("fas");
+       }else {
+           thumb.classList.remove("fas");
+           thumb.classList.add("far");
+       }
     },
     likePost(idPostToLike) {
     axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
