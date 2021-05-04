@@ -231,9 +231,6 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   &__menus {
     & > .div-icon {
       cursor: pointer;
-      stroke-width: 30;
-      stroke: white;
-      fill: transparent;
     }
     & > .div-icon {
       stroke-opacity: 0;

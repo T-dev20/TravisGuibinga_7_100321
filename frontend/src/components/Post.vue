@@ -77,7 +77,7 @@
                     </div>
                         <div class="restaurants__menus">
                             <span class="restaurants__menus__heart div-icon" 
-                            ><i class="fas fa-thumbs-up"></i>
+                            ><i id="btn" class="far fa-thumbs-up"></i>
                             </span>
                         </div>
                     <span  @click="likePost(item.id)" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
