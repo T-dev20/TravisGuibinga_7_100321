@@ -81,19 +81,13 @@
                             </span>
                             <!-- Define svg -->
                             <svg  width="0" height="0" >
-                            <linearGradient id="lgrad" x1="0.5" y1="0" x2="0.2" y2="1">
-                                <stop
-                                offset="0%"
-                                style="stop-color: rgb(104, 16, 211); stop-opacity: 1"
-                                />
-                                <stop
-                                offset="75%"
-                                style="stop-color: rgb(189, 28, 143); stop-opacity: 1"
-                                />
-                            </linearGradient>
+                                
                             </svg>
                         </div>
                     <span  @click="liked()" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
+                        <svg  width="0" height="0" >
+                                
+                        </svg>
                 </div>
                 <br>
 
