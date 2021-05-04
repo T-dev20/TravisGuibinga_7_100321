@@ -231,13 +231,13 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   &__menus {
     & > .div-icon svg * {
       cursor: pointer;
-      fill: transparent;
       stroke-width: 30;
       stroke: white;
+      fill: transparent;
     }
     & > .div-icon svg *:hover {
       stroke-opacity: 0;
-      fill: url(#lgrad);
+      fill: white;
     }
   }
 }
