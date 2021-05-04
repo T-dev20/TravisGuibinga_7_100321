@@ -197,8 +197,9 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   text-align: center;
 }
 
-.fa-thumbs-up{
+.fa-thumbs-up {
   font-size: 2rem;
+  transition: .4s;
 }
 
 @media (max-width: 500px) {
@@ -226,17 +227,16 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   }
 }
 
-.restaurants {
-  justify-content: space-around;
-  &__menus {
-    & > .div-icon {
-      cursor: pointer;
+.div-icon {
+  cursor: pointer;
+  &:hover > .oneFar {
+      color: #f50057;
     }
-    & > .div-icon {
-      stroke-opacity: 0;
-      fill: white;
-    }
-  }
 }
+
+.fas {
+    color: #f50057;
+}
+
 
 </style>

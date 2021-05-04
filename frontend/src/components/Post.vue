@@ -75,11 +75,9 @@
                     <div class="btnAddComment">      
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
-                        <div class="restaurants__menus">
                             <span class="restaurants__menus__heart div-icon" 
-                            ><i id="btn" class="far fa-thumbs-up"></i>
+                            ><i id="btn" class="far fa-thumbs-up oneFar"></i>
                             </span>
-                        </div>
                     <span  @click="likePost(item.id)" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
                 </div>
                 <br>
