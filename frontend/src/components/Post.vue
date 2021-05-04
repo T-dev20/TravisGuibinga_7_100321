@@ -195,15 +195,14 @@ export default {
             }
         }      
     )
-    .then((response) => {
-        console.log(response);
-        this.$emit('updateLike', true);
-        this.$emit('updatePost',true);
-      })
-      .catch( ()=> {
-          alert('Oups, une erreur est survenue');
-          console.log('Une erreur est survenue');
-      })
+    .then(() => {
+       let vueLike = this.likedPost;
+       console.log(vueLike);
+    })
+    .catch( ()=> {
+        alert('Oups, une erreur est survenue');
+        console.log('Une erreur est survenue');
+    })
     }
   }
 }
