@@ -79,10 +79,6 @@
                             <span class="restaurants__menus__heart div-icon" 
                             ><i class="fas fa-thumbs-up"></i>
                             </span>
-                            <!-- Define svg -->
-                            <svg  width="0" height="0" >
-                                
-                            </svg>
                         </div>
                     <span  @click="likePost(item.id)" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
                 </div>

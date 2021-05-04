@@ -229,13 +229,13 @@ $cardGroupomania-bgColor: darken($website-color, 20);
 .restaurants {
   justify-content: space-around;
   &__menus {
-    & > .div-icon svg * {
+    & > .div-icon {
       cursor: pointer;
       stroke-width: 30;
       stroke: white;
       fill: transparent;
     }
-    & > .div-icon svg *:hover {
+    & > .div-icon {
       stroke-opacity: 0;
       fill: white;
     }
