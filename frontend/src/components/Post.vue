@@ -84,7 +84,7 @@
                                 
                             </svg>
                         </div>
-                    <span  @click="liked()" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</span>
+                    <button  @click="liked()" id="thumb" class="likeContainer" > <i class="far fa-thumbs-up" ></i> {{item.likes}}</button>
                 </div>
                 <br>
 
@@ -178,6 +178,27 @@ export default {
     liked() {
        const thumb = document.getElementById('thumb');
        thumb.style.color='red';
+    },
+    likePost(idPostToLike) {
+    axios.post('http://localhost:3000/api/posts' + idPostToLike + '/like',
+        { 
+            userId: this.userId,
+        },
+        {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            }
+        }      
+    )
+    .then((response) => {
+        console.log(response);
+        this.$emit('updateLike', true);
+        this.$emit('updatePost',true);
+      })
+      .catch( ()=> {
+          alert('Oops, une erreur est survenue');
+          console.log('Une erreur est survenue');
+      })
     }
   }
 }
