@@ -115,10 +115,7 @@ export default {
   props: {
     msg: String,
     directionToUseForAxiosGetPost: String,
-    like: {
-        type: Boolean,
-        default: true
-    }
+    like: Boolean
   },
   data() {
     return { 
@@ -186,8 +183,9 @@ export default {
     },
     likePost(idPostToLike) {
         let vueLike = this.likedPost;
-        vueLike = !vueLike
-        axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
+        if(vueLike) {
+            vueLike = false
+            axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
             { 
                 like: vueLike
             },
@@ -196,14 +194,28 @@ export default {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 }
             }      
-        )
-        .then(() => {
-            console.log(vueLike);
-        })
-        .catch( ()=> {
-            alert('Oups, une erreur est survenue');
-            console.log('Une erreur est survenue');
-        })
+            )
+            .then(() => {
+                console.log(vueLike);
+            })
+            .catch( ()=> {
+                alert('Oups, une erreur est survenue');
+                console.log('Une erreur est survenue');
+            })
+        }else {
+            vueLike = true
+            axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
+            { 
+                like: vueLike
+            },
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                }
+            } ) 
+        }
+        
+        
     }
   }
 }
