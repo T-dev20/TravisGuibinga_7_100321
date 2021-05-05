@@ -185,24 +185,25 @@ export default {
        }
     },
     likePost(idPostToLike) {
-    axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
-        { 
-            like: this.likedPost
-        },
-        {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            }
-        }      
-    )
-    .then(() => {
-       let vueLike = this.likedPost;
-       console.log(vueLike);
-    })
-    .catch( ()=> {
-        alert('Oups, une erreur est survenue');
-        console.log('Une erreur est survenue');
-    })
+        let vueLike = this.likedPost;
+        vueLike = !vueLike
+        axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
+            { 
+                like: vueLike
+            },
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                }
+            }      
+        )
+        .then(() => {
+            console.log(vueLike);
+        })
+        .catch( ()=> {
+            alert('Oups, une erreur est survenue');
+            console.log('Une erreur est survenue');
+        })
     }
   }
 }
