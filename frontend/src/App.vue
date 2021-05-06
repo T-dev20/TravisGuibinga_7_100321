@@ -195,6 +195,7 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   margin-right: 5px;
   width: 10%;
   text-align: center;
+  cursor: pointer;
 }
 
 .fa-thumbs-up {
