@@ -115,7 +115,10 @@ export default {
   props: {
     msg: String,
     directionToUseForAxiosGetPost: String,
-    like: Boolean
+    like: {
+        type: Boolean,
+        default: false
+    }
   },
   data() {
     return { 
@@ -182,12 +185,11 @@ export default {
        }
     },
     likePost(idPostToLike) {
-        let vueLike = this.likedPost;
-        if(vueLike) {
-            vueLike = false
+            console.log(this.likedPost);
+            this.likedPost = !this.likedPost
             axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
             { 
-                like: vueLike
+                like: this.likedPost
             },
             {
                 headers: {
@@ -196,27 +198,38 @@ export default {
             }      
             )
             .then(() => {
-                console.log(vueLike);
+                console.log('après', this.likedPost);
             })
             .catch( ()=> {
                 alert('Oups, une erreur est survenue');
                 console.log('Une erreur est survenue');
             })
-        }else {
-            vueLike = true
-            axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
-            { 
-                like: vueLike
-            },
-            {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token"),
-                }
-            } ) 
-        }
-        
-        
-    }
+        }        
   }
 }
 </script>
+
+// let vueLike = this.likedPost;
+//         vueLike = false;
+//             axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
+//             { 
+//                 like: vueLike
+//             },
+//             {
+//                 headers: {
+//                     Authorization: "Bearer " + localStorage.getItem("token"),
+//                 }
+//             }      
+//             )
+//             .then(() => {
+//                 console.log(vueLike);
+//                 vueLike = !vueLike;
+//                 console.log('après', vueLike);
+//             })
+//             .catch( ()=> {
+//                 alert('Oups, une erreur est survenue');
+//                 console.log('Une erreur est survenue');
+//             })
+        
+        
+//     }
