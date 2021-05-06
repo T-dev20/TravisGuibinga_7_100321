@@ -187,9 +187,10 @@ export default {
     likePost(idPostToLike) {
             console.log(this.likedPost);
             this.likedPost = !this.likedPost
+            localStorage.setItem('valueBoolLike', this.likedPost);
             axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
             { 
-                like: this.likedPost
+                like: localStorage.getItem('valueBoolLike')
             },
             {
                 headers: {
