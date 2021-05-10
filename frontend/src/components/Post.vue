@@ -117,7 +117,7 @@ export default {
     directionToUseForAxiosGetPost: String,
     like: {
         type: Boolean,
-        default: localStorage.getItem('valueBoolLike')
+        default: false
     }
   },
   data() {
@@ -192,11 +192,9 @@ export default {
        }
     },
     likePost(idPostToLike) {
-            localStorage.setItem('valueBoolLike', false);
             this.likedPost = !this.likedPost
-            localStorage.setItem('valueBoolLike', this.likedPost);
             console.log(this.likedPost);
-            let valueBool = localStorage.getItem('valueBoolLike');
+            
 
             axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
             { 
@@ -209,12 +207,7 @@ export default {
             }      
             )
             .then(() => {
-                if(valueBool) {
-                    alert('Post liké');
-                    console.log('après like', this.likedPost);
-                }else {
-                    alert('Like annulé');
-                }
+                console.log(this.likedPost);
             })
             .catch( ()=> {
                 alert('Oups, une erreur est survenue');
@@ -225,27 +218,27 @@ export default {
 }
 </script>
 
-// let vueLike = this.likedPost;
-//         vueLike = false;
-//             axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
-//             { 
-//                 like: vueLike
-//             },
-//             {
-//                 headers: {
-//                     Authorization: "Bearer " + localStorage.getItem("token"),
-//                 }
-//             }      
-//             )
-//             .then(() => {
-//                 console.log(vueLike);
-//                 vueLike = !vueLike;
-//                 console.log('après', vueLike);
-//             })
-//             .catch( ()=> {
-//                 alert('Oups, une erreur est survenue');
-//                 console.log('Une erreur est survenue');
-//             })
+let vueLike = this.likedPost;
+        vueLike = false;
+            axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
+            { 
+                like: vueLike
+            },
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                }
+            }      
+            )
+            .then(() => {
+                console.log(vueLike);
+                vueLike = !vueLike;
+                console.log('après', vueLike);
+            })
+            .catch( ()=> {
+                alert('Oups, une erreur est survenue');
+                console.log('Une erreur est survenue');
+            })
         
         
 //     }
