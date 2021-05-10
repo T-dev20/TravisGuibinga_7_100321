@@ -194,7 +194,6 @@ export default {
     likePost(idPostToLike) {
             this.likedPost = !this.likedPost
             console.log(this.likedPost);
-            
 
             axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
             { 
@@ -207,7 +206,9 @@ export default {
             }      
             )
             .then(() => {
-                console.log(this.likedPost);
+                this.likedPost = !this.likedPost;
+                console.log('Après like',this.likedPost);
+                document.location.reload();
             })
             .catch( ()=> {
                 alert('Oups, une erreur est survenue');
