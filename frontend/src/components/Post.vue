@@ -196,6 +196,7 @@ export default {
             this.likedPost = !this.likedPost
             localStorage.setItem('valueBoolLike', this.likedPost);
             console.log(this.likedPost);
+            let valueBool = localStorage.getItem('valueBoolLike');
 
             axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
             { 
@@ -208,8 +209,12 @@ export default {
             }      
             )
             .then(() => {
-                alert('Post liké');
-                console.log('après', this.likedPost);
+                if(valueBool) {
+                    alert('Like annulé');
+                    console.log('après like', this.likedPost);
+                }else {
+                    alert('Post liké');
+                }
             })
             .catch( ()=> {
                 alert('Oups, une erreur est survenue');
