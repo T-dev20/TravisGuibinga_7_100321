@@ -208,6 +208,7 @@ export default {
             }      
             )
             .then(() => {
+                alert('Post liké');
                 console.log('après', this.likedPost);
             })
             .catch( ()=> {
