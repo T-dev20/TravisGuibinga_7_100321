@@ -196,38 +196,23 @@ export default {
             localStorage.setItem('idCurrentPost', idPostToLike);
             console.log(this.likedPost);
 
-             if(!this.likedPost && idPostToLike == idPostToLike) {
-                this.likedPost = !this.likedPost
-                localStorage.setItem('valueBoolLike', this.likedPost);
-                console.log('post liké', this.likedPost);
-
-             }else if(this.likedPost && idPostToLike == idPostToLike) {
-                this.likedPost = !this.likedPost
-                localStorage.setItem('valueBoolLike', this.likedPost);
-                console.log('like annulé', this.likedPost);
-
-             }else if(this.likedPost && idPostToLike !== idPostToLike) {
-                this.likedPost = false 
-                localStorage.setItem('valueBoolLike', this.likedPost);
-                console.log('remettre true en false', this.likedPost);
-             }
-            // axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
-            // { 
-            //     like: this.likedPost
-            // },
-            // {
-            //     headers: {
-            //         Authorization: "Bearer " + localStorage.getItem("token"),
-            //     }
-            // }      
-            // )
-            // .then(() => {
-            //     console.log('après', this.likedPost);
-            // })
-            // .catch( ()=> {
-            //     alert('Oups, une erreur est survenue');
-            //     console.log('Une erreur est survenue');
-            // })
+            axios.post('http://localhost:3000/api/posts/' + idPostToLike + '/like',
+            { 
+                like: this.likedPost
+            },
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                }
+            }      
+            )
+            .then(() => {
+                console.log('après', this.likedPost);
+            })
+            .catch( ()=> {
+                alert('Oups, une erreur est survenue');
+                console.log('Une erreur est survenue');
+            })
         }        
   }
 }
@@ -257,3 +242,22 @@ export default {
         
         
 //     }
+
+
+
+
+// if(!this.likedPost && idPostToLike == idPostToLike) {
+//                 this.likedPost = !this.likedPost
+//                 localStorage.setItem('valueBoolLike', this.likedPost);
+//                 console.log('post liké', this.likedPost);
+
+//              }else if(this.likedPost && idPostToLike == idPostToLike) {
+//                 this.likedPost = !this.likedPost
+//                 localStorage.setItem('valueBoolLike', this.likedPost);
+//                 console.log('like annulé', this.likedPost);
+
+//              }else if(this.likedPost && idPostToLike !== idPostToLike) {
+//                 this.likedPost = false 
+//                 localStorage.setItem('valueBoolLike', this.likedPost);
+//                 console.log('remettre true en false', this.likedPost);
+//              }
