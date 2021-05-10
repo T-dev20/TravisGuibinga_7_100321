@@ -135,6 +135,9 @@ export default {
     this.getAllComments();
     },    
   methods : {
+    decreaseCommentNumber(payload){
+        document.getElementById('commentNumber'+payload).innerHTML--;        
+    },
     increaseCommentNumber(payload){
         document.getElementById('commentNumber'+payload).innerHTML++;
         document.getElementById('comment-creation'+payload).style.display='none';
