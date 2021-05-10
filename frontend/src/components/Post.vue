@@ -206,7 +206,6 @@ export default {
             }      
             )
             .then(() => {
-                this.likedPost = !this.likedPost;
                 console.log('Après like',this.likedPost);
                 document.location.reload();
             })
