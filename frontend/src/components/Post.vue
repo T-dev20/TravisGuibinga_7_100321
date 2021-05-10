@@ -211,7 +211,7 @@ export default {
                 document.location.reload();
             })
             .catch( ()=> {
-                alert('Oups, une erreur est survenue');
+                alert('Déjà liké/Like déjà annulé');
                 console.log('Une erreur est survenue');
             })
         }        
