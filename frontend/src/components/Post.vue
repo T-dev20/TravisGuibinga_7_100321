@@ -210,7 +210,6 @@ export default {
                 document.location.reload();
             })
             .catch( ()=> {
-                alert('Déjà liké/Like déjà annulé');
                 console.log('Une erreur est survenue');
             })
         }        
