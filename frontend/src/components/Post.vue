@@ -210,10 +210,10 @@ export default {
             )
             .then(() => {
                 if(valueBool) {
-                    alert('Like annulé');
+                    alert('Post liké');
                     console.log('après like', this.likedPost);
                 }else {
-                    alert('Post liké');
+                    alert('Like annulé');
                 }
             })
             .catch( ()=> {
