@@ -75,8 +75,8 @@
                     <div class="btnAddComment">      
                         <button @click="cacheDisplay('comment-creation'+item.id)" class="btn font-italic toClick" type="submit">Rédiger un commentaire</button>
                     </div>
-                            <span class="restaurants__menus__heart div-icon" 
-                            ><i @click="liked()" id="thumb" class="far fa-thumbs-up oneFar"></i>
+                            <span class="restaurants__menus__heart div-icon" style="display:none;" 
+                            ><i @click="liked()" id="pouce" class="far fa-thumbs-up oneFar"></i>
                             </span>
                     <span  @click="likePost(item.id)" class="likeContainer" > <i class="fas fa-thumbs-up twoFar" ></i> {{item.likes}}</span>
                 </div>
@@ -182,13 +182,13 @@ export default {
         }
     },
     liked() {
-       var thumb = document.getElementById('thumb');
-       if(thumb.classList.contains("far")) {
-           thumb.classList.remove("far");
-           thumb.classList.add("fas");
+       var pouce = document.getElementById('pouce');
+       if(pouce.classList.contains("far")) {
+           pouce.classList.remove("far");
+           pouce.classList.add("fas");
        }else {
-           thumb.classList.remove("fas");
-           thumb.classList.add("far");
+           pouce.classList.remove("fas");
+           pouce.classList.add("far");
        }
     },
     likePost(idPostToLike) {
