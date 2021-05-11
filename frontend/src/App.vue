@@ -196,6 +196,10 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   width: 10%;
   text-align: center;
   cursor: pointer;
+  &:hover > .twoFar {
+    color: #f50057;
+    transition: .4s;
+}
 }
 
 .fa-thumbs-up {
@@ -233,11 +237,6 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   &:hover > .oneFar {
       color: #f50057;
     }
-}
-
-.fas {
-    color: #f50057;
-    transition: .4s;
 }
 
 
