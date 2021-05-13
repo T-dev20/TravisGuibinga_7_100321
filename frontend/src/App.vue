@@ -185,6 +185,7 @@ $cardGroupomania-bgColor: darken($website-color, 20);
 
 .text-center-sm {
     text-align: center!important;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 .btnAddComment {
