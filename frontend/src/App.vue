@@ -220,7 +220,7 @@ $cardGroupomania-bgColor: darken($website-color, 20);
   }
 
   .postImage {
-    width: 50%;
+    width: 100%;
   }
 
   .btnAddComment {
