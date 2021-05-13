@@ -180,7 +180,7 @@ $cardGroupomania-bgColor: darken($website-color, 20);
 }
 
 .postImage {
-    width: 30%;
+    width: 80%;
 }
 
 .text-center-sm {
