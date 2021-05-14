@@ -20,7 +20,7 @@ DB = (pas une base de données MySQL que vous avez déjà ex.groupomania)
 
 P.S : Le reste du code(L77-L79) devra être exécuté après avoir créer le 1er utilisateur depuis le front de l'application.
 
-3 / Exécutez "npm install", puis exécutez "nodemon server".
+3 / Exécutez "npm install", puis exécutez "nodemon server".
 
 
 ### Pour lancer le serveur frontal qui s'exécute sur le localhost 8080:
