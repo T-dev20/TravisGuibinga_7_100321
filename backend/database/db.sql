@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS groupotest2;
-CREATE DATABASE IF NOT EXISTS groupotest2;
-USE groupotest2;
+DROP DATABASE IF EXISTS groupomania;
+CREATE DATABASE IF NOT EXISTS groupomania;
+USE groupomania;
 
 
 ----------------------------------- Création des tables(avec les CONTRAINTES) ---------------------------------------
