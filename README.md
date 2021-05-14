@@ -7,7 +7,7 @@ Ce projet utilise pour son Frontend : Vue.js, HTML5, Sass et Bootstrap4.
 
 ## INSTALLATION
 
-Veuillez cloner ce référentiel: il vous fournira les deux dossiers nécessaires: backend et frontend.
+Veuillez cloner ce référentiel: il vous fournira les deux dossiers nécessaires( backend et frontend).
 Vous devrez avoir NodeJs, MySQL et Vue CLI installés localement sur votre machine.
 
 ### Pour lancer le Backend qui utilise MySQL (prérequis) et s'exécute sur le localhost 3000:
@@ -20,7 +20,7 @@ DB = (pas une base de données MySQL que vous avez déjà ex.groupomania)
 
 2 / Allez dans le dossier "database", entrez dans le fichier db.sql et copiez le code(L1-L76) pour créer la base de données et ses différentes tables depuis un client Mysql.
 
-P.S : Le reste du code(L77-L79) devra être exécuté après avoir créer le 1er utilisateur depuis le front de l'application.
+# P.S : Le reste du code(L77-L79) devra être exécuté après avoir créer le 1er utilisateur depuis le front de l'application. #
 
 3 / Exécutez "npm install", puis exécutez "nodemon server".
 
