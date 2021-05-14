@@ -1,5 +1,7 @@
 # GROUPOMANIA
 
+Réseau social Groupomania : Projet frontend et backend.
+
 Ce projet utilise pour son Backend : Node.js avec Express, MySql et l'ORM Sequelize.
 Ce projet utilise pour son Frontend : Vue.js, HTML5, Sass et Bootstrap4.
 
