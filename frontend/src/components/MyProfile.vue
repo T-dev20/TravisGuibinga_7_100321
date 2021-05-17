@@ -199,7 +199,8 @@ export default {
                     if( this.currentUserId == this.userId || this.currentUserRole == 'Admin') { /* Special message and redirection to Home page if the deleter is the admin who is not on his profile */
                         localStorage.clear();
                          alert('Le profil a bien été supprimé !');
-                        this.$router.push({ name: "Inscription" });                        
+                        this.$router.push({ name: "Inscription" });
+                         window.location.reload('../App.vue');                       
                     } else {
                         localStorage.clear();
                         alert('Votre profil a bien été supprimé !');
