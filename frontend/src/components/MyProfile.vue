@@ -197,9 +197,9 @@ export default {
                 .then((response) => {
                     console.log(response);
                     if( this.currentUserId == this.userId || this.currentUserRole == 'Admin') { /* Special message and redirection to Home page if the deleter is the admin who is not on his profile */
-                        alert('Le profil a bien été supprimé !');
-                        this.$router.push({ name: "Groupomania" });
-                        window.location.reload('../App.vue');
+                        localStorage.clear();
+                         alert('Le profil a bien été supprimé !');
+                        this.$router.push({ name: "Inscription" });                        
                     } else {
                         localStorage.clear();
                         alert('Votre profil a bien été supprimé !');
