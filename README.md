@@ -1,4 +1,4 @@
-# GROUPOMANIA
+# PROJET7_OPENCLASSROOMS/TravisGuibinga
 
 Réseau social Groupomania : Projet frontend et backend.
 
